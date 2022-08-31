@@ -8,7 +8,7 @@
     <link href="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
     <url>/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
     
-    <content type="html"><![CDATA[<p>这是一篇测试文章</p><img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" title="蒙娜丽莎"><p>这是一篇测试文章</p><img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" title="蒙娜丽莎"><p><img src="https://github.com/chenjiadragon/chenjiadragon.github.io/blob/main/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png?raw=true" alt="图片引用方法二"></p><p><img src="/./%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" alt="图片引用方法三"></p><img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="图片引用方法三">]]></content>
+    <content type="html"><![CDATA[<p>这是一篇测试文章</p><img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" title="蒙娜丽莎"><!-- 47 --><img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" alt="图片引用方法三">]]></content>
     
     
     <categories>
