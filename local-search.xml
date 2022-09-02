@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>VMware安装Ubuntu20.04</title>
+    <link href="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/"/>
+    <url>/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/</url>
+    
+    <content type="html"><![CDATA[<h1 id="VMware安装"><a href="#VMware安装" class="headerlink" title="VMware安装"></a>VMware安装</h1><p>这里安装的是VMware Workstation Pro 16虚拟机，安装教程（带密钥）如下：<br><a href="https://blog.csdn.net/qq_40950957/article/details/80467513">https://blog.csdn.net/qq_40950957&#x2F;article&#x2F;details&#x2F;80467513</a></p><h1 id="安装Ubuntu虚拟环境"><a href="#安装Ubuntu虚拟环境" class="headerlink" title="安装Ubuntu虚拟环境"></a>安装Ubuntu虚拟环境</h1><h2 id="1-下载Ubuntu20-04"><a href="#1-下载Ubuntu20-04" class="headerlink" title="1. 下载Ubuntu20.04"></a>1. 下载Ubuntu20.04</h2><p>Ubuntu官网：<a href="https://cn.ubuntu.com/download/desktop">https://cn.ubuntu.com/download/desktop</a></p><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/1.png" class=""><h2 id="2-VMware操作"><a href="#2-VMware操作" class="headerlink" title="2. VMware操作"></a>2. VMware操作</h2><p>打开VMware，创建新的虚拟机，按照图片一步步操作。</p><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/2.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/3.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/4.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/5.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/6.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/7.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/8.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/9.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/10.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/11.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/12.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/13.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/14.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/15.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/16.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/17.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/18.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/19.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/20.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/21.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/22.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/23.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/24.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/25.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/26.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/27.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/28.png" class=""><img src="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu20-04/29.png" class=""><h2 id="3-相关问题"><a href="#3-相关问题" class="headerlink" title="3. 相关问题"></a>3. 相关问题</h2><ol><li><a href="https://blog.csdn.net/qq_34039018/article/details/88069283">VMware Workstation无法设置显示器“自动适应客户机”</a></li></ol><h2 id="4-相关资源"><a href="#4-相关资源" class="headerlink" title="4. 相关资源"></a>4. 相关资源</h2><ol><li><a href="https://docs.vmware.com/cn/VMware-Workstation-Pro/16.0/com.vmware.ws.using.doc/GUID-0EE752F8-C159-487A-9159-FE1F646EE4CA.html">官方文档</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>虚拟机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Ubuntu</tag>
+      
+      <tag>VMware</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>解决hexo博客使用markdown引入图片无法显示的问题</title>
     <link href="/2022/08/31/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E4%BD%BF%E7%94%A8markdown%E5%BC%95%E5%85%A5%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <url>/2022/08/31/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E4%BD%BF%E7%94%A8markdown%E5%BC%95%E5%85%A5%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
