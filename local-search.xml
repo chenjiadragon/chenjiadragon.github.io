@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>一键安装ROS2 humble</title>
+    <link href="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/"/>
+    <url>/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>系统配置为：虚拟机Ubuntu 22.04。ROS2 humble官方文档有两种安装方式：</p><ol><li>binary安装：<a href="https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Install-Binary.html">https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Install-Binary.html</a></li><li>source安装：<a href="https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html">https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html</a><br>本文尝试使用一种简单的安装方式，来自<a href="http://fishros.com/#/fish_home">鱼香ROS</a>的一键安装脚本。</li></ol><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>一键安装指令：</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget http:<span class="hljs-regexp">//</span>fishros.com/install -O fishros &amp;&amp; . fishros<br></code></pre></td></tr></table></figure><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/1.png" class=""><p>根据自己的需求键入数字，这里安装ROS2，键入1回车：</p><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/2.png" class=""><p>键入1回车：</p><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/3.png" class=""><p>键入2回车：</p><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/4.png" class=""><p>键入1回车：</p><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/5.png" class=""><p>桌面版包含ROS，RViz，示例，教程等，比较全面。而基础版没有GUI工具。这里安装桌面版，键入1回车，等待一会：</p><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/6.png" class="" alt="等待安装"><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/7.png" class="" alt="安装完成"><p>打开.bashrc文件，拉到最下面可以看到：</p><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/8.png" class=""><p>可以看到环境已经设置好了。</p><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>使用ROS2测试一些样例，打开一个终端运行C++<strong>talker</strong>：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ros2 <span class="hljs-built_in">run</span> demo_nodes_cpp talker<br></code></pre></td></tr></table></figure><p>打开另一个终端运行Python<strong>listener</strong>：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ros2 <span class="hljs-built_in">run</span> demo_nodes_py listener<br></code></pre></td></tr></table></figure><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/9.png" class="" alt="talker"><img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/10.png" class="" alt="listener"><p>此时表明安装成功！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>ROS2</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Ubuntu</tag>
+      
+      <tag>humble</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>VMware安装Ubuntu22.04</title>
     <link href="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu22-04/"/>
     <url>/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu22-04/</url>
