@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://chenjiadragon.github.io/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/9.png">
 <meta property="og:image" content="https://chenjiadragon.github.io/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/10.png">
 <meta property="article:published_time" content="2022-09-04T07:15:09.000Z">
-<meta property="article:modified_time" content="2022-09-04T07:56:43.645Z">
+<meta property="article:modified_time" content="2022-09-04T07:59:00.520Z">
 <meta property="article:author" content="cjl">
 <meta property="article:tag" content="Ubuntu">
 <meta property="article:tag" content="humble">
@@ -267,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          590 字
+          586 字
         
       </span>
     
@@ -332,8 +332,9 @@
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>系统配置为：虚拟机Ubuntu 22.04。ROS2 humble官方文档有两种安装方式：</p>
 <ol>
 <li>binary安装：<a target="_blank" rel="noopener" href="https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Install-Binary.html">https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Install-Binary.html</a></li>
-<li>source安装：<a target="_blank" rel="noopener" href="https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html">https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html</a><br>本文尝试使用一种简单的安装方式，来自<a target="_blank" rel="noopener" href="http://fishros.com/#/fish_home">鱼香ROS</a>的一键安装脚本。</li>
+<li>source安装：<a target="_blank" rel="noopener" href="https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html">https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html</a></li>
 </ol>
+<p>本文尝试使用一种简单的安装方式，来自<a target="_blank" rel="noopener" href="http://fishros.com/#/fish_home">鱼香ROS</a>的一键安装脚本。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>一键安装指令：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget http:<span class="hljs-regexp">//</span>fishros.com/install -O fishros &amp;&amp; . fishros<br></code></pre></td></tr></table></figure>
 <img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/1.png" srcset="/img/loading.gif" lazyload class="">
@@ -351,13 +352,13 @@
 <p>打开.bashrc文件，拉到最下面可以看到：</p>
 <img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/8.png" srcset="/img/loading.gif" lazyload class="">
 <p>可以看到环境已经设置好了。</p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>使用ROS2测试一些样例，打开一个终端运行C++<strong>talker</strong>：</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>使用ROS2测试一些样例，打开一个终端运行C++ <em>talker</em>：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ros2 <span class="hljs-built_in">run</span> demo_nodes_cpp talker<br></code></pre></td></tr></table></figure>
-<p>打开另一个终端运行Python<strong>listener</strong>：</p>
+<p>打开另一个终端运行Python <em>listener</em>：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ros2 <span class="hljs-built_in">run</span> demo_nodes_py listener<br></code></pre></td></tr></table></figure>
 <img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/9.png" srcset="/img/loading.gif" lazyload class="" alt="talker">
 <img src="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/10.png" srcset="/img/loading.gif" lazyload class="" alt="listener">
-<p>此时表明安装成功！</p>
+<p><strong>安装成功！</strong></p>
 
                 
               </div>
@@ -447,6 +448,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/09/07/sudo-rosdep-init-rosdep-update%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="sudo rosdep init|rosdep update相关问题的解决方法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">sudo rosdep init|rosdep update相关问题的解决方法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
