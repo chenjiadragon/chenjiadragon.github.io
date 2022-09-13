@@ -1,0 +1,848 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cjl">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="学习资源 http:&#x2F;&#x2F;wiki.ros.org&#x2F; https:&#x2F;&#x2F;www.guyuehome.com&#x2F;  学习笔记环境配置查看ROS环境设置 1$ printenv | grep ROS 创建工作空间并编译： 123$ mkdir -p ~&#x2F;catkin_ws&#x2F;src$ cd ~&#x2F;catkin_ws&#x2F;$ catkin_make 使用工作空间中的功能包或节点需要先设置环境： 1$ source d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ROS初学笔记">
+<meta property="og:url" content="https://chenjiadragon.github.io/2022/09/12/ROS%E5%88%9D%E5%AD%A6%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="chenjiadragon">
+<meta property="og:description" content="学习资源 http:&#x2F;&#x2F;wiki.ros.org&#x2F; https:&#x2F;&#x2F;www.guyuehome.com&#x2F;  学习笔记环境配置查看ROS环境设置 1$ printenv | grep ROS 创建工作空间并编译： 123$ mkdir -p ~&#x2F;catkin_ws&#x2F;src$ cd ~&#x2F;catkin_ws&#x2F;$ catkin_make 使用工作空间中的功能包或节点需要先设置环境： 1$ source d">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-12T11:56:42.000Z">
+<meta property="article:modified_time" content="2022-09-13T01:11:48.678Z">
+<meta property="article:author" content="cjl">
+<meta property="article:tag" content="melodic">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>ROS初学笔记 - chenjiadragon</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chenjiadragon.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YtwA6Qo3Mv4aVYBqpTAsm3iG-MdYXbMMI","app_key":"kdSKzfvlHtJTfOsKtJADVtdY","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>cjl&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ROS初学笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-12 19:56" pubdate>
+          2022年9月12日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          38 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ROS初学笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h1><ol>
+<li><a target="_blank" rel="noopener" href="http://wiki.ros.org/">http://wiki.ros.org/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.guyuehome.com/">https://www.guyuehome.com/</a></li>
+</ol>
+<h1 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>查看ROS环境设置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">printenv</span> | grep ROS</span><br></code></pre></td></tr></table></figure>
+<p>创建工作空间并编译：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> -p ~/catkin_ws/src</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ~/catkin_ws/</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">catkin_make</span><br></code></pre></td></tr></table></figure>
+<p>使用工作空间中的功能包或节点需要先设置环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">source</span> devel/setup.bash</span><br></code></pre></td></tr></table></figure>
+<p>检查是否成功：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$ROS_PACKAGE_PATH</span></span><br></code></pre></td></tr></table></figure>
+
+<h2 id="ROS文件系统"><a href="#ROS文件系统" class="headerlink" title="ROS文件系统"></a>ROS文件系统</h2><p>查询ros可安装功能包：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>apt-cache search ros-melodic<br></code></pre></td></tr></table></figure>
+<p>安装某个功能包(不知道确切名字，按tab键有惊喜)：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ sudo apt-<span class="hljs-built_in">get</span> install ros-melodic-ros-tutorials<br></code></pre></td></tr></table></figure>
+<p>查询已安装功能包:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rospack list<br></code></pre></td></tr></table></figure>
+<p>查看某个安装包(roscpp)的安装位置：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ rospack <span class="hljs-built_in">find</span> roscpp<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>使用 <code>$ rospack help</code> 了解更多rospack命令</p>
+</blockquote>
+<p>更改终端路径到某一个包的位置:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>roscd roscpp<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>roscd和其他的ROS工具一样，只能找ROS_PACKAGE_PATH中的功能包，查看命令 <code>$ echo $ROS_PACKAGE_PATH</code></p>
+</blockquote>
+<p>查看功能包目录：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosls roscpp<br></code></pre></td></tr></table></figure>
+
+<h2 id="创建ROS功能包"><a href="#创建ROS功能包" class="headerlink" title="创建ROS功能包"></a>创建ROS功能包</h2><p>在工作空间中的功能包结构可能如下所示：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ada">workspace_folder/        <span class="hljs-comment">-- WORKSPACE</span><br>  src/                   <span class="hljs-comment">-- SOURCE SPACE</span><br>    CMakeLists.txt       <span class="hljs-comment">-- &#x27;Toplevel&#x27; CMake file, provided by catkin</span><br>    package_1/<br>      CMakeLists.txt     <span class="hljs-comment">-- CMakeLists.txt file for package_1</span><br>      <span class="hljs-keyword">package</span>.xml        <span class="hljs-comment">-- Package manifest for package_1</span><br>    ...<br>    package_n/<br>      CMakeLists.txt     <span class="hljs-comment">-- CMakeLists.txt file for package_n</span><br>      <span class="hljs-keyword">package</span>.xml        <span class="hljs-comment">-- Package manifest for package_n</span><br></code></pre></td></tr></table></figure>
+<p>在..&#x2F;catkin_ws&#x2F;src目录下，使用以下命令创建新的功能包：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"># This <span class="hljs-keyword">is</span> an example, <span class="hljs-keyword">do</span> not <span class="hljs-keyword">try</span> to run <span class="hljs-keyword">this</span><br># catkin_create_pkg &lt;package_name&gt; [depend1] [depend2] [depend3]<br>$ catkin_create_pkg beginner_tutorials std_msgs rospy roscpp<br></code></pre></td></tr></table></figure>
+<p>然后在..&#x2F;catkin_ws目录下，使用 <code>$ catkin_make</code>进行编译。<br>不要忘记添加工作区到ROS环境:</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">$ . ~<span class="hljs-regexp">/catkin_ws/</span>devel/setup.bash<br></code></pre></td></tr></table></figure>
+
+<p>查看某个功能包的一级依赖：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rospack depends1 beginner_tutorials <br></code></pre></td></tr></table></figure>
+<p>查看所有依赖：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rospack depends beginner_tutorials<br></code></pre></td></tr></table></figure>
+
+<h2 id="理解ROS节点"><a href="#理解ROS节点" class="headerlink" title="理解ROS节点"></a>理解ROS节点</h2><p>使用ROS时先运行:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>roscore<br></code></pre></td></tr></table></figure>
+
+<p>查看当前在运行的ROS节点：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosnode list<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>有时可能已经终止的节点没有及时清除，可以手动清除：<code>$ rosnode cleanup</code></p>
+</blockquote>
+<p>查看某个节点的信息：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ rosnode <span class="hljs-built_in">info</span> /rosout<br></code></pre></td></tr></table></figure>
+
+<p>运行某个功能包中的节点：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-comment"># rosrun [package_name] [node_name]</span><br><span class="hljs-variable">$ </span>rosrun turtlesim turtlesim_node<br></code></pre></td></tr></table></figure>
+<p>可以使用重映射给节点换名：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosrun turtlesim turtlesim_node <span class="hljs-symbol">__name:</span>=my_turtle<br></code></pre></td></tr></table></figure>
+<p>可以使用ping测试节点是否启动:</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit">$ rosnode <span class="hljs-built_in">ping</span> my_turtle<br></code></pre></td></tr></table></figure>
+
+<h2 id="理解ROS话题"><a href="#理解ROS话题" class="headerlink" title="理解ROS话题"></a>理解ROS话题</h2><p>使用ROS时先运行:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>roscore<br></code></pre></td></tr></table></figure>
+<p>然后打开两个终端，分别运行：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosrun turtlesim turtlesim_node<br><span class="hljs-variable">$ </span>rosrun turtlesim turtle_teleop_key<br></code></pre></td></tr></table></figure>
+
+<p>打开新的终端，运行以下命令可以看到订阅关系：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosrun rqt_graph rqt_graph<br></code></pre></td></tr></table></figure>
+<p>未安装则运行以下命令进行安装:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ sudo apt-<span class="hljs-built_in">get</span> install ros-&lt;distro&gt;-rqt<br>$ sudo apt-<span class="hljs-built_in">get</span> install ros-&lt;distro&gt;-rqt-common-plugins<br></code></pre></td></tr></table></figure>
+
+<p>rostopic工具允许你得到ROS话题的相关信息，使用以下命令得到相关用法：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rostopic -h<br></code></pre></td></tr></table></figure>
+
+<p>使用echo打印发布或接收的话题信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">rostopic <span class="hljs-built_in">echo</span> /turtle1/cmd_vel</span><br></code></pre></td></tr></table></figure>
+
+<p>使用<code>rostopic list</code>列举当前正在运行的话题：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rostopic list -h     <span class="hljs-comment"># 展示帮助信息</span><br><span class="hljs-variable">$ </span>rostopic list -v     <span class="hljs-comment"># 列举所有话题</span><br><span class="hljs-variable">$ </span>rostopic list -p     <span class="hljs-comment"># 只列举publisher    </span><br><span class="hljs-variable">$ </span>rostopic list -s     <span class="hljs-comment"># 只列举subscriber</span><br></code></pre></td></tr></table></figure>
+
+<p>查看话题使用的消息类型：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">rostopic <span class="hljs-built_in">type</span> /turtle1/cmd_vel</span><br></code></pre></td></tr></table></figure>
+<p>使用rosmsg查看消息类型细节：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosmsg show geometry_msgs/Twist<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>rostopic pub</code>发布数据:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">rostopic pub [topic] [msg_type] [args]</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- <span class="hljs-string">&#x27;[2.0, 0.0, 0.0]&#x27;</span> <span class="hljs-string">&#x27;[0.0, 0.0, 1.8]&#x27;</span></span><br></code></pre></td></tr></table></figure>
+<p>其中 -1 表示只发布一次，-r 表示循环发布，后面接参数表示频率（以hz为单位）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- <span class="hljs-string">&#x27;[2.0, 0.0, 0.0]&#x27;</span> <span class="hljs-string">&#x27;[0.0, 0.0, -1.8]&#x27;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>查看话题发布频率：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">rostopic hz [topic]</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">rostopic hz /turtle1/pose</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="理解ROS服务和参数"><a href="#理解ROS服务和参数" class="headerlink" title="理解ROS服务和参数"></a>理解ROS服务和参数</h2><p>查看当前服务：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosservice list<br></code></pre></td></tr></table></figure>
+
+<p>查看某个服务类型：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">rosservice <span class="hljs-built_in">type</span> [service]</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">rosservice <span class="hljs-built_in">type</span> /clear</span><br></code></pre></td></tr></table></figure>
+
+<p>调用服务：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">rosservice call [service] [args]</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">rosservice call /clear</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">rosservice call /spawn 2 2 0.2 <span class="hljs-string">&quot;&quot;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>查看当前参数服务器上的参数：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosparam list<br></code></pre></td></tr></table></figure>
+<p>设置参数值以及获取参数值：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">rosparam <span class="hljs-built_in">set</span> [param_name]</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">rosparam get [param_name]</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">rosparam <span class="hljs-built_in">set</span> /turtlesim/background_r 150</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">rosparam get /turtlesim/background_g</span> <br></code></pre></td></tr></table></figure>
+<p>使用以下命令展示所有参数值：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ rosparam <span class="hljs-built_in">get</span> /<br></code></pre></td></tr></table></figure>
+
+<p>使用文件加载或者存储参数：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment"># rosparam dump [file_name] [namespace]</span><br><span class="hljs-comment"># rosparam load [file_name] [namespace]</span><br>$ rosparam dump <span class="hljs-built_in">params</span>.yaml<br>$ rosparam <span class="hljs-built_in">load</span> <span class="hljs-built_in">params</span>.yaml copy_turtle<br></code></pre></td></tr></table></figure>
+
+<h2 id="使用rqt-console和roslaunch"><a href="#使用rqt-console和roslaunch" class="headerlink" title="使用rqt_console和roslaunch"></a>使用rqt_console和roslaunch</h2><p>rqt_console连接到ROS的日志记录框架，以显示来自节点的输出。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosrun rqt_console rqt_console<br></code></pre></td></tr></table></figure>
+
+<p>rqt_logger_level允许我们在节点运行时更改节点的详细级别(DEBUG、WARN、INFO和ERROR)。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rosrun rqt_logger_level rqt_logger_level<br></code></pre></td></tr></table></figure>
+
+<p>Roslaunch可以启动launch文件中定义的节点。它的用法如下：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ roslaunch <span class="hljs-comment">[package]</span> <span class="hljs-comment">[filename.launch]</span><br></code></pre></td></tr></table></figure>
+<p>例如，在beginner_tutotrals中新建一个launch文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ~/catkin_ws</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">source</span> devel/setup.bash</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">roscd beginner_tutorials</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> launch</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> launch</span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>NOTE: The directory to store launch files doesn’t necessarily have to be named launch. In fact you don’t even need to store them in a directory. roslaunch command automatically looks into the passed package and detects available launch files. However, this is considered good practice.</p>
+</blockquote>
+<p>turtlemimic.launch文件内容如下，作用是启动两个小海龟，其中一个跟着另一个移动：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;launch&gt;<br><br>  &lt;group ns<span class="hljs-operator">=</span><span class="hljs-string">&quot;turtlesim1&quot;</span>&gt;<br>    &lt;node pkg<span class="hljs-operator">=</span><span class="hljs-string">&quot;turtlesim&quot;</span> name<span class="hljs-operator">=</span><span class="hljs-string">&quot;sim&quot;</span> type<span class="hljs-operator">=</span><span class="hljs-string">&quot;turtlesim_node&quot;</span>/&gt;<br>  &lt;/group&gt;<br><br>  &lt;group ns<span class="hljs-operator">=</span><span class="hljs-string">&quot;turtlesim2&quot;</span>&gt;<br>    &lt;node pkg<span class="hljs-operator">=</span><span class="hljs-string">&quot;turtlesim&quot;</span> name<span class="hljs-operator">=</span><span class="hljs-string">&quot;sim&quot;</span> type<span class="hljs-operator">=</span><span class="hljs-string">&quot;turtlesim_node&quot;</span>/&gt;<br>  &lt;/group&gt;<br><br>  &lt;node pkg<span class="hljs-operator">=</span><span class="hljs-string">&quot;turtlesim&quot;</span> name<span class="hljs-operator">=</span><span class="hljs-string">&quot;mimic&quot;</span> type<span class="hljs-operator">=</span><span class="hljs-string">&quot;mimic&quot;</span>&gt;<br>    &lt;remap from<span class="hljs-operator">=</span><span class="hljs-string">&quot;input&quot;</span> to<span class="hljs-operator">=</span><span class="hljs-string">&quot;turtlesim1/turtle1&quot;</span>/&gt;<br>    &lt;remap from<span class="hljs-operator">=</span><span class="hljs-string">&quot;output&quot;</span> to<span class="hljs-operator">=</span><span class="hljs-string">&quot;turtlesim2/turtle1&quot;</span>/&gt;<br>  &lt;/node&gt;<br><br>&lt;/launch&gt;<br></code></pre></td></tr></table></figure>
+<p>使用以下命令启动：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">$ roslaunch beginner_tutorials turtlemimic.<span class="hljs-built_in">launch</span><br></code></pre></td></tr></table></figure>
+<p>然后发布话题：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ rostopic pub <span class="hljs-regexp">/turtlesim1/</span>turtle1<span class="hljs-regexp">/cmd_vel geometry_msgs/</span>Twist -r <span class="hljs-number">1</span> -- <span class="hljs-string">&#x27;[2.0, 0.0, 0.0]&#x27;</span> <span class="hljs-string">&#x27;[0.0, 0.0, -1.8]&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>使用以下命令更好的理解节点间的关系：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>rqt_graph<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ROS/" class="category-chain-item">ROS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/melodic/">#melodic</a>
+      
+        <a href="/tags/Ubuntu/">#Ubuntu</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ROS初学笔记</div>
+      <div>https://chenjiadragon.github.io/2022/09/12/ROS初学笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cjl</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月12日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/07/sudo-rosdep-init-rosdep-update%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="sudo rosdep init|rosdep update相关问题的解决方法">
+                        <span class="hidden-mobile">sudo rosdep init|rosdep update相关问题的解决方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"9AQnxcUdb15xuYdLHjdl9mQ5-gzGzoHsz","appKey":"RXjuMjzaj6TxcPnncXHjdcK7","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicLine.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/love.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
