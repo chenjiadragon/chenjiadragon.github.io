@@ -13,8 +13,6 @@
     
     <categories>
       
-      <category>虚拟机</category>
-      
       <category>ROS</category>
       
     </categories>
@@ -22,11 +20,11 @@
     
     <tags>
       
+      <tag>melodic</tag>
+      
       <tag>Ubuntu</tag>
       
       <tag>VMware</tag>
-      
-      <tag>melodic</tag>
       
     </tags>
     
@@ -51,9 +49,9 @@
     
     <tags>
       
-      <tag>Ubuntu</tag>
-      
       <tag>melodic</tag>
+      
+      <tag>Ubuntu</tag>
       
     </tags>
     
