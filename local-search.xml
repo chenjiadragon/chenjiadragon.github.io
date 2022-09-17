@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...</title>
+    <link href="/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/"/>
+    <url>/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/</url>
+    
+    <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>初学moveit，按照<a href="http://docs.ros.org/en/melodic/api/moveit_tutorials/html/index.html">官方教程</a>学习，根据教程一步步操作，结果才到第二节课，运行demo时：</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch panda_moveit_config demo.<span class="hljs-built_in">launch</span> rviz_tutorial:=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><p>出现报错：</p><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">No such <span class="hljs-keyword">file</span> or directory:<span class="hljs-regexp">/opt/</span>ros<span class="hljs-regexp">/melodic/</span>share<span class="hljs-regexp">/franka_description/</span>robots<span class="hljs-regexp">/panda/</span>panda.urdf.xacro [Errno2] No such <span class="hljs-keyword">file</span> or directory:<span class="hljs-string">&#x27;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#x27;</span>...<br></code></pre></td></tr></table></figure><h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>我本以为是我没有安装<code>franka_description</code>包，但我打开文件夹<code>/opt/ros/melodic/share/</code>，发现有这个安装包，但是没有<code>panda</code>这个文件夹。我以为时包文件丢失，重新安装了以下：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install ros-melodic-franka-description<br></code></pre></td></tr></table></figure><p>问题依旧没有解决。</p><p>去ROS官网查看<code>franka_description</code>包：<a href="http://wiki.ros.org/franka_description">http://wiki.ros.org/franka_description</a><br>打开github地址，发现github上的包文件是完整的：</p><img src="/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/1.png" class=""><p>把它克隆到moveit工作空间下的src文件夹里：</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/frankaemika/</span>franka_ros<br></code></pre></td></tr></table></figure><p>安装相关依赖并编译：</p><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">$ rosdep install</span> <span class="hljs-literal">-</span><span class="hljs-comment">y</span> <span class="hljs-literal">--</span><span class="hljs-comment">from</span><span class="hljs-literal">-</span><span class="hljs-comment">paths</span> <span class="hljs-string">.</span> <span class="hljs-literal">--</span><span class="hljs-comment">ignore</span><span class="hljs-literal">-</span><span class="hljs-comment">src</span> <span class="hljs-literal">--</span><span class="hljs-comment">rosdistro melodic</span><br><span class="hljs-comment">$ catkin_make</span><br></code></pre></td></tr></table></figure><p>重新运行：</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch panda_moveit_config demo.<span class="hljs-built_in">launch</span> rviz_tutorial:=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><p>成功！</p><h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>因为工作空间中的功能吧优先级高于ROS按照的功能包，所以也不用担心重名。不过，<a href="http://wiki.ros.org/franka_description">官网</a>显示已经发布了功能包，不知道为什么使用sudo apt-get 安装的包与github上不一样。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>ROS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>melodic</tag>
+      
+      <tag>moveit</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>C++: internal compiler error: 已杀死 (program cc1plus)</title>
     <link href="/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/"/>
     <url>/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/</url>

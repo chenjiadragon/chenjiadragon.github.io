@@ -18,27 +18,25 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问题描述在虚拟机中安装了ROS，并使用catkin_make编译项目时，出现该问题： 1234567891011121314151617181920[ 46%] Building CXX object moveit_tutorials&#x2F;doc&#x2F;interactivity&#x2F;CMakeFiles&#x2F;interactivity_utils.dir&#x2F;src&#x2F;imarker.cpp.oc++: interna">
+    <meta name="description" content="问题描述初学moveit，按照官方教程学习，根据教程一步步操作，结果才到第二节课，运行demo时： 1roslaunch panda_moveit_config demo.launch rviz_tutorial:&#x3D;true 出现报错： 1No such file or directory:&#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;panda">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++: internal compiler error: 已杀死 (program cc1plus)">
-<meta property="og:url" content="https://chenjiadragon.github.io/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/index.html">
+<meta property="og:title" content="No such file or directory: &#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;panda&#x2F;panda.urdf.xacro [Errno 2] No such file or directory: &#39;&#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;panda&#x2F;panda.urdf.xacro&#39;...">
+<meta property="og:url" content="https://chenjiadragon.github.io/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="问题描述在虚拟机中安装了ROS，并使用catkin_make编译项目时，出现该问题： 1234567891011121314151617181920[ 46%] Building CXX object moveit_tutorials&#x2F;doc&#x2F;interactivity&#x2F;CMakeFiles&#x2F;interactivity_utils.dir&#x2F;src&#x2F;imarker.cpp.oc++: interna">
+<meta property="og:description" content="问题描述初学moveit，按照官方教程学习，根据教程一步步操作，结果才到第二节课，运行demo时： 1roslaunch panda_moveit_config demo.launch rviz_tutorial:&#x3D;true 出现报错： 1No such file or directory:&#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;panda">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/1.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/2.png">
-<meta property="article:published_time" content="2022-09-16T01:59:25.000Z">
-<meta property="article:modified_time" content="2022-09-16T08:36:04.171Z">
+<meta property="og:image" content="https://chenjiadragon.github.io/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/1.png">
+<meta property="article:published_time" content="2022-09-17T11:56:31.000Z">
+<meta property="article:modified_time" content="2022-09-17T12:19:21.272Z">
 <meta property="article:author" content="cjl">
 <meta property="article:tag" content="melodic">
-<meta property="article:tag" content="Ubuntu">
-<meta property="article:tag" content="VMware">
+<meta property="article:tag" content="moveit">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://chenjiadragon.github.io/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/1.png">
+<meta name="twitter:image" content="https://chenjiadragon.github.io/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/1.png">
   
   
   
-  <title>C++: internal compiler error: 已杀死 (program cc1plus) - chenjiadragon</title>
+  <title>No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;... - chenjiadragon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -237,7 +235,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="C++: internal compiler error: 已杀死 (program cc1plus)"></span>
+            <span id="subtitle" data-typed-text="No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;..."></span>
           
         </div>
 
@@ -248,8 +246,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-16 09:59" pubdate>
-          2022年9月16日 上午
+        <time datetime="2022-09-17 19:56" pubdate>
+          2022年9月17日 晚上
         </time>
       </span>
     
@@ -260,7 +258,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          897 字
         
       </span>
     
@@ -271,7 +269,7 @@
         
         
         
-          27 分钟
+          8 分钟
         
       </span>
     
@@ -317,41 +315,35 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">C++: internal compiler error: 已杀死 (program cc1plus)</h1>
+            <h1 style="display: none">No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在虚拟机中安装了ROS，并使用<code>catkin_make</code>编译项目时，出现该问题：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">[ 46%] Building CXX object moveit_tutorials/doc/interactivity/CMakeFiles/interactivity_utils.dir/src/imarker.cpp.o<br>c++: internal compiler error: 已杀死 (program cc1plus)<br>Please submit a full bug report,<br>with preprocessed <span class="hljs-built_in">source</span> <span class="hljs-keyword">if</span> appropriate.<br>See &lt;file:///usr/share/doc/gcc-7/README.Bugs&gt; <span class="hljs-keyword">for</span> instructions.<br>moveit_tutorials/doc/motion_planning_api/CMakeFiles/motion_planning_api_tutorial.dir/build.make:62: recipe <span class="hljs-keyword">for</span> target <span class="hljs-string">&#x27;moveit_tutorials/doc/motion_planning_api/CMakeFiles/motion_planning_api_tutorial.dir/src/motion_planning_api_tutorial.cpp.o&#x27;</span> failed<br>make[2]: *** [moveit_tutorials/doc/motion_planning_api/CMakeFiles/motion_planning_api_tutorial.dir/src/motion_planning_api_tutorial.cpp.o] Error 4<br>CMakeFiles/Makefile2:4570: recipe <span class="hljs-keyword">for</span> target <span class="hljs-string">&#x27;moveit_tutorials/doc/motion_planning_api/CMakeFiles/motion_planning_api_tutorial.dir/all&#x27;</span> failed<br>make[1]: *** [moveit_tutorials/doc/motion_planning_api/CMakeFiles/motion_planning_api_tutorial.dir/all] Error 2<br>make[1]: *** 正在等待未完成的任务....<br>[ 50%] Linking CXX executable /home/cjl/ros-melodic/ws_moveit/devel/lib/moveit_tutorials/motion_planning_pipeline_tutorial<br>[ 53%] Building CXX object moveit_tutorials/doc/interactivity/CMakeFiles/interactivity_utils.dir/src/pose_string.cpp.o<br>[ 53%] Built target motion_planning_pipeline_tutorial<br>[ 57%] Linking CXX shared library /home/cjl/ros-melodic/ws_moveit/devel/lib/libinteractivity_utils.so<br>[ 60%] Linking CXX executable /home/cjl/ros-melodic/ws_moveit/devel/lib/moveit_tutorials/move_group_interface_tutorial<br>[ 60%] Built target interactivity_utils<br>[ 60%] Built target move_group_interface_tutorial<br>Makefile:140: recipe <span class="hljs-keyword">for</span> target <span class="hljs-string">&#x27;all&#x27;</span> failed<br>make: *** [all] Error 2<br>Invoking <span class="hljs-string">&quot;make -j4 -l4&quot;</span> failed<br></code></pre></td></tr></table></figure>
-
-<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>出现这种问题的原因不是因为代码有问题，而是编译器在编译代码时，内存耗尽导致的。这里的内存指的是物理内存和虚拟内存(swap空间)。在Vmware上，这个问题比较常见，其他经常发生这种情况的平台是树莓pi和类似的SBCs(因为它们通常没有swap空间，并且物理内存也有限)。</p>
-<p>可以使用以下代码查看物理内存和虚拟内存的大小与占用：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">free -h</span><br></code></pre></td></tr></table></figure>
-<img src="/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/1.png" srcset="/img/loading.gif" lazyload class="" alt="内存占用">
-<p>使用VMware安装Ubuntu时，因为我采用的安装方式是“清除整个磁盘并安装Ubuntu”，而非以下这种方式指定分区。可以看到系统只给我分配了不到1G的虚拟内存。</p>
-<img src="/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/2.png" srcset="/img/loading.gif" lazyload class="">
+                <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>初学moveit，按照<a target="_blank" rel="noopener" href="http://docs.ros.org/en/melodic/api/moveit_tutorials/html/index.html">官方教程</a>学习，根据教程一步步操作，结果才到第二节课，运行demo时：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch panda_moveit_config demo.<span class="hljs-built_in">launch</span> rviz_tutorial:=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<p>出现报错：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">No such <span class="hljs-keyword">file</span> or directory:<span class="hljs-regexp">/opt/</span>ros<span class="hljs-regexp">/melodic/</span>share<span class="hljs-regexp">/franka_description/</span>robots<span class="hljs-regexp">/panda/</span>panda.urdf.xacro [Errno2] No such <span class="hljs-keyword">file</span> or directory:<span class="hljs-string">&#x27;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#x27;</span>...<br></code></pre></td></tr></table></figure>
 
 
-<blockquote>
-<p>注意：在UBUNTU系统里面，并不是你的物理内存全部耗尽之后，系统才使用swap分区！系统的swappiness设定值，对如何使用swap分区是有着很大的联系。 如何修改两者之间的关系，参考<a href="#%E5%8F%82%E8%80%83">博客3</a></p>
-</blockquote>
-<p>经分析，出现该问题的原因大概率是因为虚拟空间设置过小导致的，解决方法有以下几种：</p>
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>最简单的方法是使用单线程进行编译，确定是编译速度会变慢：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">catkin_make</span> -j <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>临时增加虚拟内存空间。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo dd <span class="hljs-attribute">if</span>=/dev/zero <span class="hljs-attribute">of</span>=/swapfile <span class="hljs-attribute">bs</span>=64M <span class="hljs-attribute">count</span>=16<br><span class="hljs-comment"># count的大小就是增加的swap空间的大小，64M是块大小，所以空间大小是bs*count=1024MB</span><br><br>sudo mkswap /swapfile<br><span class="hljs-comment"># 把刚才空间格式化成swap格式</span><br><br>chmod 0600 /swapfile  <br><span class="hljs-comment"># 该目录权限，不改的话，在下一步启动时会报“swapon: /swapfile: insecure permissions 0644, 0600 suggested.”错误</span><br><br>sudo swapon /swapfile<br><span class="hljs-comment"># 使用刚才创建的swap空间</span><br></code></pre></td></tr></table></figure>
-<p>编译完成后释放空间：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">swapoff -<span class="hljs-keyword">a</span><br><span class="hljs-comment"># 详细的用法可以：swapoff --help</span><br><br>free -h<br><span class="hljs-comment"># 查看当前内存使用情况</span><br></code></pre></td></tr></table></figure>
-<h2 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h2><p>永久增加虚拟内存，新建并重新挂载：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo swapoff /swapfile <br><span class="hljs-comment"># 先关闭虚拟内存</span><br><br>sudo fallocate -l 8G /swapfile<br><span class="hljs-comment"># 新建8G虚拟内存</span><br> <br><span class="hljs-built_in">ls</span> -lh /swapfile<br><span class="hljs-comment"># 查看是否已经新建swap；</span><br> <br>sudo <span class="hljs-built_in">chmod</span> 600 /swapfile<br><span class="hljs-comment"># 设置swap文件权限，只有root才能对本虚拟内存文件有读写权限；</span><br> <br><span class="hljs-built_in">ls</span> -lh /swapfile<br><span class="hljs-comment"># 查看文件信息，确认swap权限；</span><br> <br>sudo mkswap /swapfile<br><span class="hljs-comment"># 通知系统挂载swap；</span><br> <br>sudo swapon /swapfile<br><span class="hljs-comment"># 通知系统启用swap；</span><br> <br><span class="hljs-comment"># 现在虽然已经可以使用虚拟内存，但是一旦系统重启后，需要重新挂载，所以修改挂载磁盘文件达到重启后自动挂载：</span><br>sudo vi /etc/fstab<br> <br><span class="hljs-comment">#编辑脚本，打开文件后，最后面添加一行/swapfile  none  swap  sw  0  0，然后保存</span><br></code></pre></td></tr></table></figure>
 
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>我本以为是我没有安装<code>franka_description</code>包，但我打开文件夹<code>/opt/ros/melodic/share/</code>，发现有这个安装包，但是没有<code>panda</code>这个文件夹。我以为时包文件丢失，重新安装了以下：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install ros-melodic-franka-description<br></code></pre></td></tr></table></figure>
+<p>问题依旧没有解决。</p>
+<p>去ROS官网查看<code>franka_description</code>包：<a target="_blank" rel="noopener" href="http://wiki.ros.org/franka_description">http://wiki.ros.org/franka_description</a><br>打开github地址，发现github上的包文件是完整的：</p>
+<img src="/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/1.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://answers.ros.org/question/348106/c-internal-compiler-error-killed-while-building-universal-robots-ros-driver/">https://answers.ros.org/question/348106/c-internal-compiler-error-killed-while-building-universal-robots-ros-driver/</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c4ef42f6b2ec?u_atoken=accb1f50-4757-4f3f-8430-f9388c548e31&u_asession=01Sl97qhpzNtrzz3mtEYw-wA3CyQJFNHWpyqogGSfSixQfKtxtrf-HqPxHiq2wPl0LX0KNBwm7Lovlpxjd_P_q4JsKWYrT3W_NKPr8w6oU7K9T_9PkbfI9NtGK2za4CkVMPn5sJEo90JdruCukG2OVYmBkFo3NEHBv0PZUm6pbxQU&u_asig=05xHh4IRvz0OCaBf-5Cy3OE9fe4aMvS8FPRNgfAj4GPQqgTlU-Iq8IvUS2Vh0mMEf_FKwpjFHxgICf3cFCF6AqI8jdmNS3UBrHZk4dVsm7Ys7QEQSNA1i82ReMKxPlnagFIcJRq4Mo1hmPxMVZo9d3VVc-7H3O6oW1uAMKRdrH7af9JS7q8ZD7Xtz2Ly-b0kmuyAKRFSVJkkdwVUnyHAIJzU0KdFsOCLwMZOAxf8iLOxIrpB0pxWIxuPEKqEpEKHhELoLNx2oKfcIBo1yjPF0Bne3h9VXwMyh6PgyDIVSG1W9JpQAZ1eYztvV05qTc_LG75wXlYElZ4cq7YXSAdlfppbSqcceQuk9g-QpfEp97nmQwRREAJVszkQw8SBfELMt5mWspDxyAEEo4kbsryBKb9Q&u_aref=dt6SQ8S9vuUu7VT3LkIHdhamzvs=">解决c++: internal compiler error: 已杀死 (program cc1plus)</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Steve_Rogan/article/details/121574843">https://blog.csdn.net/Steve_Rogan&#x2F;article&#x2F;details&#x2F;121574843</a></li>
-</ol>
+<p>把它克隆到moveit工作空间下的src文件夹里：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/frankaemika/</span>franka_ros<br></code></pre></td></tr></table></figure>
+
+<p>安装相关依赖并编译：</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">$ rosdep install</span> <span class="hljs-literal">-</span><span class="hljs-comment">y</span> <span class="hljs-literal">--</span><span class="hljs-comment">from</span><span class="hljs-literal">-</span><span class="hljs-comment">paths</span> <span class="hljs-string">.</span> <span class="hljs-literal">--</span><span class="hljs-comment">ignore</span><span class="hljs-literal">-</span><span class="hljs-comment">src</span> <span class="hljs-literal">--</span><span class="hljs-comment">rosdistro melodic</span><br><span class="hljs-comment">$ catkin_make</span><br></code></pre></td></tr></table></figure>
+
+<p>重新运行：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch panda_moveit_config demo.<span class="hljs-built_in">launch</span> rviz_tutorial:=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>成功！</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>因为工作空间中的功能吧优先级高于ROS按照的功能包，所以也不用担心重名。不过，<a target="_blank" rel="noopener" href="http://wiki.ros.org/franka_description">官网</a>显示已经发布了功能包，不知道为什么使用sudo apt-get 安装的包与github上不一样。</p>
 
                 
               </div>
@@ -387,9 +379,7 @@
       
         <a href="/tags/melodic/">#melodic</a>
       
-        <a href="/tags/Ubuntu/">#Ubuntu</a>
-      
-        <a href="/tags/VMware/">#VMware</a>
+        <a href="/tags/moveit/">#moveit</a>
       
     </div>
   
@@ -401,8 +391,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>C++: internal compiler error: 已杀死 (program cc1plus)</div>
-      <div>https://chenjiadragon.github.io/2022/09/16/C-internal-compiler-error-已杀死-program-cc1plus/</div>
+      <div>No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...</div>
+      <div>https://chenjiadragon.github.io/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/</div>
     </div>
     <div class="license-meta">
       
@@ -414,7 +404,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年9月16日</div>
+          <div>2022年9月17日</div>
         </div>
       
       
@@ -444,18 +434,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/" title="No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/12/ROS%E5%88%9D%E5%AD%A6%E7%AC%94%E8%AE%B0/" title="ROS初学笔记">
-                        <span class="hidden-mobile">ROS初学笔记</span>
+                      <a href="/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/" title="C++: internal compiler error: 已杀死 (program cc1plus)">
+                        <span class="hidden-mobile">C++: internal compiler error: 已杀死 (program cc1plus)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
