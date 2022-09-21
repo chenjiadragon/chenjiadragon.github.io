@@ -18,25 +18,23 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问题描述初学moveit，按照官方教程学习，根据教程一步步操作，结果才到第二节课，运行demo时： 1roslaunch panda_moveit_config demo.launch rviz_tutorial:&#x3D;true 出现报错： 1No such file or directory:&#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;panda">
+    <meta name="description" content="安装流程在Ubuntu20.04上安装ROS-Noetic后，安装moveit。安装流程如下： 确保自己有最新的数据包： 1234sudo rosdep initrosdep updatesudo apt-get updatesudo apt-get dist-upgrade  安装ROS构建工具（一般安装ROS时已经安装好了）： 1sudo apt install ros-noetic-catk">
 <meta property="og:type" content="article">
-<meta property="og:title" content="No such file or directory: &#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;panda&#x2F;panda.urdf.xacro [Errno 2] No such file or directory: &#39;&#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;panda&#x2F;panda.urdf.xacro&#39;...">
-<meta property="og:url" content="https://chenjiadragon.github.io/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/index.html">
+<meta property="og:title" content="ROS-Noetic安装moveit">
+<meta property="og:url" content="https://chenjiadragon.github.io/2022/09/21/ROS-Noetic%E5%AE%89%E8%A3%85moveit/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="问题描述初学moveit，按照官方教程学习，根据教程一步步操作，结果才到第二节课，运行demo时： 1roslaunch panda_moveit_config demo.launch rviz_tutorial:&#x3D;true 出现报错： 1No such file or directory:&#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;panda">
+<meta property="og:description" content="安装流程在Ubuntu20.04上安装ROS-Noetic后，安装moveit。安装流程如下： 确保自己有最新的数据包： 1234sudo rosdep initrosdep updatesudo apt-get updatesudo apt-get dist-upgrade  安装ROS构建工具（一般安装ROS时已经安装好了）： 1sudo apt install ros-noetic-catk">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/1.png">
-<meta property="article:published_time" content="2022-09-17T11:56:31.000Z">
-<meta property="article:modified_time" content="2022-09-17T12:19:21.272Z">
+<meta property="article:published_time" content="2022-09-21T04:08:48.000Z">
+<meta property="article:modified_time" content="2022-09-21T04:33:57.907Z">
 <meta property="article:author" content="cjl">
-<meta property="article:tag" content="melodic">
+<meta property="article:tag" content="noetic">
 <meta property="article:tag" content="moveit">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://chenjiadragon.github.io/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/1.png">
   
   
   
-  <title>No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;... - chenjiadragon</title>
+  <title>ROS-Noetic安装moveit - chenjiadragon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -235,7 +233,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;..."></span>
+            <span id="subtitle" data-typed-text="ROS-Noetic安装moveit"></span>
           
         </div>
 
@@ -246,8 +244,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-17 19:56" pubdate>
-          2022年9月17日 晚上
+        <time datetime="2022-09-21 12:08" pubdate>
+          2022年9月21日 中午
         </time>
       </span>
     
@@ -258,7 +256,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          897 字
+          1.1k 字
         
       </span>
     
@@ -269,7 +267,7 @@
         
         
         
-          8 分钟
+          10 分钟
         
       </span>
     
@@ -315,35 +313,39 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...</h1>
+            <h1 style="display: none">ROS-Noetic安装moveit</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>初学moveit，按照<a target="_blank" rel="noopener" href="http://docs.ros.org/en/melodic/api/moveit_tutorials/html/index.html">官方教程</a>学习，根据教程一步步操作，结果才到第二节课，运行demo时：</p>
+                <h1 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h1><p>在Ubuntu20.04上安装ROS-Noetic后，安装moveit。安装流程如下：</p>
+<p>确保自己有最新的数据包：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">sudo rosdep init<br>rosdep <span class="hljs-keyword">update</span><br>sudo apt-<span class="hljs-keyword">get</span> <span class="hljs-keyword">update</span><br>sudo apt-<span class="hljs-keyword">get</span> dist-upgrade<br></code></pre></td></tr></table></figure>
+
+<p>安装ROS构建工具（一般安装ROS时已经安装好了）：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">sudo apt install ros-noetic-catkin <span class="hljs-keyword">python3</span>-catkin-tools <span class="hljs-keyword">python3</span>-osrf-pycommon<br></code></pre></td></tr></table></figure>
+
+<p>安装moveit（不用像<a target="_blank" rel="noopener" href="https://ros-planning.github.io/moveit_tutorials/">官网</a>一样下载源码）：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install ros-noetic-moveit<br></code></pre></td></tr></table></figure>
+
+<p>启动验证：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch moveit_setup_assistant setup_assistant.<span class="hljs-built_in">launch</span><br></code></pre></td></tr></table></figure>
+
+<p>如果要跑官网的示例教程，首先建立一个工作空间，下载示例代码：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir ~<span class="hljs-regexp">/ws_moveit/</span>src<br>cd ~<span class="hljs-regexp">/ws_moveit/</span>src<br>git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ros-planning/m</span>oveit_tutorials.git -b master<br>git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ros-planning/</span>panda_moveit_config.git -b melodic-devel<br></code></pre></td></tr></table></figure>
+
+<p>安装依赖并编译：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> ~<span class="hljs-string">/ws_moveit/src</span><br>rosdep install -y <span class="hljs-params">--from-paths</span> . <span class="hljs-params">--ignore-src</span> <span class="hljs-params">--rosdistro</span> noetic<br><span class="hljs-keyword">cd</span> <span class="hljs-string">..</span><br>catkin_make<br>source ~<span class="hljs-string">/ws_moveit/devel/setup.bash</span><br></code></pre></td></tr></table></figure>
+
+<p>运行demo：</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch panda_moveit_config demo.<span class="hljs-built_in">launch</span> rviz_tutorial:=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
-<p>出现报错：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">No such <span class="hljs-keyword">file</span> or directory:<span class="hljs-regexp">/opt/</span>ros<span class="hljs-regexp">/melodic/</span>share<span class="hljs-regexp">/franka_description/</span>robots<span class="hljs-regexp">/panda/</span>panda.urdf.xacro [Errno2] No such <span class="hljs-keyword">file</span> or directory:<span class="hljs-string">&#x27;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#x27;</span>...<br></code></pre></td></tr></table></figure>
 
-
-
-<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>我本以为是我没有安装<code>franka_description</code>包，但我打开文件夹<code>/opt/ros/melodic/share/</code>，发现有这个安装包，但是没有<code>panda</code>这个文件夹。我以为时包文件丢失，重新安装了以下：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install ros-melodic-franka-description<br></code></pre></td></tr></table></figure>
-<p>问题依旧没有解决。</p>
-<p>去ROS官网查看<code>franka_description</code>包：<a target="_blank" rel="noopener" href="http://wiki.ros.org/franka_description">http://wiki.ros.org/franka_description</a><br>打开github地址，发现github上的包文件是完整的：</p>
-<img src="/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/1.png" srcset="/img/loading.gif" lazyload class="">
-
-<p>把它克隆到moveit工作空间下的src文件夹里：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/frankaemika/</span>franka_ros<br></code></pre></td></tr></table></figure>
-
-<p>安装相关依赖并编译：</p>
-<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">$ rosdep install</span> <span class="hljs-literal">-</span><span class="hljs-comment">y</span> <span class="hljs-literal">--</span><span class="hljs-comment">from</span><span class="hljs-literal">-</span><span class="hljs-comment">paths</span> <span class="hljs-string">.</span> <span class="hljs-literal">--</span><span class="hljs-comment">ignore</span><span class="hljs-literal">-</span><span class="hljs-comment">src</span> <span class="hljs-literal">--</span><span class="hljs-comment">rosdistro melodic</span><br><span class="hljs-comment">$ catkin_make</span><br></code></pre></td></tr></table></figure>
-
-<p>重新运行：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch panda_moveit_config demo.<span class="hljs-built_in">launch</span> rviz_tutorial:=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
-
-<p>成功！</p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>因为工作空间中的功能吧优先级高于ROS按照的功能包，所以也不用担心重名。不过，<a target="_blank" rel="noopener" href="http://wiki.ros.org/franka_description">官网</a>显示已经发布了功能包，不知道为什么使用sudo apt-get 安装的包与github上不一样。</p>
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>ROS-Noetic版本使用的是python3，检查Ubuntu20.04的Python版本：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> --<span class="hljs-keyword">version</span><br></code></pre></td></tr></table></figure>
+<p>如果没有输出python版本，说明系统未指定python版本，执行以下指令检查系统安装的python版本：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls <span class="hljs-regexp">/usr/</span>bin/python*<br></code></pre></td></tr></table></figure>
+<p>一般有两个，一个python2，一个python3。使用以下命令可以自主选择python版本:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo update-alternatives --install <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/python python /u</span>sr<span class="hljs-regexp">/bin/</span>python2 <span class="hljs-number">1</span><br>sudo update-alternatives --install <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/python python /u</span>sr<span class="hljs-regexp">/bin/</span>python3 <span class="hljs-number">2</span><br>sudo update-alternatives --config python<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -377,7 +379,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/melodic/">#melodic</a>
+        <a href="/tags/noetic/">#noetic</a>
       
         <a href="/tags/moveit/">#moveit</a>
       
@@ -391,8 +393,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...</div>
-      <div>https://chenjiadragon.github.io/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/</div>
+      <div>ROS-Noetic安装moveit</div>
+      <div>https://chenjiadragon.github.io/2022/09/21/ROS-Noetic安装moveit/</div>
     </div>
     <div class="license-meta">
       
@@ -404,7 +406,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年9月17日</div>
+          <div>2022年9月21日</div>
         </div>
       
       
@@ -434,18 +436,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/21/ROS-Noetic%E5%AE%89%E8%A3%85moveit/" title="ROS-Noetic安装moveit">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ROS-Noetic安装moveit</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/" title="C++: internal compiler error: 已杀死 (program cc1plus)">
-                        <span class="hidden-mobile">C++: internal compiler error: 已杀死 (program cc1plus)</span>
+                      <a href="/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/" title="No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...">
+                        <span class="hidden-mobile">No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

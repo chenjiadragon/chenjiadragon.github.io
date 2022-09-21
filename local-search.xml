@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>ROS-Noetic安装moveit</title>
+    <link href="/2022/09/21/ROS-Noetic%E5%AE%89%E8%A3%85moveit/"/>
+    <url>/2022/09/21/ROS-Noetic%E5%AE%89%E8%A3%85moveit/</url>
+    
+    <content type="html"><![CDATA[<h1 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h1><p>在Ubuntu20.04上安装ROS-Noetic后，安装moveit。安装流程如下：</p><p>确保自己有最新的数据包：</p><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">sudo rosdep init<br>rosdep <span class="hljs-keyword">update</span><br>sudo apt-<span class="hljs-keyword">get</span> <span class="hljs-keyword">update</span><br>sudo apt-<span class="hljs-keyword">get</span> dist-upgrade<br></code></pre></td></tr></table></figure><p>安装ROS构建工具（一般安装ROS时已经安装好了）：</p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">sudo apt install ros-noetic-catkin <span class="hljs-keyword">python3</span>-catkin-tools <span class="hljs-keyword">python3</span>-osrf-pycommon<br></code></pre></td></tr></table></figure><p>安装moveit（不用像<a href="https://ros-planning.github.io/moveit_tutorials/">官网</a>一样下载源码）：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install ros-noetic-moveit<br></code></pre></td></tr></table></figure><p>启动验证：</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch moveit_setup_assistant setup_assistant.<span class="hljs-built_in">launch</span><br></code></pre></td></tr></table></figure><p>如果要跑官网的示例教程，首先建立一个工作空间，下载示例代码：</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir ~<span class="hljs-regexp">/ws_moveit/</span>src<br>cd ~<span class="hljs-regexp">/ws_moveit/</span>src<br>git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ros-planning/m</span>oveit_tutorials.git -b master<br>git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ros-planning/</span>panda_moveit_config.git -b melodic-devel<br></code></pre></td></tr></table></figure><p>安装依赖并编译：</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> ~<span class="hljs-string">/ws_moveit/src</span><br>rosdep install -y <span class="hljs-params">--from-paths</span> . <span class="hljs-params">--ignore-src</span> <span class="hljs-params">--rosdistro</span> noetic<br><span class="hljs-keyword">cd</span> <span class="hljs-string">..</span><br>catkin_make<br>source ~<span class="hljs-string">/ws_moveit/devel/setup.bash</span><br></code></pre></td></tr></table></figure><p>运行demo：</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch panda_moveit_config demo.<span class="hljs-built_in">launch</span> rviz_tutorial:=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>ROS-Noetic版本使用的是python3，检查Ubuntu20.04的Python版本：</p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> --<span class="hljs-keyword">version</span><br></code></pre></td></tr></table></figure><p>如果没有输出python版本，说明系统未指定python版本，执行以下指令检查系统安装的python版本：</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls <span class="hljs-regexp">/usr/</span>bin/python*<br></code></pre></td></tr></table></figure><p>一般有两个，一个python2，一个python3。使用以下命令可以自主选择python版本:</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo update-alternatives --install <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/python python /u</span>sr<span class="hljs-regexp">/bin/</span>python2 <span class="hljs-number">1</span><br>sudo update-alternatives --install <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/python python /u</span>sr<span class="hljs-regexp">/bin/</span>python3 <span class="hljs-number">2</span><br>sudo update-alternatives --config python<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>ROS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>noetic</tag>
+      
+      <tag>moveit</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...</title>
     <link href="/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/"/>
     <url>/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/</url>
