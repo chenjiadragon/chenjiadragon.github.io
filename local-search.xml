@@ -4,6 +4,58 @@
   
   
   <entry>
+    <title>ROS下使用摄像头发布和订阅图像</title>
+    <link href="/2022/09/22/ROS%E4%B8%8B%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85%E5%9B%BE%E5%83%8F/"/>
+    <url>/2022/09/22/ROS%E4%B8%8B%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85%E5%9B%BE%E5%83%8F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>ROS可以发布和订阅消息: </p><ol><li><a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29">C++实现发布和订阅</a></li><li><a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29">python实现发布和订阅</a></li></ol><p>ROS已经写好了图像发布的消息类型：<a href="http://docs.ros.org/en/noetic/api/sensor_msgs/html/index-msg.html">sensor_msgs&#x2F;Image</a></p><p>将<code>sensor_msgs/Image</code>消息类型转换成OpenCV可以使用的矩阵形式需要用到<a href="http://wiki.ros.org/cv_bridge">cv_bridge功能包</a>：</p><img src="/2022/09/22/ROS%E4%B8%8B%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85%E5%9B%BE%E5%83%8F/1.png" class=""><h1 id="2-创建ROS节点"><a href="#2-创建ROS节点" class="headerlink" title="2. 创建ROS节点"></a>2. 创建ROS节点</h1><h2 id="1-初始化工作空间"><a href="#1-初始化工作空间" class="headerlink" title="(1) 初始化工作空间"></a>(1) 初始化工作空间</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> py3_test_ws &amp;&amp; <span class="hljs-built_in">cd</span> py3_test_ws<br><span class="hljs-built_in">mkdir</span> src &amp;&amp; <span class="hljs-built_in">cd</span> src<br>catkin_init_workspace<br></code></pre></td></tr></table></figure><h2 id="2-创建功能包"><a href="#2-创建功能包" class="headerlink" title="(2) 创建功能包"></a>(2) 创建功能包</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">catkin_create_pkg</span> py3_demo rospy rosmsg roscpp<br></code></pre></td></tr></table></figure><h2 id="3-编写python3的图像发布和接收节点"><a href="#3-编写python3的图像发布和接收节点" class="headerlink" title="(3) 编写python3的图像发布和接收节点"></a>(3) 编写python3的图像发布和接收节点</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> py3_demo &amp;&amp; <span class="hljs-built_in">mkdir</span> scripts<br><span class="hljs-keyword">cd</span> scripts &amp;&amp; touch camera.<span class="hljs-keyword">py</span> img_process.<span class="hljs-keyword">py</span><br>chmod +<span class="hljs-keyword">x</span> camera.<span class="hljs-keyword">py</span><br>chmod +<span class="hljs-keyword">x</span> img_process.<span class="hljs-keyword">py</span><br></code></pre></td></tr></table></figure><p>将以下代码复制到对应的文件中:</p><h2 id="摄像头发布节点-camera-py"><a href="#摄像头发布节点-camera-py" class="headerlink" title="摄像头发布节点(camera.py)"></a>摄像头发布节点(camera.py)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python3</span><br><span class="hljs-comment"># coding:utf-8</span><br><br><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">from</span> std_msgs.msg <span class="hljs-keyword">import</span> Header<br><span class="hljs-keyword">from</span> sensor_msgs.msg <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">from</span> cv_bridge <span class="hljs-keyword">import</span> CvBridge , CvBridgeError<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">if</span> __name__==<span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-keyword">import</span> sys <br>    <span class="hljs-built_in">print</span>(sys.version) <span class="hljs-comment"># 查看python版本</span><br>    capture = cv2.VideoCapture(<span class="hljs-number">0</span>) <span class="hljs-comment"># 定义摄像头</span><br>    rospy.init_node(<span class="hljs-string">&#x27;camera_node&#x27;</span>, anonymous=<span class="hljs-literal">True</span>) <span class="hljs-comment">#定义节点</span><br>    image_pub=rospy.Publisher(<span class="hljs-string">&#x27;/image_view/image_raw&#x27;</span>, Image, queue_size = <span class="hljs-number">1</span>) <span class="hljs-comment">#定义话题</span><br>    <br>    header = Header(stamp = rospy.Time.now())<br>    header.frame_id = <span class="hljs-string">&quot;Camera&quot;</span><br>    ros_frame = Image()<br>    ros_frame.header=header<br>    ros_frame.width = <span class="hljs-number">640</span><br>    ros_frame.height = <span class="hljs-number">480</span><br>    ros_frame.encoding = <span class="hljs-string">&quot;bgr8&quot;</span><br>    <span class="hljs-comment"># ros_frame.step = 1920</span><br><br>    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> rospy.is_shutdown():    <span class="hljs-comment"># Ctrl C正常退出，如果异常退出会报错device busy！</span><br>        start = time.time()<br>        ret, frame = capture.read()<br>        <span class="hljs-keyword">if</span> ret: <span class="hljs-comment"># 如果有画面再执行</span><br>            <span class="hljs-comment"># frame = cv2.flip(frame,0)   #垂直镜像操作</span><br>            frame = cv2.flip(frame,<span class="hljs-number">1</span>)   <span class="hljs-comment">#水平镜像操作   </span><br>    <br>            ros_frame.data = np.array(frame).tostring() <span class="hljs-comment">#图片格式转换</span><br>            image_pub.publish(ros_frame) <span class="hljs-comment">#发布消息</span><br>            end = time.time()  <br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;cost time:&quot;</span>, end-start ) <span class="hljs-comment"># 看一下每一帧的执行时间，从而确定合适的rate</span><br>            rate = rospy.Rate(<span class="hljs-number">25</span>) <span class="hljs-comment"># 10hz </span><br><br>    capture.release()<br>    cv2.destroyAllWindows() <br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;quit successfully!&quot;</span>)<br><br></code></pre></td></tr></table></figure><h2 id="摄像头接收处理节点-img-process-py"><a href="#摄像头接收处理节点-img-process-py" class="headerlink" title="摄像头接收处理节点(img_process.py)"></a>摄像头接收处理节点(img_process.py)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python3</span><br><span class="hljs-comment"># coding:utf-8</span><br><br><span class="hljs-keyword">import</span> rospy<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> sensor_msgs.msg <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">from</span> cv_bridge <span class="hljs-keyword">import</span> CvBridge, CvBridgeError<br><span class="hljs-keyword">import</span> cv2<br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">callback</span>(<span class="hljs-params">data</span>):<br>    cv_img = bridge.imgmsg_to_cv2(data, <span class="hljs-string">&quot;bgr8&quot;</span>)<br>    cv2.imshow(<span class="hljs-string">&quot;frame&quot;</span> , cv_img)<br>    cv2.waitKey(<span class="hljs-number">1</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-keyword">import</span> sys <br>    <span class="hljs-built_in">print</span>(sys.version) <span class="hljs-comment"># 查看python版本</span><br>    <br>    rospy.init_node(<span class="hljs-string">&#x27;img_process_node&#x27;</span>, anonymous=<span class="hljs-literal">True</span>)<br>    bridge = CvBridge()<br>    rospy.Subscriber(<span class="hljs-string">&#x27;/image_view/image_raw&#x27;</span>, Image, callback)<br>    rospy.spin()<br><br></code></pre></td></tr></table></figure><h1 id="3-运行节点"><a href="#3-运行节点" class="headerlink" title="3. 运行节点"></a>3. 运行节点</h1><h2 id="1-编译"><a href="#1-编译" class="headerlink" title="(1) 编译"></a>(1) 编译</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd ..<span class="hljs-regexp">/../</span>..<br>catkin_make -DPYTHON_EXECUTABLE=<span class="hljs-regexp">/usr/</span>bin/python3<br></code></pre></td></tr></table></figure><h2 id="2-运行"><a href="#2-运行" class="headerlink" title="(2) 运行"></a>(2) 运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> devel/setup.bash<br><span class="hljs-comment"># 打开三个终端</span><br>roscore<br>rosrun py3_demo camera.py<br>rosrun py3_demo img_process.py<br></code></pre></td></tr></table></figure><p>之后就可以进行开发了。</p><h1 id="4-参考"><a href="#4-参考" class="headerlink" title="4. 参考"></a>4. 参考</h1><ol><li><a href="https://blog.csdn.net/qq_45779334/article/details/119579649">https://blog.csdn.net/qq_45779334&#x2F;article&#x2F;details&#x2F;119579649</a></li><li><a href="https://blog.csdn.net/qq_45779334/article/details/124323809">C++实现</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>ROS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>noetic</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Ubuntu虚拟机如何使用摄像头</title>
+    <link href="/2022/09/22/Ubuntu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4/"/>
+    <url>/2022/09/22/Ubuntu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4/</url>
+    
+    <content type="html"><![CDATA[<h1 id="相关设置"><a href="#相关设置" class="headerlink" title="相关设置"></a>相关设置</h1><p>在虚拟机设置中将USB兼容性设置为3.x，默认是2.x：</p><img src="/2022/09/22/Ubuntu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4/1.png" class=""><p>此时虚拟机可以检测到相关USB设备，但是一台USB设备只能链接一台主机或者虚拟机，只有断开主机的连接，虚拟机才可以连接到摄像头。<br>点击VMware菜单栏上的“虚拟机-&gt;可移动设备”：</p><img src="/2022/09/22/Ubuntu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4/2.jpg" class=""><p>此时就可以在虚拟机中使用摄像头了。</p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol><li><a href="https://www.jianshu.com/p/bc93dedb697d">https://www.jianshu.com/p/bc93dedb697d</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>虚拟机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Ubuntu</tag>
+      
+      <tag>VMware</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ROS-Noetic安装moveit</title>
     <link href="/2022/09/21/ROS-Noetic%E5%AE%89%E8%A3%85moveit/"/>
     <url>/2022/09/21/ROS-Noetic%E5%AE%89%E8%A3%85moveit/</url>
@@ -20,9 +72,9 @@
     
     <tags>
       
-      <tag>noetic</tag>
-      
       <tag>moveit</tag>
+      
+      <tag>noetic</tag>
       
     </tags>
     
