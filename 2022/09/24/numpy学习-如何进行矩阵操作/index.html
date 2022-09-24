@@ -1,0 +1,761 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cjl">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言NumPy是一个开源Python库，几乎在科学和工程中的每个领域都使用它。Numpy包含多维数据结构和矩阵数据结构，并提供了对其进行有效操作的方法。本文将详细介绍数据与矩阵操作的方法。 NumPy提供了一个N维数据类型：numpy.ndarray，它是NumPy中最基础的数据类型。我们可以对numpy.ndarray进行子类化。NumPy官方提供了一些标准数组子类，其中就有矩阵对象：numpy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="numpy学习--如何进行矩阵操作">
+<meta property="og:url" content="https://chenjiadragon.github.io/2022/09/24/numpy%E5%AD%A6%E4%B9%A0-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="chenjiadragon">
+<meta property="og:description" content="前言NumPy是一个开源Python库，几乎在科学和工程中的每个领域都使用它。Numpy包含多维数据结构和矩阵数据结构，并提供了对其进行有效操作的方法。本文将详细介绍数据与矩阵操作的方法。 NumPy提供了一个N维数据类型：numpy.ndarray，它是NumPy中最基础的数据类型。我们可以对numpy.ndarray进行子类化。NumPy官方提供了一些标准数组子类，其中就有矩阵对象：numpy">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-24T09:11:34.000Z">
+<meta property="article:modified_time" content="2022-09-24T13:36:01.325Z">
+<meta property="article:author" content="cjl">
+<meta property="article:tag" content="矩阵">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>numpy学习--如何进行矩阵操作 - chenjiadragon</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chenjiadragon.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YtwA6Qo3Mv4aVYBqpTAsm3iG-MdYXbMMI","app_key":"kdSKzfvlHtJTfOsKtJADVtdY","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>cjl&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="numpy学习--如何进行矩阵操作"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-24 17:11" pubdate>
+          2022年9月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          40 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">numpy学习--如何进行矩阵操作</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>NumPy是一个开源Python库，几乎在科学和工程中的每个领域都使用它。Numpy包含多维数据结构和矩阵数据结构，并提供了对其进行有效操作的方法。本文将详细介绍数据与矩阵操作的方法。</p>
+<p>NumPy提供了一个N维数据类型：<strong>numpy.ndarray</strong>，它是NumPy中最基础的数据类型。我们可以对numpy.ndarray进行子类化。NumPy官方提供了一些标准数组子类，其中就有矩阵对象：<strong>numpy.matrix</strong>。所以，很明显numpy.matrix是numpy.ndarray的子类。</p>
+<p>numpy.matrix和numpy.ndarray都可以使用进行矩阵操作。其中numpy.matrix语法与MATLAB有些相似，进行矩阵操作更细致化。但奇怪的是官方并不推荐使用numpy.matrix，因为它使得编写一致处理矩阵和规则数组的函数变得非常困难，将来会删除matrix子类。</p>
+<p>本文将介绍两种数据类型进行矩阵操作的方法。</p>
+<h1 id="numpy-matrix数据类型相关操作"><a href="#numpy-matrix数据类型相关操作" class="headerlink" title="numpy.matrix数据类型相关操作"></a>numpy.matrix数据类型相关操作</h1><h2 id="1-创建矩阵"><a href="#1-创建矩阵" class="headerlink" title="1. 创建矩阵"></a>1. 创建矩阵</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>&gt;&gt;&gt;m= np.mat([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])  <span class="hljs-comment">#创建矩阵</span><br>&gt;&gt;&gt;m<br>matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]])<br>&gt;&gt;&gt;m= np.matrix([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])  <span class="hljs-comment"># 创建矩阵</span><br>&gt;&gt;&gt;m<br>matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]])<br>&gt;&gt;&gt;np.shape(m)          <span class="hljs-comment"># 查看矩阵大小</span><br>(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)<br>&gt;&gt;&gt;m.shape            <span class="hljs-comment"># 也可以这样</span><br>(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)<br>&gt;&gt;&gt;m.shape[<span class="hljs-number">0</span>]          <span class="hljs-comment"># 查看矩阵行数</span><br><span class="hljs-number">1</span><br>&gt;&gt;&gt;m.shape[<span class="hljs-number">1</span>]          <span class="hljs-comment"># 查看矩阵列数</span><br><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>np.mat()和np.matrix()几乎等价。前者是一个函数，可以将不同数据类型的数据转换成numpy.matrix类型；后者则是numpy.matrix类的构造函数。二者其他区别详见：<a target="_blank" rel="noopener" href="http://t.csdn.cn/M2LVg">http://t.csdn.cn/M2LVg</a></p>
+</blockquote>
+<h2 id="2-创建常见的矩阵"><a href="#2-创建常见的矩阵" class="headerlink" title="2. 创建常见的矩阵"></a>2. 创建常见的矩阵</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;data1=np.mat(np.zeros((<span class="hljs-number">3</span>,<span class="hljs-number">3</span>)))    <span class="hljs-comment">#创建一个3*3的零矩阵，矩阵这里zeros函数的参数是一个tuple类型(3,3)</span><br>&gt;&gt;&gt;data1<br>matrix([[ <span class="hljs-number">0.</span>,  <span class="hljs-number">0.</span>,  <span class="hljs-number">0.</span>],<br>        [ <span class="hljs-number">0.</span>,  <span class="hljs-number">0.</span>,  <span class="hljs-number">0.</span>],<br>        [ <span class="hljs-number">0.</span>,  <span class="hljs-number">0.</span>,  <span class="hljs-number">0.</span>]])<br>&gt;&gt;&gt;data2=np.mat(np.ones((<span class="hljs-number">2</span>,<span class="hljs-number">4</span>))) <span class="hljs-comment">#创建一个2*4的1矩阵，默认是浮点型的数据，如果需要时int类型，可以使用dtype=int</span><br>&gt;&gt;&gt;data2<br>matrix([[ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>],<br>        [ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>]])<br>&gt;&gt;&gt;data3=np.mat(np.random.rand(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)) <span class="hljs-comment">#这里的random模块使用的是numpy中的random模块，random.rand(2,2)创建的是一个二维数组，需要将其转换成#matrix</span><br>&gt;&gt;&gt;data3<br>matrix([[ <span class="hljs-number">0.57341802</span>,  <span class="hljs-number">0.51016034</span>],<br>        [ <span class="hljs-number">0.56438599</span>,  <span class="hljs-number">0.70515605</span>]])<br>&gt;&gt;&gt;data4=np.mat(np.random.randint(<span class="hljs-number">10</span>,size=(<span class="hljs-number">3</span>,<span class="hljs-number">3</span>))) <span class="hljs-comment">#生成一个3*3的0-10之间的随机整数矩阵，如果需要指定下界则可以多加一个参数</span><br>&gt;&gt;&gt;data4<br>matrix([[<span class="hljs-number">9</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>],<br>        [<span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>],<br>        [<span class="hljs-number">6</span>, <span class="hljs-number">0</span>, <span class="hljs-number">7</span>]])<br>&gt;&gt;&gt;data5=np.mat(np.random.randint(<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,size=(<span class="hljs-number">2</span>,<span class="hljs-number">5</span>))) <span class="hljs-comment">#产生一个2-8之间的随机整数矩阵</span><br>&gt;&gt;&gt;data5<br>matrix([[<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">3</span>, <span class="hljs-number">7</span>],<br>        [<span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>]])<br>&gt;&gt;&gt;data6=np.mat(np.eye(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,dtype=<span class="hljs-built_in">int</span>)) <span class="hljs-comment">#产生一个2*2的对角矩阵</span><br>&gt;&gt;&gt;data6<br>matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>],<br>        [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]])<br> <br>&gt;&gt;&gt;a1=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br>&gt;&gt;&gt;a2=np.mat(np.diag(a1)) <span class="hljs-comment">#生成一个对角线为1、2、3的对角矩阵</span><br>&gt;&gt;&gt;a2<br>matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],<br>        [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>],<br>        [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>]])<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-矩阵索引"><a href="#3-矩阵索引" class="headerlink" title="3. 矩阵索引"></a>3. 矩阵索引</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;m=np.mat([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>]])<br>&gt;&gt;&gt;m[<span class="hljs-number">1</span>:]                    <span class="hljs-comment">#取得第一行的所有元素</span><br>matrix([[<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>]])<br>&gt;&gt;&gt;m[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>:<span class="hljs-number">1</span>]               <span class="hljs-comment">#第一行第0-1个元素，注意左闭右开,返回的是矩阵</span><br>matrix([[<span class="hljs-number">2</span>]])<br>&gt;&gt;&gt;m[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>:<span class="hljs-number">3</span>]<br>matrix([[<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>]])<br>&gt;&gt;&gt;m[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]                  <span class="hljs-comment">#第一行第2个元素，返回的是数值</span><br><span class="hljs-number">6</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="4-矩阵相乘"><a href="#4-矩阵相乘" class="headerlink" title="4. 矩阵相乘"></a>4. 矩阵相乘</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a1=np.mat([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>])      <br>&gt;&gt;&gt;a2=np.mat([[<span class="hljs-number">1</span>],[<span class="hljs-number">2</span>]])<br>&gt;&gt;&gt;a3=a1*a2      <span class="hljs-comment">#1*2的矩阵乘以2*1的矩阵，得到1*1的矩阵</span><br>&gt;&gt;&gt;a3<br>matrix([[<span class="hljs-number">5</span>]])<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="5-矩阵点乘"><a href="#5-矩阵点乘" class="headerlink" title="5. 矩阵点乘"></a>5. 矩阵点乘</h2><p>对应元素相乘：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a1=np.mat([<span class="hljs-number">1</span>,<span class="hljs-number">1</span>])<br>&gt;&gt;&gt;a2=np.mat([<span class="hljs-number">2</span>,<span class="hljs-number">2</span>])<br>&gt;&gt;&gt;a3=np.multiply(a1,a2)<br>&gt;&gt;&gt;a3<br>matrix([[<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]])<br></code></pre></td></tr></table></figure>
+
+<p>矩阵点乘：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a1=np.mat([<span class="hljs-number">2</span>,<span class="hljs-number">2</span>])<br>&gt;&gt;&gt;a2=a1*<span class="hljs-number">2</span><br>&gt;&gt;&gt;a2<br>matrix([[<span class="hljs-number">4</span>, <span class="hljs-number">4</span>]])<br></code></pre></td></tr></table></figure>
+
+<h2 id="6-矩阵求逆"><a href="#6-矩阵求逆" class="headerlink" title="6. 矩阵求逆"></a>6. 矩阵求逆</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a1=np.mat(np.eye(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)*<span class="hljs-number">0.5</span>)<br>&gt;&gt;&gt;a1<br>matrix([[ <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.</span> ],<br>        [ <span class="hljs-number">0.</span> ,  <span class="hljs-number">0.5</span>]])<br>&gt;&gt;&gt;a2=a1.I     <span class="hljs-comment">#求矩阵matrix([[0.5,0],[0,0.5]])的逆矩阵</span><br>&gt;&gt;&gt;a2<br>matrix([[ <span class="hljs-number">2.</span>,  <span class="hljs-number">0.</span>],<br>        [ <span class="hljs-number">0.</span>,  <span class="hljs-number">2.</span>]])<br></code></pre></td></tr></table></figure>
+
+<h2 id="7-矩阵转置"><a href="#7-矩阵转置" class="headerlink" title="7. 矩阵转置"></a>7. 矩阵转置</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a1=np.mat([[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]])<br>&gt;&gt;&gt;a1<br>matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>],<br>        [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]])<br>&gt;&gt;&gt;a2=a1.T<br>&gt;&gt;&gt;a2<br>matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>],<br>        [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>]])<br></code></pre></td></tr></table></figure>
+
+<h2 id="8-矩阵分割"><a href="#8-矩阵分割" class="headerlink" title="8. 矩阵分割"></a>8. 矩阵分割</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a=np.mat(ones((<span class="hljs-number">3</span>,<span class="hljs-number">3</span>)))<br>&gt;&gt;&gt;a<br>matrix([[ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>],<br>        [ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>],<br>        [ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>]])<br>&gt;&gt;&gt;b=a[<span class="hljs-number">1</span>:,<span class="hljs-number">1</span>:]  <span class="hljs-comment">#分割出第二行以后的行和第二列以后的列的所有元素</span><br>&gt;&gt;&gt;b<br>matrix([[ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>],<br>        [ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>]])<br></code></pre></td></tr></table></figure>
+
+<h2 id="9-矩阵合并"><a href="#9-矩阵合并" class="headerlink" title="9. 矩阵合并"></a>9. 矩阵合并</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a=np.mat(np.ones((<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)))<br>&gt;&gt;&gt;a<br>matrix([[ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>],<br>        [ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>]])<br>&gt;&gt;&gt;b=np.mat(np.eye(<span class="hljs-number">2</span>))<br>&gt;&gt;&gt;b<br>matrix([[ <span class="hljs-number">1.</span>,  <span class="hljs-number">0.</span>],<br>        [ <span class="hljs-number">0.</span>,  <span class="hljs-number">1.</span>]])<br>&gt;&gt;&gt;c=np.vstack((a,b))  <span class="hljs-comment">#按列合并，即增加行数</span><br>&gt;&gt;&gt;c<br>matrix([[ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>],<br>        [ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>],<br>        [ <span class="hljs-number">1.</span>,  <span class="hljs-number">0.</span>],<br>        [ <span class="hljs-number">0.</span>,  <span class="hljs-number">1.</span>]])<br>&gt;&gt;&gt;d=np.hstack((a,b))  <span class="hljs-comment">#按行合并，即行数不变，扩展列数</span><br>&gt;&gt;&gt;d<br>matrix([[ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">0.</span>],<br>        [ <span class="hljs-number">1.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">0.</span>,  <span class="hljs-number">1.</span>]])<br></code></pre></td></tr></table></figure>
+
+<h2 id="10-计算每一列、行的和"><a href="#10-计算每一列、行的和" class="headerlink" title="10. 计算每一列、行的和"></a>10. 计算每一列、行的和</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a1=np.mat([[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">4</span>,<span class="hljs-number">2</span>]])<br>&gt;&gt;&gt;a1<br>matrix([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>],<br>        [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>],<br>        [<span class="hljs-number">4</span>, <span class="hljs-number">2</span>]])<br>&gt;&gt;&gt;a2=a1.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>) <span class="hljs-comment">#列和，这里得到的是1*2的矩阵</span><br>&gt;&gt;&gt;a2<br>matrix([[<span class="hljs-number">7</span>, <span class="hljs-number">6</span>]])<br>&gt;&gt;&gt;a3=a1.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">1</span>) <span class="hljs-comment">#行和，这里得到的是3*1的矩阵</span><br>&gt;&gt;&gt;a3<br>matrix([[<span class="hljs-number">2</span>],<br>        [<span class="hljs-number">5</span>],<br>        [<span class="hljs-number">6</span>]])<br>&gt;&gt;&gt;a4=a1[<span class="hljs-number">1</span>,:].<span class="hljs-built_in">sum</span>()  <span class="hljs-comment">#计算第一行所有列的和，这里得到的是一个数值</span><br>&gt;&gt;&gt;a4<br><span class="hljs-number">5</span>                    <span class="hljs-comment">#第0行：1+1；第2行：2+3；第3行：4+2</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="11-计算最大、最小值和索引"><a href="#11-计算最大、最小值和索引" class="headerlink" title="11. 计算最大、最小值和索引"></a>11. 计算最大、最小值和索引</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a1.<span class="hljs-built_in">max</span>()   <span class="hljs-comment">#计算a1矩阵中所有元素的最大值,这里得到的结果是一个数值</span><br><span class="hljs-number">4</span><br>&gt;&gt;&gt;a2=<span class="hljs-built_in">max</span>(a1[:,<span class="hljs-number">1</span>]) <span class="hljs-comment">#计算第二列的最大值，这里得到的是一个1*1的矩阵</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a2<br>matrix([[<span class="hljs-number">3</span>]])<br>&gt;&gt;&gt;a1[<span class="hljs-number">1</span>,:].<span class="hljs-built_in">max</span>()  <span class="hljs-comment">#计算第二行的最大值，这里得到的是一个一个数值</span><br><span class="hljs-number">3</span><br>&gt;&gt;&gt;np.<span class="hljs-built_in">max</span>(a1,<span class="hljs-number">0</span>)  <span class="hljs-comment">#计算所有列的最大值，这里使用的是numpy中的max函数</span><br>matrix([[<span class="hljs-number">4</span>, <span class="hljs-number">3</span>]])<br>&gt;&gt;&gt;np.<span class="hljs-built_in">max</span>(a1,<span class="hljs-number">1</span>)  <span class="hljs-comment">#计算所有行的最大值，这里得到是一个矩阵</span><br>matrix([[<span class="hljs-number">1</span>],<br>        [<span class="hljs-number">3</span>],<br>        [<span class="hljs-number">4</span>]])<br>&gt;&gt;&gt;np.argmax(a1,<span class="hljs-number">0</span>)    <span class="hljs-comment">#计算所有列的最大值对应在该列中的索引</span><br>matrix([[<span class="hljs-number">2</span>, <span class="hljs-number">1</span>]])<br>&gt;&gt;&gt;np.argmax(a1[<span class="hljs-number">1</span>,:])  <span class="hljs-comment">#计算第二行中最大值对应在该行的索引</span><br><span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="12-矩阵、列表、数组的转换"><a href="#12-矩阵、列表、数组的转换" class="headerlink" title="12. 矩阵、列表、数组的转换"></a>12. 矩阵、列表、数组的转换</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;a1=[[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">5</span>,<span class="hljs-number">2</span>]]  <span class="hljs-comment">#列表</span><br>&gt;&gt;&gt;<span class="hljs-built_in">type</span>(a1)<br>&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;list&#x27;</span>&gt;<br>&gt;&gt;&gt;a2=np.array(a1)  <span class="hljs-comment">#将列表转换成二维数组</span><br>&gt;&gt;&gt;<span class="hljs-built_in">type</span>(a2)<br>&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;numpy.ndarray&#x27;</span>&gt;<br>&gt;&gt;&gt;a3=np.mat(a1)    <span class="hljs-comment">#将列表转化成矩阵</span><br>&gt;&gt;&gt;<span class="hljs-built_in">type</span>(a3)<br>&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;numpy.matrix&#x27;</span>&gt;<br>&gt;&gt;&gt;a4=np.array(a3)  <span class="hljs-comment">#将矩阵转换成数组</span><br>&gt;&gt;&gt;a41=a3.getA()  <span class="hljs-comment">#将矩阵转换成数组</span><br>&gt;&gt;&gt;a5=a3.tolist()  <span class="hljs-comment">#将矩阵转换成列表</span><br>&gt;&gt;&gt;a6=a2.tolist()  <span class="hljs-comment">#将数组转换成列表</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="numpy-ndarray数据类型相关操作"><a href="#numpy-ndarray数据类型相关操作" class="headerlink" title="numpy.ndarray数据类型相关操作"></a>numpy.ndarray数据类型相关操作</h1><p>等待补充…</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/index.html">numpy官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.numpy.org.cn/reference/">numpy中文网</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38150441/article/details/79893747">numpy之python 矩阵（mat）操作</a></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/python/" class="category-chain-item">python</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/python/numpy/" class="category-chain-item">numpy</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%9F%A9%E9%98%B5/">#矩阵</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>numpy学习--如何进行矩阵操作</div>
+      <div>https://chenjiadragon.github.io/2022/09/24/numpy学习-如何进行矩阵操作/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cjl</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月24日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/" title="MATLAB相机标定">
+                        <span class="hidden-mobile">MATLAB相机标定</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"9AQnxcUdb15xuYdLHjdl9mQ5-gzGzoHsz","appKey":"RXjuMjzaj6TxcPnncXHjdcK7","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicLine.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/love.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
