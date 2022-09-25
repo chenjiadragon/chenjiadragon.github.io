@@ -316,7 +316,7 @@
     <link href="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
     <url>/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
     
-    <content type="html"><![CDATA[<p>这是一篇测试文章</p><!-- <img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" title="蒙娜丽莎"> --><!-- 56 --><img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" alt="图片引用方法三">]]></content>
+    <content type="html"><![CDATA[<p>这是一篇测试文章</p><!-- <img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" title="蒙娜丽莎"> --><!-- 56 --><img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" alt="图片引用方法三"><p><a href="%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/1.pdf">论文</a></p>]]></content>
     
     
     <categories>
