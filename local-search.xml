@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Linux服务器常用命令</title>
+    <link href="/2022/09/27/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <url>/2022/09/27/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[<h1 id="参考手册"><a href="#参考手册" class="headerlink" title="参考手册"></a>参考手册</h1><ol><li><a href="https://www.runoob.com/linux/linux-command-manual.html">菜鸟教程Linux命令大全</a></li></ol><h1 id="常用指令（持续总结）"><a href="#常用指令（持续总结）" class="headerlink" title="常用指令（持续总结）"></a>常用指令（持续总结）</h1><table><thead><tr><th>操作</th><th>命令</th></tr></thead><tbody><tr><td>回退文件目录</td><td>cd ..</td></tr></tbody></table><h1 id="相关软件"><a href="#相关软件" class="headerlink" title="相关软件"></a>相关软件</h1><p><a href="https://www.xshell.com/zh/xshell/">XSHELL和XFTP</a>：免费版足够使用。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>服务器</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>numpy学习--如何进行矩阵操作</title>
     <link href="/2022/09/24/numpy%E5%AD%A6%E4%B9%A0-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C/"/>
     <url>/2022/09/24/numpy%E5%AD%A6%E4%B9%A0-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C/</url>
@@ -312,11 +337,11 @@
   
   
   <entry>
-    <title>蒙娜丽莎</title>
+    <title>测试文章</title>
     <link href="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
     <url>/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
     
-    <content type="html"><![CDATA[<p>这是一篇测试文章</p><!-- <img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" title="蒙娜丽莎"> --><!-- 56 --><img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" alt="图片引用方法三"><p><a href="%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/1.pdf">论文</a></p>]]></content>
+    <content type="html"><![CDATA[<p>这是一篇测试文章</p><!-- <img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" title="蒙娜丽莎"> --><!-- 56 --><img src="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="" alt="图片引用方法三"><p><a href="https://github.com/chenjiadragon/chenjiadragon.github.io/blob/main/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/1.pdf">论文</a></p>]]></content>
     
     
     <categories>
