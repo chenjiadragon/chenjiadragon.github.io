@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cjl">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="因为tf2是tf的超集，且tf即将被废弃。所以可以直接学习tf2。  tf简介在机器人控制中，坐标转换是非常重要的，在ROS中使用tf软件包进行坐标转换。参考1是官方教程文档。 一个机器人系统中通常有很多三维坐标系，而且一般会随着时间变化。tf就是以时间为轴，跟踪者这些坐标系（frame），默认可以记录10s内的坐标系变化。使用tf包，我们可以得知以下问题的答案：  五秒钟之前，机器人头参考系相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tf学习笔记">
+<meta property="og:url" content="https://chenjiadragon.github.io/2022/09/29/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="chenjiadragon">
+<meta property="og:description" content="因为tf2是tf的超集，且tf即将被废弃。所以可以直接学习tf2。  tf简介在机器人控制中，坐标转换是非常重要的，在ROS中使用tf软件包进行坐标转换。参考1是官方教程文档。 一个机器人系统中通常有很多三维坐标系，而且一般会随着时间变化。tf就是以时间为轴，跟踪者这些坐标系（frame），默认可以记录10s内的坐标系变化。使用tf包，我们可以得知以下问题的答案：  五秒钟之前，机器人头参考系相">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-29T08:25:56.000Z">
+<meta property="article:modified_time" content="2022-09-29T13:56:01.002Z">
+<meta property="article:author" content="cjl">
+<meta property="article:tag" content="noetic">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>tf学习笔记 - chenjiadragon</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chenjiadragon.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YtwA6Qo3Mv4aVYBqpTAsm3iG-MdYXbMMI","app_key":"kdSKzfvlHtJTfOsKtJADVtdY","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>cjl&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/code7.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="tf学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-29 16:25" pubdate>
+          2022年9月29日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">tf学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>因为tf2是tf的超集，且tf即将被废弃。所以可以直接学习tf2。</p>
+</blockquote>
+<h1 id="tf简介"><a href="#tf简介" class="headerlink" title="tf简介"></a>tf简介</h1><p>在机器人控制中，坐标转换是非常重要的，在ROS中使用tf软件包进行坐标转换。<a href="#%E5%8F%82%E8%80%83">参考1</a>是官方教程文档。</p>
+<p>一个机器人系统中通常有很多三维坐标系，而且一般会随着时间变化。tf就是以时间为轴，跟踪者这些坐标系（frame），默认可以记录10s内的坐标系变化。使用tf包，我们可以得知以下问题的答案：</p>
+<ul>
+<li>五秒钟之前，机器人头参考系相对于全局参考系的关系是什么样的？</li>
+<li>机器人夹取的物体相对于机器人中心参考系的位置在哪里？</li>
+<li>机器人中心参考系相对于全局参考系的位置在哪里？</li>
+</ul>
+<p>坐标转换包TF是一个让用户可以实时跟踪多个参考系的功能包，它使用的是树型数据结构，可以根据时间缓冲实时维护多个参考系之间的坐标变换关系。从而得知一个点在多个坐标系中的坐标表示。</p>
+<p>tf坐标系三个轴分别有三种颜色，其中红色为x轴，绿色为y轴，蓝色为z轴。</p>
+<h1 id="tf工具"><a href="#tf工具" class="headerlink" title="tf工具"></a>tf工具</h1><p>查看当前tf树中所有坐标系的发布状态：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">rosrun tf tf_monitor</span><br></code></pre></td></tr></table></figure>
+
+<p>查看当前所有坐标之间的变换关系，可通过刷新更新当前树的内容:</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">rosrun rqt_tf_tree rqt_tf_tree</span><br></code></pre></td></tr></table></figure>
+
+<p>获取reference_frame和target_frame之间的坐标变换关系:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">rosrun tf tf_echo <span class="hljs-selector-attr">[reference_frame]</span> <span class="hljs-selector-attr">[target_frame]</span><br></code></pre></td></tr></table></figure>
+
+<p>使用rviz可视化坐标系：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">rosrun rviz rviz</span><br></code></pre></td></tr></table></figure>
+<p>先在”Global Options”下设置Fixed Frame，然后点击ADD,加入TF display。</p>
+<h1 id="tf的使用"><a href="#tf的使用" class="headerlink" title="tf的使用"></a>tf的使用</h1><p>使用tf功能包，总的来说需要两个步骤：</p>
+<ol>
+<li><strong>广播tf变换</strong>：向系统中广播参考系之间的坐标变换关系，系统中更可能会存在多个不同部分的tf变换广播，每个广播都可以直接将参考系变换关系直接插入tf树中，不需要再进行同步。</li>
+<li><strong>监听tf变换</strong>： 接收并缓存系统中发布的所有参考系变换，并从中查询所需要的参考系变换。</li>
+</ol>
+<h2 id="广播tf"><a href="#广播tf" class="headerlink" title="广播tf"></a>广播tf</h2><p>本质上就是发布我们建立的坐标系。广播的坐标系变换可能是不变的，也可能是随着时间变化的。</p>
+<h3 id="静态tf广播"><a href="#静态tf广播" class="headerlink" title="静态tf广播"></a>静态tf广播</h3><p>静态的坐标系变换意味着两个坐标系之间的相对位置不会发生变化，他们有一个固定的变换关系。静态广播tf有两种发布方式，一种是使用代码，另一种是使用static_transform_publisher发布。具体的教程见：<br><a target="_blank" rel="noopener" href="http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20static%20broadcaster%20%28C%2B%2B%29">Writing a tf2 static broadcaster (C++)</a>。<br>其中后者既可以使用命令行发布，也可以使用launch文件启动发布。我认为使用后者方便又简单。这里给出后者的使用说明。</p>
+<p>命令行使用方式：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-comment"># RPY形式发布</span><br>rosrun tf2_ros static_transform_publisher <span class="hljs-keyword">x</span> <span class="hljs-keyword">y</span> z yaw pitch roll frame_id child_frame_id<br><br><span class="hljs-comment"># 四元数形式发布</span><br>rosrun tf2_ros static_transform_publisher <span class="hljs-keyword">x</span> <span class="hljs-keyword">y</span> z <span class="hljs-keyword">qx</span> qy qz <span class="hljs-keyword">qw</span> frame_id child_frame_id<br></code></pre></td></tr></table></figure>
+
+<p>launch文件发布：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;launch&gt;<br>&lt;node pkg<span class="hljs-operator">=</span><span class="hljs-string">&quot;tf2_ros&quot;</span> type<span class="hljs-operator">=</span><span class="hljs-string">&quot;static_transform_publisher&quot;</span> name<span class="hljs-operator">=</span><span class="hljs-string">&quot;link1_broadcaster&quot;</span> args<span class="hljs-operator">=</span><span class="hljs-string">&quot;1 0 0 0 0 0 1 link1_parent link1&quot;</span> /&gt;<br>&lt;/launch&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="动态tf广播"><a href="#动态tf广播" class="headerlink" title="动态tf广播"></a>动态tf广播</h3><p>动态tf广播意味着两个坐标系之间的转换关系一直在发生变化，虽然tf tree中可能也有其他的变换关系，但他们之间并不影响。这种动态的变换可能是因为实时订阅其他的消息而改变（<a target="_blank" rel="noopener" href="http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20broadcaster%20%28C%2B%2B%29">官网例子</a>），也有可能是随着时间改变。这里给出一个后者的例子。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;tf2_ros/transform_broadcaster.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;tf2/LinearMath/Quaternion.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>** argv)</span></span>&#123;<br>  ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;my_tf2_broadcaster&quot;</span>);<br>  ros::NodeHandle node;<br><br>  tf2_ros::TransformBroadcaster tfb;<br>  geometry_msgs::TransformStamped transformStamped;<br><br>  <br>  transformStamped.header.frame_id = <span class="hljs-string">&quot;frame1&quot;</span>;<br>  transformStamped.child_frame_id = <span class="hljs-string">&quot;frame2&quot;</span>;<br><span class="hljs-comment">//   transformStamped.transform.translation.x = 0.0;</span><br><span class="hljs-comment">//   transformStamped.transform.translation.y = 2.0;</span><br>  <br>  transformStamped.transform.translation.z = <span class="hljs-number">0.0</span>;<br>  tf2::Quaternion q;<br>        q.<span class="hljs-built_in">setRPY</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>  transformStamped.transform.rotation.x = q.<span class="hljs-built_in">x</span>();<br>  transformStamped.transform.rotation.y = q.<span class="hljs-built_in">y</span>();<br>  transformStamped.transform.rotation.z = q.<span class="hljs-built_in">z</span>();<br>  transformStamped.transform.rotation.w = q.<span class="hljs-built_in">w</span>();<br><br>  <span class="hljs-function">ros::Rate <span class="hljs-title">rate</span><span class="hljs-params">(<span class="hljs-number">10.0</span>)</span></span>;<br>  <span class="hljs-keyword">while</span> (node.<span class="hljs-built_in">ok</span>())&#123;<br>    transformStamped.header.stamp = ros::Time::<span class="hljs-built_in">now</span>(); <br>    transformStamped.transform.translation.x = <span class="hljs-number">2.0</span>*<span class="hljs-built_in">sin</span>(ros::Time::<span class="hljs-built_in">now</span>().<span class="hljs-built_in">toSec</span>());<br>    transformStamped.transform.translation.y = <span class="hljs-number">2.0</span>*<span class="hljs-built_in">cos</span>(ros::Time::<span class="hljs-built_in">now</span>().<span class="hljs-built_in">toSec</span>());<br><br>    tfb.<span class="hljs-built_in">sendTransform</span>(transformStamped);<br>    rate.<span class="hljs-built_in">sleep</span>();<br>    <span class="hljs-comment">// printf(&quot;sending\n&quot;);</span><br>  &#125;<br><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="监听tf"><a href="#监听tf" class="headerlink" title="监听tf"></a>监听tf</h2><p>监听的目的是得到两个坐标系之间的转换关系，包括平移和旋转，从而进行其他任务，例如将一个点从一个坐标系下转到另一个坐标系下表示。<br>首先我们发布了一个静态tf广播：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">rosrun</span> tf2_ros static_transform_publisher <span class="hljs-number">0</span>.<span class="hljs-number">1</span> <span class="hljs-number">0</span>.<span class="hljs-number">0</span> <span class="hljs-number">0</span>.<span class="hljs-number">2</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> base_link base_laser<br></code></pre></td></tr></table></figure>
+<p>然后使用下面的代码监听tf，下面示例代码的作用获得base_link到base_laser的转换关系：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;geometry_msgs/PointStamped.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;tf2_ros/transform_listener.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>** argv)</span></span>&#123;<br>  ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;my_tf_listener&quot;</span>);<br>  ros::NodeHandle node;<br><br>  tf2_ros::Buffer tfBuffer;<br>  <span class="hljs-function">tf2_ros::TransformListener <span class="hljs-title">tfListener</span><span class="hljs-params">(tfBuffer)</span></span>;<br><br>  <span class="hljs-function">ros::Rate <span class="hljs-title">rate</span><span class="hljs-params">(<span class="hljs-number">10.0</span>)</span></span>;<br>  <span class="hljs-keyword">while</span> (node.<span class="hljs-built_in">ok</span>())&#123;<br>    geometry_msgs::TransformStamped transformStamped;<br>    <span class="hljs-keyword">try</span>&#123;<br>      <span class="hljs-comment">// 查询监听器进行特定的转换,从/base_laser坐标系开始变换到/base_link坐标系;</span><br>      <span class="hljs-comment">// ros::Time(0)会给出最近的可用的变换</span><br>      transformStamped  = tfBuffer.<span class="hljs-built_in">lookupTransform</span>(<span class="hljs-string">&quot;base_laser&quot;</span>, <span class="hljs-string">&quot;base_link&quot;</span>,  <br>                               ros::<span class="hljs-built_in">Time</span>(<span class="hljs-number">0</span>));<br><br>    &#125;<br>    <span class="hljs-built_in">catch</span> (tf2::TransformException ex)&#123;<br>      <span class="hljs-built_in">ROS_ERROR</span>(<span class="hljs-string">&quot;%s&quot;</span>,ex.<span class="hljs-built_in">what</span>());<br>      ros::<span class="hljs-built_in">Duration</span>(<span class="hljs-number">1.0</span>).<span class="hljs-built_in">sleep</span>();<br>      <span class="hljs-keyword">continue</span>;<br>    &#125;<br><br>    <span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;pos:(%.2f, %.2f, %.2f)&quot;</span>, transformStamped.transform.translation.x, transformStamped.transform.translation.y, transformStamped.transform.translation.z);<br>    <span class="hljs-comment">// ROS_INFO(&quot;偏航角:(%.2f, %.2f, %.2f)&quot;, transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z());</span><br>    <span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;quaternion:(%.2f, %.2f, %.2f, %.2f)&quot;</span>, transformStamped.transform.rotation.x, transformStamped.transform.rotation.y, transformStamped.transform.rotation.z, transformStamped.transform.rotation.w);<br>    <br><br><br>    <br>    rate.<span class="hljs-built_in">sleep</span>();<br>  &#125;<br>  ros::<span class="hljs-built_in">spin</span>();<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a target="_blank" rel="noopener" href="http://wiki.ros.org/tf2/Tutorials">http://wiki.ros.org/tf2/Tutorials</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Kalenee/article/details/107593033">ROS学习——tf2</a></li>
+<li><a target="_blank" rel="noopener" href="http://docs.ros.org/en/jade/api/tf2/html/index.html">tf2——API</a></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ROS/" class="category-chain-item">ROS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/noetic/">#noetic</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>tf学习笔记</div>
+      <div>https://chenjiadragon.github.io/2022/09/29/tf学习笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cjl</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月29日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/29/ROS%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" title="ROS实用技巧">
+                        <span class="hidden-mobile">ROS实用技巧</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"9AQnxcUdb15xuYdLHjdl9mQ5-gzGzoHsz","appKey":"RXjuMjzaj6TxcPnncXHjdcK7","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicLine.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/love.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
