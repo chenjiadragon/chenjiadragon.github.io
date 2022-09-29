@@ -18,23 +18,22 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="安装流程在Ubuntu20.04上安装ROS-Noetic后，安装moveit。安装流程如下： 确保自己有最新的数据包： 1234sudo rosdep initrosdep updatesudo apt-get updatesudo apt-get dist-upgrade  安装ROS构建工具（一般安装ROS时已经安装好了）： 1sudo apt install ros-noetic-catk">
+    <meta name="description" content="只编译某个功能包一个工作空间下可能有很多功能包吗，每次都用catkin_make编译所有包，效率将很低下。如果只是修改了某个包，可以只编译这个包就行，命令如下： 12# 注意妙用TAB键catkin_make -DCATKIN_WHITELIST_PACKAGES&#x3D;&quot;你的包名&quot; 编译某几个包： 1catkin_make -DCATKIN_WHITELIST_PACKAGES&#x3D;&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ROS-Noetic安装moveit">
-<meta property="og:url" content="https://chenjiadragon.github.io/2022/09/21/ROS-Noetic%E5%AE%89%E8%A3%85moveit/index.html">
+<meta property="og:title" content="ROS实用技巧">
+<meta property="og:url" content="https://chenjiadragon.github.io/2022/09/29/ROS%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="安装流程在Ubuntu20.04上安装ROS-Noetic后，安装moveit。安装流程如下： 确保自己有最新的数据包： 1234sudo rosdep initrosdep updatesudo apt-get updatesudo apt-get dist-upgrade  安装ROS构建工具（一般安装ROS时已经安装好了）： 1sudo apt install ros-noetic-catk">
+<meta property="og:description" content="只编译某个功能包一个工作空间下可能有很多功能包吗，每次都用catkin_make编译所有包，效率将很低下。如果只是修改了某个包，可以只编译这个包就行，命令如下： 12# 注意妙用TAB键catkin_make -DCATKIN_WHITELIST_PACKAGES&#x3D;&quot;你的包名&quot; 编译某几个包： 1catkin_make -DCATKIN_WHITELIST_PACKAGES&#x3D;&amp;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-21T04:08:48.000Z">
-<meta property="article:modified_time" content="2022-09-24T09:12:23.450Z">
+<meta property="article:published_time" content="2022-09-29T03:08:59.000Z">
+<meta property="article:modified_time" content="2022-09-29T03:28:55.906Z">
 <meta property="article:author" content="cjl">
 <meta property="article:tag" content="noetic">
-<meta property="article:tag" content="moveit">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>ROS-Noetic安装moveit - chenjiadragon</title>
+  <title>ROS实用技巧 - chenjiadragon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -233,7 +232,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ROS-Noetic安装moveit"></span>
+            <span id="subtitle" data-typed-text="ROS实用技巧"></span>
           
         </div>
 
@@ -244,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-21 12:08" pubdate>
-          2022年9月21日 中午
+        <time datetime="2022-09-29 11:08" pubdate>
+          2022年9月29日 上午
         </time>
       </span>
     
@@ -256,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          629 字
         
       </span>
     
@@ -267,7 +266,7 @@
         
         
         
-          10 分钟
+          6 分钟
         
       </span>
     
@@ -313,39 +312,29 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ROS-Noetic安装moveit</h1>
+            <h1 style="display: none">ROS实用技巧</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h1><p>在Ubuntu20.04上安装ROS-Noetic后，安装moveit。安装流程如下：</p>
-<p>确保自己有最新的数据包：</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">sudo rosdep init<br>rosdep <span class="hljs-keyword">update</span><br>sudo apt-<span class="hljs-keyword">get</span> <span class="hljs-keyword">update</span><br>sudo apt-<span class="hljs-keyword">get</span> dist-upgrade<br></code></pre></td></tr></table></figure>
+                <h1 id="只编译某个功能包"><a href="#只编译某个功能包" class="headerlink" title="只编译某个功能包"></a>只编译某个功能包</h1><p>一个工作空间下可能有很多功能包吗，每次都用catkin_make编译所有包，效率将很低下。如果只是修改了某个包，可以只编译这个包就行，命令如下：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># 注意妙用TAB键</span><br><span class="hljs-attribute">catkin_make</span> -DCATKIN_WHITELIST_PACKAGES=<span class="hljs-string">&quot;你的包名&quot;</span><br></code></pre></td></tr></table></figure>
+<p>编译某几个包：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">catkin_make -DCATKIN_WHITELIST_PACKAGES<span class="hljs-operator">=</span><span class="hljs-string">&quot;包1;包2&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p>安装ROS构建工具（一般安装ROS时已经安装好了）：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">sudo apt install ros-noetic-catkin <span class="hljs-keyword">python3</span>-catkin-tools <span class="hljs-keyword">python3</span>-osrf-pycommon<br></code></pre></td></tr></table></figure>
 
-<p>安装moveit（不用像<a target="_blank" rel="noopener" href="https://ros-planning.github.io/moveit_tutorials/">官网</a>一样下载源码）：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install ros-noetic-moveit<br></code></pre></td></tr></table></figure>
+<h1 id="ROS功能包的常用开发流程"><a href="#ROS功能包的常用开发流程" class="headerlink" title="ROS功能包的常用开发流程"></a>ROS功能包的常用开发流程</h1><p>在工作空间中创建一个功能包,后面是常用依赖:</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">catkin_create_pkg mypkg roscpp rospy tf sensor_msgs std_msgs</span><br></code></pre></td></tr></table></figure>
 
-<p>启动验证：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch moveit_setup_assistant setup_assistant.<span class="hljs-built_in">launch</span><br></code></pre></td></tr></table></figure>
+<p>在mypkg&#x2F;src文件夹下编写自己的c++代码（mynode.cpp），头文件卸载mypkg&#x2F;include文件夹下。一般情况下，一个c++文件就是一个节点。</p>
+<p>修改CMakeList.txt文件，加入以下命令：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">add<span class="hljs-constructor">_executable(<span class="hljs-params">mynode</span> <span class="hljs-params">src</span><span class="hljs-operator">/</span><span class="hljs-params">mynode</span>.<span class="hljs-params">cpp</span>)</span><br>target<span class="hljs-constructor">_link_libraries(<span class="hljs-params">mynode</span> $&#123;<span class="hljs-params">catkin_LIBRARIES</span>&#125;)</span><br></code></pre></td></tr></table></figure>
 
-<p>如果要跑官网的示例教程，首先建立一个工作空间，下载示例代码：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir ~<span class="hljs-regexp">/ws_moveit/</span>src<br>cd ~<span class="hljs-regexp">/ws_moveit/</span>src<br>git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ros-planning/m</span>oveit_tutorials.git -b master<br>git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ros-planning/</span>panda_moveit_config.git -b melodic-devel<br></code></pre></td></tr></table></figure>
+<p>对于python文件，建议创建一个新的文件夹,如scripts&#x2F;存放python文件。</p>
+<p>python文件需要给予可执行权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x 你的python文件<br></code></pre></td></tr></table></figure>
 
-<p>安装依赖并编译：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> ~<span class="hljs-string">/ws_moveit/src</span><br>rosdep install -y <span class="hljs-params">--from-paths</span> . <span class="hljs-params">--ignore-src</span> <span class="hljs-params">--rosdistro</span> noetic<br><span class="hljs-keyword">cd</span> <span class="hljs-string">..</span><br>catkin_make<br>source ~<span class="hljs-string">/ws_moveit/devel/setup.bash</span><br></code></pre></td></tr></table></figure>
-
-<p>运行demo：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">roslaunch panda_moveit_config demo.<span class="hljs-built_in">launch</span> rviz_tutorial:=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
-
-<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>ROS-Noetic版本使用的是python3，检查Ubuntu20.04的Python版本：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> --<span class="hljs-keyword">version</span><br></code></pre></td></tr></table></figure>
-<p>如果没有输出python版本，说明系统未指定python版本，执行以下指令检查系统安装的python版本：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls <span class="hljs-regexp">/usr/</span>bin/python*<br></code></pre></td></tr></table></figure>
-<p>一般有两个，一个python2，一个python3。使用以下命令可以自主选择python版本:</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo update-alternatives --install <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/python python /u</span>sr<span class="hljs-regexp">/bin/</span>python2 <span class="hljs-number">1</span><br>sudo update-alternatives --install <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/python python /u</span>sr<span class="hljs-regexp">/bin/</span>python3 <span class="hljs-number">2</span><br>sudo update-alternatives --config python<br></code></pre></td></tr></table></figure>
+<p>最后，可以使用launch文件启动，也可以使用rosrun启动节点。</p>
 
                 
               </div>
@@ -381,8 +370,6 @@
       
         <a href="/tags/noetic/">#noetic</a>
       
-        <a href="/tags/moveit/">#moveit</a>
-      
     </div>
   
 </div>
@@ -393,8 +380,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ROS-Noetic安装moveit</div>
-      <div>https://chenjiadragon.github.io/2022/09/21/ROS-Noetic安装moveit/</div>
+      <div>ROS实用技巧</div>
+      <div>https://chenjiadragon.github.io/2022/09/29/ROS实用技巧/</div>
     </div>
     <div class="license-meta">
       
@@ -406,7 +393,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年9月21日</div>
+          <div>2022年9月29日</div>
         </div>
       
       
@@ -436,18 +423,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/22/Ubuntu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4/" title="Ubuntu虚拟机如何使用摄像头">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ubuntu虚拟机如何使用摄像头</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/" title="No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...">
-                        <span class="hidden-mobile">No such file or directory: /opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro [Errno 2] No such file or directory: &#39;/opt/ros/melodic/share/franka_description/robots/panda/panda.urdf.xacro&#39;...</span>
+                      <a href="/2022/09/27/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux服务器常用命令">
+                        <span class="hidden-mobile">Linux服务器常用命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

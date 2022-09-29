@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>ROS实用技巧</title>
+    <link href="/2022/09/29/ROS%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
+    <url>/2022/09/29/ROS%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+    
+    <content type="html"><![CDATA[<h1 id="只编译某个功能包"><a href="#只编译某个功能包" class="headerlink" title="只编译某个功能包"></a>只编译某个功能包</h1><p>一个工作空间下可能有很多功能包吗，每次都用catkin_make编译所有包，效率将很低下。如果只是修改了某个包，可以只编译这个包就行，命令如下：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># 注意妙用TAB键</span><br><span class="hljs-attribute">catkin_make</span> -DCATKIN_WHITELIST_PACKAGES=<span class="hljs-string">&quot;你的包名&quot;</span><br></code></pre></td></tr></table></figure><p>编译某几个包：</p><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">catkin_make -DCATKIN_WHITELIST_PACKAGES<span class="hljs-operator">=</span><span class="hljs-string">&quot;包1;包2&quot;</span><br></code></pre></td></tr></table></figure><h1 id="ROS功能包的常用开发流程"><a href="#ROS功能包的常用开发流程" class="headerlink" title="ROS功能包的常用开发流程"></a>ROS功能包的常用开发流程</h1><p>在工作空间中创建一个功能包,后面是常用依赖:</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">catkin_create_pkg mypkg roscpp rospy tf sensor_msgs std_msgs</span><br></code></pre></td></tr></table></figure><p>在mypkg&#x2F;src文件夹下编写自己的c++代码（mynode.cpp），头文件卸载mypkg&#x2F;include文件夹下。一般情况下，一个c++文件就是一个节点。</p><p>修改CMakeList.txt文件，加入以下命令：</p><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">add<span class="hljs-constructor">_executable(<span class="hljs-params">mynode</span> <span class="hljs-params">src</span><span class="hljs-operator">/</span><span class="hljs-params">mynode</span>.<span class="hljs-params">cpp</span>)</span><br>target<span class="hljs-constructor">_link_libraries(<span class="hljs-params">mynode</span> $&#123;<span class="hljs-params">catkin_LIBRARIES</span>&#125;)</span><br></code></pre></td></tr></table></figure><p>对于python文件，建议创建一个新的文件夹,如scripts&#x2F;存放python文件。</p><p>python文件需要给予可执行权限：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x 你的python文件<br></code></pre></td></tr></table></figure><p>最后，可以使用launch文件启动，也可以使用rosrun启动节点。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>ROS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>noetic</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux服务器常用命令</title>
     <link href="/2022/09/27/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <url>/2022/09/27/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
@@ -143,9 +168,9 @@
     
     <tags>
       
-      <tag>moveit</tag>
-      
       <tag>noetic</tag>
+      
+      <tag>moveit</tag>
       
     </tags>
     
