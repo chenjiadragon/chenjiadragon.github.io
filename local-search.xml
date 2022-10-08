@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>python编程技巧</title>
+    <link href="/2022/10/08/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/"/>
+    <url>/2022/10/08/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/</url>
+    
+    <content type="html"><![CDATA[<h1 id="编程技巧持续总结"><a href="#编程技巧持续总结" class="headerlink" title="编程技巧持续总结"></a>编程技巧持续总结</h1><h2 id="1-根据列表值排序下标"><a href="#1-根据列表值排序下标" class="headerlink" title="1. 根据列表值排序下标"></a>1. 根据列表值排序下标</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 存在一个列表nums1，根据其列表值排序下标</span><br>nums1 = [<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>]<br>idx1 = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(n))<br>idx1.sort(key=<span class="hljs-keyword">lambda</span> x: nums1[x])<br><span class="hljs-built_in">print</span>(idx1)<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>PyTorch入门学习笔记</title>
     <link href="/2022/10/04/PyTorch%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <url>/2022/10/04/PyTorch%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
