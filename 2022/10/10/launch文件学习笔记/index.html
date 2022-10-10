@@ -1,0 +1,760 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cjl">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="每当我们需要运行一个ROS节点或工具时，都需要打开一个新的终端运行一个命令。当系统中的节点数量不断增加时，每个节点一个终端的模式会变得非常麻烦。那么有没有一种方式可以一次性启动所有节点呢？答案当然是肯定的。 启动文件（Launch File）便是ROS中一种同时启动多个节点的途径，还可以自动启动ROSMaster节点管理器，而且可以实现每个节点的各种配置，为多个节点的操作提供了很大便利。 一、基本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="launch文件学习笔记">
+<meta property="og:url" content="https://chenjiadragon.github.io/2022/10/10/launch%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="chenjiadragon">
+<meta property="og:description" content="每当我们需要运行一个ROS节点或工具时，都需要打开一个新的终端运行一个命令。当系统中的节点数量不断增加时，每个节点一个终端的模式会变得非常麻烦。那么有没有一种方式可以一次性启动所有节点呢？答案当然是肯定的。 启动文件（Launch File）便是ROS中一种同时启动多个节点的途径，还可以自动启动ROSMaster节点管理器，而且可以实现每个节点的各种配置，为多个节点的操作提供了很大便利。 一、基本">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-10T02:12:47.000Z">
+<meta property="article:modified_time" content="2022-10-10T02:46:47.985Z">
+<meta property="article:author" content="cjl">
+<meta property="article:tag" content="转载">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>launch文件学习笔记 - chenjiadragon</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chenjiadragon.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YtwA6Qo3Mv4aVYBqpTAsm3iG-MdYXbMMI","app_key":"kdSKzfvlHtJTfOsKtJADVtdY","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>cjl&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/code7.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="launch文件学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-10 10:12" pubdate>
+          2022年10月10日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">launch文件学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>每当我们需要运行一个ROS节点或工具时，都需要打开一个新的终端运行一个命令。当系统中的节点数量不断增加时，每个节点一个终端的模式会变得非常麻烦。那么有没有一种方式可以一次性启动所有节点呢？答案当然是肯定的。 启动文件（Launch File）便是ROS中一种同时启动多个节点的途径，还可以自动启动ROSMaster节点管理器，而且可以实现每个节点的各种配置，为多个节点的操作提供了很大便利。</p>
+<h1 id="一、基本元素"><a href="#一、基本元素" class="headerlink" title="一、基本元素"></a>一、基本元素</h1><p>首先来看一个简单的launch文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br>   &lt;nodepkg=&quot;turtlesim&quot;name=&quot;sim1&quot; type=&quot;turtlesim_node&quot;/&gt;<br>   &lt;nodepkg=&quot;turtlesim&quot;name=&quot;sim2&quot; type=&quot;turtlesim_node&quot;/&gt;<br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这是一个简单而完整的launch文件，采用XML的形式进行描述，包含一个根元素&lt;launch&gt;和两个节点元素&lt;node&gt;。</p>
+<h2 id="1-lt-launch-gt"><a href="#1-lt-launch-gt" class="headerlink" title="1. &lt;launch&gt;"></a>1. &lt;launch&gt;</h2><p>XML文件必须要包含一个根元素，launch文件中的根元素采用&lt;launch&gt;标签定义，文件中的其他内容都必须包含在这个标签之中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br>    ......<br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-lt-node-gt"><a href="#2-lt-node-gt" class="headerlink" title="2. &lt;node&gt;"></a>2. &lt;node&gt;</h2><p>启动文件的核心是启动ROS节点，采用&lt;node&gt;标签定义，语法如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;package-name&quot;</span><span class="hljs-attr">type</span>=<span class="hljs-string">&quot;executable-name&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;node-name&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>从上边的定义规则可以看出，在启动文件中启动一个节点需要三个属性：pkg、type和name。其中pkg定义节点所在的功能包名称，type定义节点的可执行文件名称，这两个属性等同于在终端中使用rosrun命令执行节点时的输入参数。name属性用来定义节点运行的名称，将覆盖节点中init()赋予节点的名称。这是三个最常用的属性，在某些情况下，我们还有可能用到以下属性：</p>
+<ul>
+<li>output &#x3D; “screen”：将节点的标准输出打印到终端屏幕，默认输出为日志文档;</li>
+<li>respawn &#x3D; “true”：复位属性，该节点停止时，会自动重启，默认为false;</li>
+<li>required &#x3D; “true”：必要节点，当该节点终止时，launch文件中的其他节点也被终止;</li>
+<li>ns &#x3D; “namespace”：命名空间，为节点内的相对名称添加命名空间前缀;</li>
+<li>args &#x3D; “arguments”：节点需要的输入参数。</li>
+</ul>
+<p>实际应用中的launch文件往往会更加复杂，使用的标签也会更多，例如一个启动机器人的launch文件如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;mrobot_bringup&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;mrobot_bringup&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;mrobot_bringup&quot;</span> <span class="hljs-attr">output</span>=<span class="hljs-string">&quot;screen&quot;</span> /&gt;</span><br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;urdf_file&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;$(find xacro)/xacro --inorder &#x27;$(find mrobot_description)/urdf/mrobot_with_rplidar.urdf.xacro&#x27;&quot;</span> /&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;robot_description&quot;</span> <span class="hljs-attr">command</span>=<span class="hljs-string">&quot;$(arg urdf_file)&quot;</span> /&gt;</span><br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;joint_state_publisher&quot;</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;joint_state_publisher&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;joint_state_publisher&quot;</span> /&gt;</span>  <br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;robot_state_publisher&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;robot_state_publisher&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;state_publisher&quot;</span>&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;publish_frequency&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;double&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;5.0&quot;</span> /&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">node</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;base2laser&quot;</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;tf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;static_transform_publisher&quot;</span> <span class="hljs-attr">args</span>=<span class="hljs-string">&quot;0 0 0 0 0 0 1 /base_link /laser 50&quot;</span>/&gt;</span><br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;robot_pose_ekf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;robot_pose_ekf&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;robot_pose_ekf&quot;</span>&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">remap</span> <span class="hljs-attr">from</span>=<span class="hljs-string">&quot;robot_pose_ekf/odom_combined&quot;</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;odom_combined&quot;</span>/&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;freq&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;10.0&quot;</span>/&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sensor_timeout&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;1.0&quot;</span>/&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;publish_tf&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;odom_used&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;imu_used&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;vo_used&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;output_frame&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;odom&quot;</span>/&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">node</span>&gt;</span><br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;$(find mrobot_bringup)/launch/rplidar.launch&quot;</span> /&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>目前，我们只关注其中的标签元素，除了上边介绍的&lt;launch&gt;和&lt;node&gt;，这里还出现了&lt;arg&gt;、&lt;param&gt;、&lt;remap&gt;，这些都是常用的标签元素。</p>
+<h1 id="二、参数设置"><a href="#二、参数设置" class="headerlink" title="二、参数设置"></a>二、参数设置</h1><p>为了方便设置和修改，launch文件支持参数设置的功能，类似于编程语言中的变量声明。关于参数设置的标签元素有两个：&lt;param&gt;、&lt;arg&gt;，一个代表parameter，另一个代表argument。这两个标签元素翻译成中文都是“参数”的意思，但是这两个“参数”的意义是完全不同的。</p>
+<h2 id="1-lt-param-gt"><a href="#1-lt-param-gt" class="headerlink" title="1. &lt;param&gt;"></a>1. &lt;param&gt;</h2><p>parameter是ROS系统运行中的参数，存储在参数服务器中。在launch文件中通过&lt;param&gt;元素加载parameter；launch文件执行后，parameter就加载到ROS的参数服务器上了。每个活跃的节点都可以通过 ros::param::get()接口来获取parameter的值，用户也可以在终端中通过rosparam命令获得parameter的值。 &lt;param&gt;的使用方法如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;output_frame&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;odom&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>运行launch文件后，output_frame这个parameter的值就设置为odom，并且加载到ROS参数服务器上了。但是在很多复杂的系统中，参数的数量很多，如果这样一个一个的设置会非常麻烦，ROS也为我们提供了另外一种类似的参数加载方式——&lt;rosparam&gt;：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">&lt;rosparamfile=&quot;$(find 2dnav_pr2)/config/costmap_common_params.yaml&quot; command=&quot;load&quot; ns=&quot;local_costmap&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>&lt;rosparam&gt;可以帮助我们将一个yaml格式文件中的参数全部加载到ROS参数服务器中，需要设置command属性为“load”，还可以选择设置命名空间“ns”。  </p>
+<h2 id="2-lt-arg-gt"><a href="#2-lt-arg-gt" class="headerlink" title="2. &lt;arg&gt;"></a>2. &lt;arg&gt;</h2><p>argument是另外一个概念，类似于launch文件内部的局部变量，仅限于launch文件使用，便于launch文件的重构，和ROS节点内部的实现没有关系。 设置argument使用&lt;arg&gt;标签元素，语法如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">name</span>=<span class="hljs-string">”arg-name”</span> <span class="hljs-attr">default</span>=<span class="hljs-string">”arg-value”/</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>launch文件中需要使用到argument时，可以使用如下方式调用：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml">&lt;paramname=&quot;foo&quot; value=&quot;$(argarg-name)&quot; /&gt;<br><span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;node&quot;</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;package&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;type &quot;</span><span class="hljs-attr">args</span>=<span class="hljs-string">&quot;$(arg arg-name)&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="三、重映射机制"><a href="#三、重映射机制" class="headerlink" title="三、重映射机制"></a>三、重映射机制</h1><p>ROS的设计目标是提高代码的复用率，所以ROS社区中的很多功能包我们都可以拿来直接使用，而不需要关注功能包的内部实现。那么问题就来了，别人功能包的接口不一定和我们的系统兼容呀？ ROS提供一种重映射的机制，简单来说就是取别名，类似于C++中的别名机制，我们不需要修改别人功能包的接口，只需要将接口名称重映射一下，取个别名，我们的系统就认识了（接口的数据类型必须相同）。launch文件中的&lt;remap&gt;标签可以帮我们实现这个重映射的功能。 比如turtlebot的键盘控制节点，发布的速度控制指令话题可能是&#x2F;turtlebot&#x2F;cmd_vel，但是我们自己的机器人订阅的速度控制话题是&#x2F;cmd_vel，这个时候使用&lt;remap&gt;就可以轻松解决问题，将&#x2F;turtlebot &#x2F;cmd_vel重映射为&#x2F;cmd_vel，我们的机器人就可以接收到速度控制指令了：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">remap</span> <span class="hljs-attr">from</span>=<span class="hljs-string">&quot;/turtlebot/cmd_vel&quot;</span><span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/cmd_vel&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>重映射机制在ROS中的使用非常广泛，也非常重要，方法不止这一种，也可以在终端rosrun命令中实现重映射，大家一定要理解好这种机制。</p>
+<h1 id="四、嵌套复用"><a href="#四、嵌套复用" class="headerlink" title="四、嵌套复用"></a>四、嵌套复用</h1><p>在复杂的系统当中，launch文件往往有很多，这些launch文件之间也会存在依赖关系。如果需要直接复用一个已有launch文件中的内容，可以使用&lt;include&gt;标签包含其他launch文件，这和C语言中的include几乎是一样的。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;$(dirname)/other.launch&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>总而言之，launch是ROS框架中非常实用、灵活的功能，它类似于一种高级编程语言，可以帮助我们管理启动系统时的方方面面。在使用ROS的过程中，很多情况下我们并不需要编写大量代码，仅需要使用已有的功能包，编辑一下launch文件，就可以完成很多机器人功能。  </p>
+<blockquote>
+<p>这里仅介绍了launch中最为常用的一些标签元素，还有更多高级的标签元素可以访问wiki学习： <a target="_blank" rel="noopener" href="http://wiki.ros.org/roslaunch/XML">http://wiki.ros.org/roslaunch/XML</a></p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ROS/" class="category-chain-item">ROS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>launch文件学习笔记</div>
+      <div>https://chenjiadragon.github.io/2022/10/10/launch文件学习笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cjl</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月10日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/08/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/" title="python编程技巧">
+                        <span class="hidden-mobile">python编程技巧</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"9AQnxcUdb15xuYdLHjdl9mQ5-gzGzoHsz","appKey":"RXjuMjzaj6TxcPnncXHjdcK7","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicLine.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/love.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
