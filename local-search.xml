@@ -290,14 +290,14 @@
       
       <category>ROS</category>
       
+      <category>moveit</category>
+      
     </categories>
     
     
     <tags>
       
       <tag>noetic</tag>
-      
-      <tag>moveit</tag>
       
     </tags>
     
@@ -317,12 +317,12 @@
       
       <category>ROS</category>
       
+      <category>moveit</category>
+      
     </categories>
     
     
     <tags>
-      
-      <tag>moveit</tag>
       
       <tag>melodic</tag>
       
