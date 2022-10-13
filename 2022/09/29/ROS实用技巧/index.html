@@ -26,7 +26,7 @@
 <meta property="og:description" content="只编译某个功能包一个工作空间下可能有很多功能包吗，每次都用catkin_make编译所有包，效率将很低下。如果只是修改了某个包，可以只编译这个包就行，命令如下： 12# 注意妙用TAB键catkin_make -DCATKIN_WHITELIST_PACKAGES&#x3D;&quot;你的包名&quot; 编译某几个包： 1catkin_make -DCATKIN_WHITELIST_PACKAGES&#x3D;&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-29T03:08:59.000Z">
-<meta property="article:modified_time" content="2022-09-29T03:28:55.906Z">
+<meta property="article:modified_time" content="2022-10-13T10:51:03.385Z">
 <meta property="article:author" content="cjl">
 <meta property="article:tag" content="noetic">
 <meta name="twitter:card" content="summary_large_image">
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          629 字
+          627 字
         
       </span>
     
@@ -324,7 +324,7 @@
 
 
 <h1 id="ROS功能包的常用开发流程"><a href="#ROS功能包的常用开发流程" class="headerlink" title="ROS功能包的常用开发流程"></a>ROS功能包的常用开发流程</h1><p>在工作空间中创建一个功能包,后面是常用依赖:</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">catkin_create_pkg mypkg roscpp rospy tf sensor_msgs std_msgs</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">catkin_create_pkg mypkg roscpp rospy sensor_msgs std_msgs</span><br></code></pre></td></tr></table></figure>
 
 <p>在mypkg&#x2F;src文件夹下编写自己的c++代码（mynode.cpp），头文件卸载mypkg&#x2F;include文件夹下。一般情况下，一个c++文件就是一个节点。</p>
 <p>修改CMakeList.txt文件，加入以下命令：</p>
