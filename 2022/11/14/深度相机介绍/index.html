@@ -18,39 +18,25 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言可能很多朋友想用VMware在自己的windows系统上体验下其它操作系统或者运行某些只能在Linux上的软件。但是可能自己买阿里云或者腾讯云感觉划不来。下面我来简单的来告诉大家，运用VMware的桥接模式，可以让大家像拥有另外一台不同操作系统的电脑一样在局域网中。同样可以来上网，可以和局域网中的其他机器一样通信，甚至可以暴露ip与端口到公网中，这样其他机器或者网页等也能访问它。 环境：  宿">
+    <meta name="description" content="一、简介随着机器视觉，自动驾驶等颠覆性的技术逐步发展，采用 3D 相机进行物体识别，行为识别，场景建模的相关应用越来越多，可以说深度相机就是终端和机器人的眼睛，那么什么是深度相机呢，跟之前的普通相机（2D）想比较，又有哪些差别？ 深度相机又称之为3D相机，顾名思义，就是通过该相机能检测出拍摄空间的景深距离，这也是与普通摄像头最大的区别。普通的彩色相机拍摄到的图片能看到相机视角内的所有物体并记录下来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VMware虚拟机实现桥接模式上网">
-<meta property="og:url" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/index.html">
+<meta property="og:title" content="深度相机介绍">
+<meta property="og:url" content="https://chenjiadragon.github.io/2022/11/14/%E6%B7%B1%E5%BA%A6%E7%9B%B8%E6%9C%BA%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="前言可能很多朋友想用VMware在自己的windows系统上体验下其它操作系统或者运行某些只能在Linux上的软件。但是可能自己买阿里云或者腾讯云感觉划不来。下面我来简单的来告诉大家，运用VMware的桥接模式，可以让大家像拥有另外一台不同操作系统的电脑一样在局域网中。同样可以来上网，可以和局域网中的其他机器一样通信，甚至可以暴露ip与端口到公网中，这样其他机器或者网页等也能访问它。 环境：  宿">
+<meta property="og:description" content="一、简介随着机器视觉，自动驾驶等颠覆性的技术逐步发展，采用 3D 相机进行物体识别，行为识别，场景建模的相关应用越来越多，可以说深度相机就是终端和机器人的眼睛，那么什么是深度相机呢，跟之前的普通相机（2D）想比较，又有哪些差别？ 深度相机又称之为3D相机，顾名思义，就是通过该相机能检测出拍摄空间的景深距离，这也是与普通摄像头最大的区别。普通的彩色相机拍摄到的图片能看到相机视角内的所有物体并记录下来">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/1.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/2.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/3.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/4.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/5.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/6.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/7.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/8.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/9.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/10.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/11.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/12.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/13.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/14.png">
-<meta property="article:published_time" content="2022-10-30T13:48:28.000Z">
-<meta property="article:modified_time" content="2022-10-30T14:05:38.110Z">
+<meta property="og:image" content="https://chenjiadragon.github.io/2022/11/14/%E6%B7%B1%E5%BA%A6%E7%9B%B8%E6%9C%BA%E4%BB%8B%E7%BB%8D/1.jpg">
+<meta property="og:image" content="https://chenjiadragon.github.io/2022/11/14/%E6%B7%B1%E5%BA%A6%E7%9B%B8%E6%9C%BA%E4%BB%8B%E7%BB%8D/2.jpg">
+<meta property="article:published_time" content="2022-11-14T06:29:48.000Z">
+<meta property="article:modified_time" content="2022-11-14T09:00:01.175Z">
 <meta property="article:author" content="cjl">
-<meta property="article:tag" content="Ubuntu">
-<meta property="article:tag" content="VMware">
-<meta property="article:tag" content="转载">
+<meta property="article:tag" content="视觉">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://chenjiadragon.github.io/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/1.png">
+<meta name="twitter:image" content="https://chenjiadragon.github.io/2022/11/14/%E6%B7%B1%E5%BA%A6%E7%9B%B8%E6%9C%BA%E4%BB%8B%E7%BB%8D/1.jpg">
   
   
   
-  <title>VMware虚拟机实现桥接模式上网 - chenjiadragon</title>
+  <title>深度相机介绍 - chenjiadragon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -249,7 +235,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="VMware虚拟机实现桥接模式上网"></span>
+            <span id="subtitle" data-typed-text="深度相机介绍"></span>
           
         </div>
 
@@ -260,8 +246,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-30 21:48" pubdate>
-          2022年10月30日 晚上
+        <time datetime="2022-11-14 14:29" pubdate>
+          2022年11月14日 下午
         </time>
       </span>
     
@@ -272,7 +258,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          893 字
+          1.9k 字
         
       </span>
     
@@ -283,7 +269,7 @@
         
         
         
-          8 分钟
+          16 分钟
         
       </span>
     
@@ -329,58 +315,158 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">VMware虚拟机实现桥接模式上网</h1>
+            <h1 style="display: none">深度相机介绍</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>可能很多朋友想用VMware在自己的windows系统上体验下其它操作系统或者运行某些只能在Linux上的软件。但是可能自己买阿里云或者腾讯云感觉划不来。下面我来简单的来告诉大家，运用VMware的桥接模式，可以让大家像拥有另外一台不同操作系统的电脑一样在局域网中。同样可以来上网，可以和局域网中的其他机器一样通信，甚至可以暴露ip与端口到公网中，这样其他机器或者网页等也能访问它。</p>
-<p><strong>环境：</strong></p>
-<ul>
-<li>宿主机：win10</li>
-<li>软件：VMware</li>
-<li>虚拟机：Ubuntu</li>
-<li>前提条件：已经在宿主机中安装好了虚拟主机Ubuntu</li>
-</ul>
-<h1 id="一、VMware上网的几三种模式"><a href="#一、VMware上网的几三种模式" class="headerlink" title="一、VMware上网的几三种模式"></a>一、VMware上网的几三种模式</h1><p>VMware 提供了 ：<strong>NAT模式、桥接网络（Bridged Networking） 、Host-Only模式</strong>。</p>
-<p>一般默认是使用NAT模式，相较于其它的有优点是可以上网。</p>
-<p>详细了解参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zlfing/article/details/76943895">https://blog.csdn.net/zlfing/article/details/76943895</a></p>
-<h1 id="二、查看物理机（宿主机）在局域网内的信息"><a href="#二、查看物理机（宿主机）在局域网内的信息" class="headerlink" title="二、查看物理机（宿主机）在局域网内的信息"></a>二、查看物理机（宿主机）在局域网内的信息</h1><p>首先需要虚拟机是关闭状态。在然后需要弄清楚自己物理机在局域网内的Ip、掩码、网关等。</p>
-<p>在CMD窗口内 输入 ipconfig  &#x2F;all。这是使用命令行查看相关网络连接。</p>
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/1.png" srcset="/img/loading.gif" lazyload class="">
+                <h1 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h1><p>随着机器视觉，自动驾驶等颠覆性的技术逐步发展，采用 3D 相机进行物体识别，行为识别，场景建模的相关应用越来越多，可以说深度相机就是终端和机器人的眼睛，那么什么是深度相机呢，跟之前的普通相机（2D）想比较，又有哪些差别？</p>
+<p>深度相机又称之为3D相机，顾名思义，就是通过该相机能检测出拍摄空间的景深距离，这也是与普通摄像头最大的区别。普通的彩色相机拍摄到的图片能看到相机视角内的所有物体并记录下来，但是其所记录的数据不包含这些物体距离相机的距离。仅仅能通过图像的语义分析来判断哪些物体离我们比较远，哪些比较近，但是并没有确切的数据。而深度相机则恰恰解决了该问题，通过深度相机获取到的数据，我们能准确知道图像中每个点离摄像头距离，这样加上该点在 2D 图像中的(x,y)坐标，就能获取图像中每个点的三维空间坐标。通过三维坐标就能还原真实场景，实现场景建模等应用。</p>
+<h1 id="二、主流深度相机"><a href="#二、主流深度相机" class="headerlink" title="二、主流深度相机"></a>二、主流深度相机</h1><p>目前市面上常有的深度相机方案有以下三种：结构光(Structured-light)、双目视觉(Stereo)和光飞行时间法(ToF)。</p>
+<h2 id="1-结构光深度相机原理"><a href="#1-结构光深度相机原理" class="headerlink" title="1. 结构光深度相机原理"></a>1. 结构光深度相机原理</h2><p>结构光(Structured light)，其原理是通过红外激光器，将具有一定结构特征的光线投射到被拍摄物体上，再由专门的红外摄像头进行采集。这种具备一定结构的光线，会因被拍摄物体的不同深度区域，而采集不同的图像相位信息，然后通过运算单元将这种结构的变化换算成深度信息，一次来获得三维结构。简单来说，就是通过光学手段获取被拍摄物体的三维结构，再将获取到的信息进行更深入的应用。通常采用特定波长的不可见红外激光作为光源，它发射出来的光经过一定的编码投影在物体上，通过一定算法来计算返回的编码图案的畸变来得到物体的位置和深度信息。</p>
+<p>下图是一个典型的结构光相机示意图：</p>
+<img src="/2022/11/14/%E6%B7%B1%E5%BA%A6%E7%9B%B8%E6%9C%BA%E4%BB%8B%E7%BB%8D/1.jpg" srcset="/img/loading.gif" lazyload class="">
+<img src="/2022/11/14/%E6%B7%B1%E5%BA%A6%E7%9B%B8%E6%9C%BA%E4%BB%8B%E7%BB%8D/2.jpg" srcset="/img/loading.gif" lazyload class="">
 
-
-<p>但是有时候我们可能通过 ipconfig &#x2F;all 命令不好定位到我们所需的本地上网链接，所以我们可以通过，可视化窗口帮助我们定位，查找与命令行相同的信息。</p>
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/2.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/3.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/4.png" srcset="/img/loading.gif" lazyload class="">
-
-
-<h1 id="三、设置虚拟机"><a href="#三、设置虚拟机" class="headerlink" title="三、设置虚拟机"></a>三、设置虚拟机</h1><p>首先关闭虚拟机</p>
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/5.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/6.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/7.png" srcset="/img/loading.gif" lazyload class="">
-<p>选择 桥接模式，然后点击 还原默认设置，然后再重新进来，选择 桥接模式 、桥接到 自己刚刚在上面所查看到自己的物理网卡上  Realtek PCIe GBE family Controller #2。</p>
-<p>选择一个虚拟机，但是不开机。点击如下图，进行虚拟机设置。</p>
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/8.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/9.png" srcset="/img/loading.gif" lazyload class="">
-
-
-<h1 id="四、进入虚拟机设置"><a href="#四、进入虚拟机设置" class="headerlink" title="四、进入虚拟机设置"></a>四、进入虚拟机设置</h1><img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/10.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/11.png" srcset="/img/loading.gif" lazyload class="">
-
-<blockquote>
-<p>注意：这里192.168.3.90 是我自己给我自己的虚拟机配置的 IP 。我的宿主机的IP是 192.168.3.40 。虚拟机的IP与宿主机的IP 必须在同一网段，所以请大家注意了。</p>
-</blockquote>
-<p>点击保存。查看设置结果。输如命令，ifconfig</p>
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/12.png" srcset="/img/loading.gif" lazyload class="">
-<p>可以看到设置已经生效了。现在我们进行 ping 操作。</p>
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/13.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/14.png" srcset="/img/loading.gif" lazyload class="">
-
-
+<p>优点：</p>
+<ol>
+<li>不受光照变化和物体纹理影响</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>容易受光照影响，强光下基本不用</li>
+<li>测量距离较近，距离变远则精度差</li>
+<li>容易受光滑平面反光的影响</li>
+</ol>
+<p>典型应用：</p>
+<ol>
+<li>近距体感识别、VR、AR;</li>
+<li>近距物体识别、姿态检测、测量等</li>
+</ol>
+<p>产品举例：Microsoft Kinect v1</p>
+<h2 id="2-双目立体视觉原理"><a href="#2-双目立体视觉原理" class="headerlink" title="2. 双目立体视觉原理"></a>2. 双目立体视觉原理</h2><p>双目立体视觉(Binocular Stereo Vision)是机器视觉的一种重要形式，他是基于视差原理并利用成像设备从不同的位置获取被测物体的两幅图像，通过计算图像对应点间的位置偏差，来获取物体三维几何信息的方法。</p>
+<p>优点：</p>
+<ol>
+<li>成本低，功耗低</li>
+<li>分辨率、帧率较高</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>复杂度高，实时性差，处理芯片需很高性能</li>
+<li>目标需要有良好的特征变化</li>
+<li>对环境光照非常敏感</li>
+<li>处理速度相对较慢</li>
+</ol>
+<p>产品举例：Stereolabs ZED</p>
+<h2 id="3-ToF原理"><a href="#3-ToF原理" class="headerlink" title="3. ToF原理"></a>3. ToF原理</h2><p>ToF(time of fly)，顾名思义是测量光飞行时间来取得距离，具体而言就是通过给目标连续发射激光脉冲，然后用传感器接收从反射光线，通过探测光脉冲的飞行往返时间来得到确切的目标物距离。因为光速过大，通过直接测光飞行时间实际不可行，一般通过检测通过一定手段调制后的光波的相位偏移来实现。</p>
+<p>优点：</p>
+<ol>
+<li>不受光照变化和物体纹理影响</li>
+<li>适合远距离、大量程</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>分辨率较低，不适合高精度场合</li>
+<li>不适合近距离感知</li>
+</ol>
+<p>典型应用：</p>
+<ol>
+<li>近距体感识别、VR、AR;</li>
+<li>近距物体识别、姿态检测、测量等</li>
+<li>远距环境建模、物体识别、测量等</li>
+</ol>
+<p>产品举例：Microsoft Kinect v2</p>
+<h2 id="4-三种方案表格对比"><a href="#4-三种方案表格对比" class="headerlink" title="4. 三种方案表格对比"></a>4. 三种方案表格对比</h2><table>
+<thead>
+<tr>
+<th align="center">视觉方案</th>
+<th align="center">RGB双目</th>
+<th align="center">结构光</th>
+<th align="center">TOF</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">测距方式</td>
+<td align="center">被动式</td>
+<td align="center">主动式</td>
+<td align="center">主动式</td>
+</tr>
+<tr>
+<td align="center">工作原理</td>
+<td align="center">双目匹配，三角测量</td>
+<td align="center">激光散斑编码</td>
+<td align="center">发射与反射信号时间差</td>
+</tr>
+<tr>
+<td align="center">测量范围</td>
+<td align="center">基线限制，中距</td>
+<td align="center">0.1m~10m</td>
+<td align="center">0.1m~100m</td>
+</tr>
+<tr>
+<td align="center">分辨率</td>
+<td align="center">中高</td>
+<td align="center">中</td>
+<td align="center">低</td>
+</tr>
+<tr>
+<td align="center">精度</td>
+<td align="center">中(0.01mm~1mm)</td>
+<td align="center">中高(um~cm)</td>
+<td align="center">中(mm~cm)</td>
+</tr>
+<tr>
+<td align="center">帧率</td>
+<td align="center">较低(几十Hz)</td>
+<td align="center">中(&lt;100Hz)</td>
+<td align="center">高</td>
+</tr>
+<tr>
+<td align="center">抗光照</td>
+<td align="center">高</td>
+<td align="center">低</td>
+<td align="center">中</td>
+</tr>
+<tr>
+<td align="center">功耗</td>
+<td align="center">较低，因为纯软件</td>
+<td align="center">中等，需要投射图案，只照射局部区域</td>
+<td align="center">很高，因为需要全面照射</td>
+</tr>
+<tr>
+<td align="center">硬件成本</td>
+<td align="center">低</td>
+<td align="center">中</td>
+<td align="center">高</td>
+</tr>
+<tr>
+<td align="center">黑暗环境能否工作</td>
+<td align="center">不可以</td>
+<td align="center">可以</td>
+<td align="center">可以</td>
+</tr>
+<tr>
+<td align="center">价格</td>
+<td align="center">便宜：千元量级</td>
+<td align="center">1mm精度：千元量级；0.1mm精度：万元量级；0.01mm：几十万量级</td>
+<td align="center">几千~几百万</td>
+</tr>
+</tbody></table>
+<h1 id="三、深度相机制造商"><a href="#三、深度相机制造商" class="headerlink" title="三、深度相机制造商"></a>三、深度相机制造商</h1><p>深度相机厂商众多，产品设计原理和技术参数千差万别，体积、价格差距也很大。使用者需要根据自身不同的应用需求和使用场景选择最适合自己的深度相机。一句话，深度相机没有最好，只有最适合。</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.stereolabs.com/">Stereolabs ZED</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.k4w.cn/">Microsoft Kinect</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/architecture-and-technology/realsense-overview.html">Intel RealSense</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ultraleap.com/">Leap Motion Controller</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.orbbec.com.cn/">奥比中光</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.percipio.xyz/">图漾</a></li>
+<li><a target="_blank" rel="noopener" href="https://structure.io/">Occipital Structure</a></li>
+<li><a target="_blank" rel="noopener" href="https://duo3d.com/">DUO</a></li>
+</ol>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a target="_blank" rel="noopener" href="http://t.csdn.cn/A4nOd">win10 VMware 虚拟机 实现桥接模式 上网</a></li>
+<li><a target="_blank" rel="noopener" href="http://t.csdn.cn/JXAAZ">RGB-D Camera深度相机主流方案对比</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/li-yao7758258/p/11191878.html">三种主流深度相机介绍</a></li>
+<li><a target="_blank" rel="noopener" href="http://t.csdn.cn/EhC1O">【深度相机系列六】深度相机哪家强？附详细参数对比清单</a></li>
 </ol>
 
                 
@@ -400,7 +486,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="category-chain-item">虚拟机</a>
+  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
   
   
 
@@ -415,11 +501,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Ubuntu/">#Ubuntu</a>
-      
-        <a href="/tags/VMware/">#VMware</a>
-      
-        <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
+        <a href="/tags/%E8%A7%86%E8%A7%89/">#视觉</a>
       
     </div>
   
@@ -431,8 +513,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>VMware虚拟机实现桥接模式上网</div>
-      <div>https://chenjiadragon.github.io/2022/10/30/VMware虚拟机实现桥接模式上网/</div>
+      <div>深度相机介绍</div>
+      <div>https://chenjiadragon.github.io/2022/11/14/深度相机介绍/</div>
     </div>
     <div class="license-meta">
       
@@ -444,7 +526,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年10月30日</div>
+          <div>2022年11月14日</div>
         </div>
       
       
@@ -474,18 +556,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/14/%E6%B7%B1%E5%BA%A6%E7%9B%B8%E6%9C%BA%E4%BB%8B%E7%BB%8D/" title="深度相机介绍">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">深度相机介绍</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/27/roscpp-Callbacks-and-Spinning/" title="(roscpp) Callbacks and Spinning">
-                        <span class="hidden-mobile">(roscpp) Callbacks and Spinning</span>
+                      <a href="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/" title="VMware虚拟机实现桥接模式上网">
+                        <span class="hidden-mobile">VMware虚拟机实现桥接模式上网</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
