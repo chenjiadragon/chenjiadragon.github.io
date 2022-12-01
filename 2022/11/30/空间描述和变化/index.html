@@ -18,23 +18,22 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 模块命名 模块尽量使用小写命名，首字母保持小写，尽量不要用下划线（除非多个单词，且数量不多的情况） 因为很多模块文件存在与模块名称一致的类，模块采用小写，类采用首字母大写，这样就能区分开模块和类  123# 规范的模块名import decoderimport html_parser  2. 类命名 类名使用驼峰（CamelCase）命名风格，首字母大写，私有类可用一个下划线开头  12cl">
+    <meta name="description" content="设有两个坐标系，{A}和{B}。    位置描述{B}原点在{A}坐标系下的描述为：$^AP_{BORG}$，为$3\times1$矩阵。 姿态描述令坐标系{A}为参考坐标系，坐标系{B}三个主轴方向的单位向量均为$3\times1$矩阵，将其合并成一个$3\times3$矩阵,称该矩阵为旋转矩阵$^A_BR$，用来描述{B}相对于{A}的表达。  $^A_BR$是一个正交阵，即$^A_BR$ &amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python编程命名规范">
-<meta property="og:url" content="https://chenjiadragon.github.io/2022/11/23/python%E7%BC%96%E7%A8%8B%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:title" content="空间描述和变化">
+<meta property="og:url" content="https://chenjiadragon.github.io/2022/11/30/%E7%A9%BA%E9%97%B4%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%8F%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="1. 模块命名 模块尽量使用小写命名，首字母保持小写，尽量不要用下划线（除非多个单词，且数量不多的情况） 因为很多模块文件存在与模块名称一致的类，模块采用小写，类采用首字母大写，这样就能区分开模块和类  123# 规范的模块名import decoderimport html_parser  2. 类命名 类名使用驼峰（CamelCase）命名风格，首字母大写，私有类可用一个下划线开头  12cl">
+<meta property="og:description" content="设有两个坐标系，{A}和{B}。    位置描述{B}原点在{A}坐标系下的描述为：$^AP_{BORG}$，为$3\times1$矩阵。 姿态描述令坐标系{A}为参考坐标系，坐标系{B}三个主轴方向的单位向量均为$3\times1$矩阵，将其合并成一个$3\times3$矩阵,称该矩阵为旋转矩阵$^A_BR$，用来描述{B}相对于{A}的表达。  $^A_BR$是一个正交阵，即$^A_BR$ &amp;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-23T07:02:57.000Z">
-<meta property="article:modified_time" content="2022-11-23T11:49:35.426Z">
+<meta property="article:published_time" content="2022-11-30T14:01:43.000Z">
+<meta property="article:modified_time" content="2022-12-01T08:18:56.300Z">
 <meta property="article:author" content="cjl">
-<meta property="article:tag" content="转载">
-<meta property="article:tag" content="代码规范">
+<meta property="article:tag" content="机器人学导论">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>python编程命名规范 - chenjiadragon</title>
+  <title>空间描述和变化 - chenjiadragon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -233,7 +232,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="python编程命名规范"></span>
+            <span id="subtitle" data-typed-text="空间描述和变化"></span>
           
         </div>
 
@@ -244,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-23 15:02" pubdate>
-          2022年11月23日 下午
+        <time datetime="2022-11-30 22:01" pubdate>
+          2022年11月30日 晚上
         </time>
       </span>
     
@@ -256,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.9k 字
         
       </span>
     
@@ -267,7 +266,7 @@
         
         
         
-          14 分钟
+          17 分钟
         
       </span>
     
@@ -313,75 +312,56 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">python编程命名规范</h1>
+            <h1 style="display: none">空间描述和变化</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="1-模块命名"><a href="#1-模块命名" class="headerlink" title="1. 模块命名"></a>1. 模块命名</h1><ul>
-<li>模块尽量使用小写命名，首字母保持小写，尽量不要用下划线（除非多个单词，且数量不多的情况）</li>
-<li>因为很多模块文件存在与模块名称一致的类，模块采用小写，类采用首字母大写，这样就能区分开模块和类</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 规范的模块名</span><br><span class="hljs-keyword">import</span> decoder<br><span class="hljs-keyword">import</span> html_parser<br></code></pre></td></tr></table></figure>
-
-<h1 id="2-类命名"><a href="#2-类命名" class="headerlink" title="2. 类命名"></a>2. 类命名</h1><ul>
-<li>类名使用驼峰（CamelCase）命名风格，首字母大写，私有类可用一个下划线开头</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AnimalFarm</span>(<span class="hljs-title class_ inherited__">Farm</span>):<br>    <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
-
-<h1 id="3-函数命名"><a href="#3-函数命名" class="headerlink" title="3. 函数命名"></a>3. 函数命名</h1><ul>
-<li>函数名(包括类成员函数)一律小写，如有多个单词，用下划线隔开</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">run</span>():<br>    <span class="hljs-keyword">pass</span><br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">run_with_env</span>():<br>    <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>类内以单下划线（_）开头的函数表示的是protected类型的函数。只允许类本身与子类进行访问。</li>
-<li>类内以双下划线（__）开头的函数表示的是private类型的函数，只运行类本身进行访问。</li>
-</ul>
-<h1 id="4-变量命名"><a href="#4-变量命名" class="headerlink" title="4. 变量命名"></a>4. 变量命名</h1><ul>
-<li>变量名尽量小写，如有多个单词，用下划线隔开；</li>
-<li>类内以单下划线（_）开头表示的变量是protected类型的变量。只允许类本身与子类进行访问。</li>
-<li>类内以双下划线（__）开头表示的变量是private类型的变量，只运行类本身进行访问。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    count = <span class="hljs-number">0</span><br>    school_name = <span class="hljs-string">&#x27;&#x27;</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>常量采用全大写，如有多个单词，是用下划线隔开</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">MAX_CLIENT</span> = <span class="hljs-number">100</span><br><span class="hljs-attr">MAX_CONNECTION</span> = <span class="hljs-number">1000</span><br><span class="hljs-attr">CONNECTION_TIMEOUT</span> = <span class="hljs-number">600</span><br></code></pre></td></tr></table></figure>
+                <p>设有两个坐标系，{A}和{B}。</p>
+<!-- | 操作 | 具体操作命令 | 详细介绍 |
+|  :-: | :-:  |  :-:     |
+| 进入指定目录 |<font color=red> cd 目录路径 </font> |  Linux cd命令 | -->
 
 
-<h1 id="5-编程（代码）规范"><a href="#5-编程（代码）规范" class="headerlink" title="5. 编程（代码）规范"></a>5. 编程（代码）规范</h1><h2 id="1-空行"><a href="#1-空行" class="headerlink" title="1. 空行"></a>1. 空行</h2><ul>
-<li>空一行：用于类成员函数之间，或者用于区分不同逻辑块</li>
-<li>空两行：类与类，类与函数，函数与函数之间</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Test class,提供通用的方法&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Test的构造器:&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">pass</span><br> <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">function1</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br> <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">function2</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br> <br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">function3</span>():<br>    <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+<h1 id="位置描述"><a href="#位置描述" class="headerlink" title="位置描述"></a>位置描述</h1><p>{B}原点在{A}坐标系下的描述为：$^AP_{BORG}$，为$3\times1$矩阵。</p>
+<h1 id="姿态描述"><a href="#姿态描述" class="headerlink" title="姿态描述"></a>姿态描述</h1><p>令坐标系{A}为参考坐标系，坐标系{B}三个主轴方向的单位向量均为$3\times1$矩阵，将其合并成一个$3\times3$矩阵,称该矩阵为旋转矩阵$^A_BR$，用来描述{B}相对于{A}的表达。</p>
+<blockquote>
+<p>$^A_BR$是一个正交阵，即$^A_BR$ &#x3D; $^A_BR^{-1}$ &#x3D; $^A_BR^{T}$</p>
+</blockquote>
+<h1 id="位姿描述"><a href="#位姿描述" class="headerlink" title="位姿描述"></a>位姿描述</h1><p>位姿&#x3D;位置+姿态</p>
+<p>知道了{B}相对于{A}的位姿描述，可以将{B}坐标系下的点转换到{A}坐标系下表示。</p>
+<p>假设有一个点，它在{A}中的表示为$^AP$，它在{B}中的表示为$^BP$，则有关系式：$^AP$ &#x3D; $^{A}<em>{B}R$ $^BP$ + $^AP</em>{ORG}$</p>
+<p>我们一般使用齐次描述，等式右边第一部分用$^A_BT$简化表示：<br>$$<br>\left(<br>\begin{matrix}<br>^AP \<br>1<br>\end{matrix}<br>\right)<br>&#x3D;<br>\left(<br>\begin{matrix}<br>&amp;^A_BR &amp; &amp; ^AP_{BORG} \<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{matrix}<br>\right)<br>\left(<br>\begin{matrix}<br>^BP \<br>1<br>\end{matrix}<br>\right)<br>$$</p>
+<h1 id="变换的运算"><a href="#变换的运算" class="headerlink" title="变换的运算"></a>变换的运算</h1><ol>
+<li>乘法运算（符合运算）：$^A_CT$ &#x3D; $^A_BT$$^B_CT$(合理利用上下标简化运算</li>
+<li>逆运算：$^B_AT$ &#x3D; $^A_BT^{-1}$。也可以利用正交矩阵的性质：<br>$$<br> ^B_AT&#x3D;\left(<br>\begin{matrix}<br>&amp;^A_BR^T &amp; &amp; -^A_BR^T (^AP_{BORG}) \<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{matrix}<br>\right)<br>$$</li>
+</ol>
+<h1 id="其他姿态描述"><a href="#其他姿态描述" class="headerlink" title="其他姿态描述"></a>其他姿态描述</h1><p>由上可知，旋转矩阵是一个标准正交阵。虽然有9个参数，但可以用只用三个参数确定。即<strong>绕轴旋转</strong>。</p>
+<ol>
+<li><p>绕 Z 轴 $\alpha$ 角度得到的坐标系相对于原来坐标系的旋转矩阵为<br>$$<br>R_Z(\alpha)&#x3D;\left[<br>\begin{matrix}<br>c\alpha &amp; -s\alpha &amp; 0\<br>s\alpha &amp; c\alpha &amp; 0 \<br>0 &amp; 0 &amp; 1<br>\end{matrix}<br>\right]<br>$$</p>
+</li>
+<li><p>绕 Y 轴 $\beta$ 角度得到的坐标系相对于原来坐标系的旋转矩阵为<br>$$<br>R_Y(\beta)&#x3D;\left[<br>\begin{matrix}<br>c\beta &amp; 0 &amp; s\beta\<br>0 &amp; 1 &amp; 0 \<br>-s\beta &amp; 0 &amp; c\beta<br>\end{matrix}<br>\right]<br>$$</p>
+</li>
+<li><p>绕 X 轴 $\gamma$ 角度得到的坐标系相对于原来坐标系的旋转矩阵为<br>$$<br>R_X(\gamma)&#x3D;\left[<br>\begin{matrix}<br>1 &amp; 0 &amp; 0\<br>0 &amp; c\gamma &amp; -s\gamma \<br>0 &amp; s\gamma &amp; c\gamma<br>\end{matrix}<br>\right]<br>$$</p>
+</li>
+</ol>
+<h2 id="固定角旋转"><a href="#固定角旋转" class="headerlink" title="固定角旋转"></a>固定角旋转</h2><p>固定角旋转中固定一词，是指旋转是在固定（即不运动的）参考坐标系中确定的。共有12种固定角旋转。以下是最常见的使用例子：</p>
+<p><strong>X-Y-Z固定角</strong>：有两个重合的坐标系{A}和{B}。先将{B}绕{A}的 x 轴旋转 $\gamma$ 角度，再绕{A}的 y 轴旋转 $\beta$ 角度，最后绕{A}的 z 轴旋转 $\alpha$ 角度。其旋转矩阵表示如下。</p>
+<p>$$<br>^A_BR_{XYZ}(\gamma,\beta,\alpha) &#x3D; R_Z(\alpha)R_Y(\beta)R_X(\gamma)<br>$$</p>
+<blockquote>
+<p>可以看出，固定角后旋转的轴往前加矩阵乘！</p>
+</blockquote>
+<h2 id="欧拉角旋转"><a href="#欧拉角旋转" class="headerlink" title="欧拉角旋转"></a>欧拉角旋转</h2><p>欧拉角旋转指的是每次旋转的角度都是按照旋转后的坐标系的轴进行旋转，同样有12种欧拉角旋转。以下是对应的例子：</p>
+<p><strong>Z-Y-X欧拉角</strong>：有两个重合的坐标系{A}和{B}。先将{B}绕{B}的 z 轴旋转 $\alpha$ 角度，再绕{B}的 y 轴旋转 $\beta$ 角度，最后绕{B}的 x 轴旋转 $\gamma$ 角度。其旋转矩阵表示如下。</p>
+<p>$$<br>^A_BR_{Z^{‘}Y^{‘}X^{‘}}(\alpha,\beta,\gamma) &#x3D; R_Z(\alpha)R_Y(\beta)R_X(\gamma)<br>$$</p>
+<blockquote>
+<ol>
+<li>可以看出X-Y-Z固定角旋转和Z-Y-X欧拉角旋转得到的旋转矩阵相同。其实，12种固定角和1种欧拉角都分别一一对应，他们是对偶的关系。</li>
+<li>欧拉角后旋转的轴往后加矩阵乘。</li>
+</ol>
+</blockquote>
+<h1 id="四元数姿态表示法"><a href="#四元数姿态表示法" class="headerlink" title="四元数姿态表示法"></a>四元数姿态表示法</h1><p>未完待续……</p>
 
-
-<h2 id="2-换行"><a href="#2-换行" class="headerlink" title="2. 换行"></a>2. 换行</h2><ul>
-<li>反斜杠</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;test.txt&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> file_1, \<br>     <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;test2.txt&quot;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> file_2:<br>    file_2.write(file_1.read())<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>字符串</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">query_str = (<span class="hljs-string">&#x27;my name&#x27;</span><br>             <span class="hljs-string">&#x27;is&#x27;</span><br>             <span class="hljs-string">&#x27; %s&#x27;</span>) % <span class="hljs-string">&quot;Tom&quot;</span><br><span class="hljs-built_in">print</span> query_str<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>二元运算符</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">income = (gross_wages<br>          + taxable_interest<br>          + (dividends - qualified_dividends)<br>          - ira_deduction<br>          - student_loan_interest)<br></code></pre></td></tr></table></figure>
-
-<h2 id="3-缩进"><a href="#3-缩进" class="headerlink" title="3. 缩进"></a>3. 缩进</h2><ul>
-<li>没有子模块，一层缩进</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">my_list = [<br>    <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>,<br>    <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>,<br>    ]<br> <br>result = some_function_that_takes_arguments(<br>    <span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>,<br>    <span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>,<br>    )<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>有子模块</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#if and </span><br><span class="hljs-keyword">if</span> (this_is_one_thing<br>        <span class="hljs-keyword">and</span> that_is_another_thing):<br>    do_something()<br><span class="hljs-comment"># function</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">long_function_name</span>(<span class="hljs-params"></span><br><span class="hljs-params">        var_one, var_two, </span><br><span class="hljs-params">        var_three,var_four</span>):<br>    <span class="hljs-built_in">print</span>(var_one)<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -399,7 +379,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/python/" class="category-chain-item">python</a>
+  <a href="/categories/%E6%9C%BA%E6%A2%B0%E8%87%82/" class="category-chain-item">机械臂</a>
   
   
 
@@ -414,9 +394,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
-      
-        <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">#代码规范</a>
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E5%AF%BC%E8%AE%BA/">#机器人学导论</a>
       
     </div>
   
@@ -428,8 +406,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>python编程命名规范</div>
-      <div>https://chenjiadragon.github.io/2022/11/23/python编程命名规范/</div>
+      <div>空间描述和变化</div>
+      <div>https://chenjiadragon.github.io/2022/11/30/空间描述和变化/</div>
     </div>
     <div class="license-meta">
       
@@ -441,7 +419,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月23日</div>
+          <div>2022年11月30日</div>
         </div>
       
       
@@ -471,18 +449,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/30/%E7%A9%BA%E9%97%B4%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%8F%98%E5%8C%96/" title="空间描述和变化">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">空间描述和变化</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/14/ROS%E6%9C%BA%E6%A2%B0%E8%87%82%E8%B0%83%E7%A0%94/" title="ROS机械臂调研">
-                        <span class="hidden-mobile">ROS机械臂调研</span>
+                      <a href="/2022/11/23/python%E7%BC%96%E7%A8%8B%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" title="python编程命名规范">
+                        <span class="hidden-mobile">python编程命名规范</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
