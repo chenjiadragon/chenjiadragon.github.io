@@ -18,12 +18,12 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="编程技巧持续总结1. 根据列表值排序下标123456# 存在一个列表nums1，根据其列表值排序下标nums1 &#x3D; [3, 5, 4, 2]n&#x3D;len(nums1)idx1 &#x3D; list(range(n))idx1.sort(key&#x3D;lambda x: nums1[x])print(idx1)  小试牛刀：  https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;advantage-shuff">
+    <meta name="description" content="编程技巧持续总结  1. 根据列表值排序下标 123456# 存在一个列表nums1，根据其列表值排序下标nums1 &#x3D; [3, 5, 4, 2]n&#x3D;len(nums1)idx1 &#x3D; list(range(n))idx1.sort(key&#x3D;lambda x: nums1[x])print(idx1) 小试牛刀：  https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;advantage-sh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python编程技巧">
 <meta property="og:url" content="https://chenjiadragon.github.io/2022/10/08/python%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="编程技巧持续总结1. 根据列表值排序下标123456# 存在一个列表nums1，根据其列表值排序下标nums1 &#x3D; [3, 5, 4, 2]n&#x3D;len(nums1)idx1 &#x3D; list(range(n))idx1.sort(key&#x3D;lambda x: nums1[x])print(idx1)  小试牛刀：  https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;advantage-shuff">
+<meta property="og:description" content="编程技巧持续总结  1. 根据列表值排序下标 123456# 存在一个列表nums1，根据其列表值排序下标nums1 &#x3D; [3, 5, 4, 2]n&#x3D;len(nums1)idx1 &#x3D; list(range(n))idx1.sort(key&#x3D;lambda x: nums1[x])print(idx1) 小试牛刀：  https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;advantage-sh">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-08T08:45:48.000Z">
 <meta property="article:modified_time" content="2022-10-30T08:04:27.049Z">
@@ -106,7 +106,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -317,26 +321,29 @@
             
               <div class="markdown-body">
                 
-                <h1 id="编程技巧持续总结"><a href="#编程技巧持续总结" class="headerlink" title="编程技巧持续总结"></a>编程技巧持续总结</h1><h2 id="1-根据列表值排序下标"><a href="#1-根据列表值排序下标" class="headerlink" title="1. 根据列表值排序下标"></a>1. 根据列表值排序下标</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 存在一个列表nums1，根据其列表值排序下标</span><br>nums1 = [<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>]<br>n=<span class="hljs-built_in">len</span>(nums1)<br>idx1 = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(n))<br>idx1.sort(key=<span class="hljs-keyword">lambda</span> x: nums1[x])<br><span class="hljs-built_in">print</span>(idx1)<br></code></pre></td></tr></table></figure>
-
+                <h1 id="编程技巧持续总结"><a class="markdownIt-Anchor" href="#编程技巧持续总结"></a> 编程技巧持续总结</h1>
+<h2 id="1-根据列表值排序下标"><a class="markdownIt-Anchor" href="#1-根据列表值排序下标"></a> 1. 根据列表值排序下标</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 存在一个列表nums1，根据其列表值排序下标</span><br>nums1 = [<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>]<br>n=<span class="hljs-built_in">len</span>(nums1)<br>idx1 = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(n))<br>idx1.sort(key=<span class="hljs-keyword">lambda</span> x: nums1[x])<br><span class="hljs-built_in">print</span>(idx1)<br></code></pre></td></tr></table></figure>
 <p>小试牛刀：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/advantage-shuffle/">https://leetcode.cn/problems/advantage-shuffle/</a></li>
 </ol>
-<h2 id="2-同时列出数据和数据下标"><a href="#2-同时列出数据和数据下标" class="headerlink" title="2. 同时列出数据和数据下标"></a>2. 同时列出数据和数据下标</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 使用enumerate()</span><br>nums = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>]<br><span class="hljs-keyword">for</span> i,num <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(nums):<br>    <span class="hljs-built_in">print</span> i,num<br></code></pre></td></tr></table></figure>
-
-<h2 id="3-单调栈"><a href="#3-单调栈" class="headerlink" title="3. 单调栈"></a>3. 单调栈</h2><p>单调栈顾名思义，即满足单调性的栈结构。单调栈基本定义：<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/monotonous-stack/">https://oi-wiki.org/ds/monotonous-stack/</a></p>
+<h2 id="2-同时列出数据和数据下标"><a class="markdownIt-Anchor" href="#2-同时列出数据和数据下标"></a> 2. 同时列出数据和数据下标</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 使用enumerate()</span><br>nums = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>]<br><span class="hljs-keyword">for</span> i,num <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(nums):<br>    <span class="hljs-built_in">print</span> i,num<br></code></pre></td></tr></table></figure>
+<h2 id="3-单调栈"><a class="markdownIt-Anchor" href="#3-单调栈"></a> 3. 单调栈</h2>
+<p>单调栈顾名思义，即满足单调性的栈结构。单调栈基本定义：<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/monotonous-stack/">https://oi-wiki.org/ds/monotonous-stack/</a></p>
 <p>单调栈可用于寻找数组中某个元素x左边（右边）第一个小于x的元素。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">arr = [<span class="hljs-number">11</span>,<span class="hljs-number">81</span>,<span class="hljs-number">94</span>,<span class="hljs-number">43</span>,<span class="hljs-number">3</span>]<br>n = lne(arr)<br>monoStack = []  <span class="hljs-comment"># 定义一个单调栈</span><br>left = [<span class="hljs-number">0</span>] * n   <span class="hljs-comment"># 寻找每个元素左边第一个小于x的下标</span><br><br><span class="hljs-keyword">for</span> i, x <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(arr):<br>    <span class="hljs-keyword">while</span> monoStack <span class="hljs-keyword">and</span> x &lt;= arr[monoStack[-<span class="hljs-number">1</span>]]:<br>        monoStack.pop()<br>    left[i] = (monoStack[-<span class="hljs-number">1</span>] <span class="hljs-keyword">if</span> monoStack <span class="hljs-keyword">else</span> -<span class="hljs-number">1</span>)  <span class="hljs-comment"># -1表示不存在</span><br>    monoStack.append(i)<br><span class="hljs-built_in">print</span>(left)<br></code></pre></td></tr></table></figure>
-
-<h2 id="4-python3字符串判断是否为数字或大小写"><a href="#4-python3字符串判断是否为数字或大小写" class="headerlink" title="4. python3字符串判断是否为数字或大小写"></a>4. python3字符串判断是否为数字或大小写</h2><table>
+<h2 id="4-python3字符串判断是否为数字或大小写"><a class="markdownIt-Anchor" href="#4-python3字符串判断是否为数字或大小写"></a> 4. python3字符串判断是否为数字或大小写</h2>
+<table>
 <thead>
 <tr>
 <th>判断函数</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>字符串.isalnum()</td>
 <td>所有字符都是数字或者字母，为真返回 Ture，否则返回 False。</td>
 </tr>
@@ -364,7 +371,8 @@
 <td>字符串.isspace()</td>
 <td>所有字符都是空白字符，为真返回 Ture，否则返回 False。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
@@ -372,7 +380,8 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>字符串.upper()</td>
 <td>把所有字符中的小写字母转换成大写字母</td>
 </tr>
@@ -388,7 +397,8 @@
 <td>字符串.title()</td>
 <td>把每个单词的第一个字母转化为大写，其余小写</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>小试牛刀：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-case-permutation/">https://leetcode.cn/problems/letter-case-permutation/</a></li>

@@ -97,7 +97,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -269,7 +273,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/09/22/Ubuntu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%91%84%E5%83%8F%E5%A4%B4/" target="_self">
         <div>
-          相关设置在虚拟机设置中将USB兼容性设置为3.x，默认是2.x：   此时虚拟机可以检测到相关USB设备，但是一台USB设备只能链接一台主机或者虚拟机，只有断开主机的连接，虚拟机才可以连接到摄像头。点击VMware菜单栏上的“虚拟机-&gt;可移动设备”：   此时就可以在虚拟机中使用摄像头了。 参考 https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;bc93dedb697d
+          相关设置 在虚拟机设置中将USB兼容性设置为3.x，默认是2.x：  此时虚拟机可以检测到相关USB设备，但是一台USB设备只能链接一台主机或者虚拟机，只有断开主机的连接，虚拟机才可以连接到摄像头。 点击VMware菜单栏上的“虚拟机-&gt;可移动设备”：  此时就可以在虚拟机中使用摄像头了。  参考  https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;bc93dedb697d
         </div>
       </a>
 
@@ -332,7 +336,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/09/21/ROS-Noetic%E5%AE%89%E8%A3%85moveit/" target="_self">
         <div>
-          安装流程在Ubuntu20.04上安装ROS-Noetic后，安装moveit。安装流程如下： 确保自己有最新的数据包： 1234sudo rosdep initrosdep updatesudo apt-get updatesudo apt-get dist-upgrade  安装ROS构建工具（一般安装ROS时已经安装好了）： 1sudo apt install ros-noetic-catk
+          安装流程 在Ubuntu20.04上安装ROS-Noetic后，安装moveit。安装流程如下： 确保自己有最新的数据包： 1234sudo rosdep initrosdep updatesudo apt-get updatesudo apt-get dist-upgrade 安装ROS构建工具（一般安装ROS时已经安装好了）： 1sudo apt install ros-noetic-cat
         </div>
       </a>
 
@@ -400,7 +404,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/09/17/No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro-Errno-2-No-such-file-or-directory-opt-ros-melodic-share-franka-description-robots-panda-panda-urdf-xacro/" target="_self">
         <div>
-          问题描述初学moveit，按照官方教程学习，根据教程一步步操作，结果才到第二节课，运行demo时： 1roslaunch panda_moveit_config demo.launch rviz_tutorial:&#x3D;true 出现报错： 1No such file or directory:&#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;panda
+          问题描述 初学moveit，按照官方教程学习，根据教程一步步操作，结果才到第二节课，运行demo时： 1roslaunch panda_moveit_config demo.launch rviz_tutorial:&#x3D;true 出现报错： 1No such file or directory:&#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;share&#x2F;franka_description&#x2F;robots&#x2F;pan
         </div>
       </a>
 
@@ -468,7 +472,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/09/16/C-internal-compiler-error-%E5%B7%B2%E6%9D%80%E6%AD%BB-program-cc1plus/" target="_self">
         <div>
-          问题描述在虚拟机中安装了ROS，并使用catkin_make编译项目时，出现该问题： 1234567891011121314151617181920[ 46%] Building CXX object moveit_tutorials&#x2F;doc&#x2F;interactivity&#x2F;CMakeFiles&#x2F;interactivity_utils.dir&#x2F;src&#x2F;imarker.cpp.oc++: interna
+          问题描述 在虚拟机中安装了ROS，并使用catkin_make编译项目时，出现该问题： 1234567891011121314151617181920[ 46%] Building CXX object moveit_tutorials&#x2F;doc&#x2F;interactivity&#x2F;CMakeFiles&#x2F;interactivity_utils.dir&#x2F;src&#x2F;imarker.cpp.oc++: inter
         </div>
       </a>
 
@@ -533,7 +537,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/09/12/ROS%E5%88%9D%E5%AD%A6%E7%AC%94%E8%AE%B0/" target="_self">
         <div>
-          学习资源 http:&#x2F;&#x2F;wiki.ros.org&#x2F; https:&#x2F;&#x2F;www.guyuehome.com&#x2F;  学习笔记环境配置查看ROS环境设置 1$ printenv | grep ROS 创建工作空间并编译： 123$ mkdir -p ~&#x2F;catkin_ws&#x2F;src$ cd ~&#x2F;catkin_ws&#x2F;$ catkin_make 使用工作空间中的功能包或节点需要先设置环境： 1$ source d
+          学习资源  http:&#x2F;&#x2F;wiki.ros.org&#x2F; https:&#x2F;&#x2F;www.guyuehome.com&#x2F;   学习笔记  环境配置 查看ROS环境设置 1$ printenv | grep ROS 创建工作空间并编译： 123$ mkdir -p ~&#x2F;catkin_ws&#x2F;src$ cd ~&#x2F;catkin_ws&#x2F;$ catkin_make 使用工作空间中的功能包或节点需要先设置环境： 1$ so
         </div>
       </a>
 
@@ -596,7 +600,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/09/07/sudo-rosdep-init-rosdep-update%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" target="_self">
         <div>
-          前言 以下资源来自ROS2官网：https:&#x2F;&#x2F;docs.ros.org&#x2F;en&#x2F;humble&#x2F;Tutorials&#x2F;Intermediate&#x2F;Rosdep.html  rosdep是ROS的依赖管理实用工具，可以与ROS包和外部库一起工作。rosdep是一个命令行工具，用于自动识别和安装（安装包的）依赖项。它可以在以下情况被调用:  构建工作区，并需要适当的依赖关系来构建其中的包时 安装了某个包(例
+          前言  以下资源来自ROS2官网：https:&#x2F;&#x2F;docs.ros.org&#x2F;en&#x2F;humble&#x2F;Tutorials&#x2F;Intermediate&#x2F;Rosdep.html  rosdep是ROS的依赖管理实用工具，可以与ROS包和外部库一起工作。rosdep是一个命令行工具，用于自动识别和安装（安装包的）依赖项。它可以在以下情况被调用:  构建工作区，并需要适当的依赖关系来构建其中的包时 安装了某个包
         </div>
       </a>
 
@@ -659,7 +663,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/09/04/%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85ROS2-humble/" target="_self">
         <div>
-          前言系统配置为：虚拟机Ubuntu 22.04。ROS2 humble官方文档有两种安装方式：  binary安装：https:&#x2F;&#x2F;docs.ros.org&#x2F;en&#x2F;humble&#x2F;Installation&#x2F;Alternatives&#x2F;Ubuntu-Install-Binary.html source安装：https:&#x2F;&#x2F;docs.ros.org&#x2F;en&#x2F;humble&#x2F;Installation&#x2F;Alter
+          前言 系统配置为：虚拟机Ubuntu 22.04。ROS2 humble官方文档有两种安装方式：  binary安装：https:&#x2F;&#x2F;docs.ros.org&#x2F;en&#x2F;humble&#x2F;Installation&#x2F;Alternatives&#x2F;Ubuntu-Install-Binary.html source安装：https:&#x2F;&#x2F;docs.ros.org&#x2F;en&#x2F;humble&#x2F;Installation&#x2F;Alt
         </div>
       </a>
 
@@ -722,7 +726,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu22-04/" target="_self">
         <div>
-          VMware安装这里安装的是VMware Workstation Pro 16虚拟机，安装教程（带密钥）如下：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40950957&#x2F;article&#x2F;details&#x2F;80467513 安装Ubuntu虚拟环境1. 下载Ubuntu22.04Ubuntu官网：https:&#x2F;&#x2F;cn.ubuntu.com&#x2F;download&#x2F;des
+          VMware安装 这里安装的是VMware Workstation Pro 16虚拟机，安装教程（带密钥）如下： https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40950957&#x2F;article&#x2F;details&#x2F;80467513  安装Ubuntu虚拟环境  1. 下载Ubuntu22.04 Ubuntu官网：https:&#x2F;&#x2F;cn.ubuntu.com&#x2F;download&#x2F;desktop   2
         </div>
       </a>
 
@@ -785,7 +789,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/08/31/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E4%BD%BF%E7%94%A8markdown%E5%BC%95%E5%85%A5%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
         <div>
-          问题描述本人使用的是Fluid主题，将_config.yaml文件中的post_asset_folder选项设为true后，每次使用 1hexo new [title] 创建新文章时都会自动创建一个同名文件夹，用于存放文章相关的资源，例如图片等。这时我们可以通过相对路径来引用它们。 但是常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。官方推荐
+          问题描述 本人使用的是Fluid主题，将_config.yaml文件中的post_asset_folder选项设为true后，每次使用 1hexo new [title] 创建新文章时都会自动创建一个同名文件夹，用于存放文章相关的资源，例如图片等。这时我们可以通过相对路径来引用它们。 但是常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。官方
         </div>
       </a>
 
@@ -839,7 +843,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" target="_self">
         <div>
-          这是一篇测试文章        论文
+          这是一篇测试文章    论文
         </div>
       </a>
 

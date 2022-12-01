@@ -97,7 +97,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -269,7 +273,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/11/30/%E7%A9%BA%E9%97%B4%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%8F%98%E5%8C%96/" target="_self">
         <div>
-          设有两个坐标系，{A}和{B}。    位置描述{B}原点在{A}坐标系下的描述为：$^AP_{BORG}$，为$3\times1$矩阵。 姿态描述令坐标系{A}为参考坐标系，坐标系{B}三个主轴方向的单位向量均为$3\times1$矩阵，将其合并成一个$3\times3$矩阵,称该矩阵为旋转矩阵$^A_BR$，用来描述{B}相对于{A}的表达。  $^A_BR$是一个正交阵，即$^A_BR$ &amp;
+          设有两个坐标系，{A}和{B}。   位置描述 {B}原点在{A}坐标系下的描述为：APBORG^AP_{BORG}APBORG​，为3×13\times13×1矩阵。  姿态描述 令坐标系{A}为参考坐标系，坐标系{B}三个主轴方向的单位向量均为3×13\times13×1矩阵，将其合并成一个3×33\times33×3矩阵,称该矩阵为旋转矩阵BAR^A_BRBA​R，用来描述{B}相对于{A}
         </div>
       </a>
 
@@ -330,7 +334,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/11/23/python%E7%BC%96%E7%A8%8B%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" target="_self">
         <div>
-          1. 模块命名 模块尽量使用小写命名，首字母保持小写，尽量不要用下划线（除非多个单词，且数量不多的情况） 因为很多模块文件存在与模块名称一致的类，模块采用小写，类采用首字母大写，这样就能区分开模块和类  123# 规范的模块名import decoderimport html_parser  2. 类命名 类名使用驼峰（CamelCase）命名风格，首字母大写，私有类可用一个下划线开头  12cl
+          1. 模块命名  模块尽量使用小写命名，首字母保持小写，尽量不要用下划线（除非多个单词，且数量不多的情况） 因为很多模块文件存在与模块名称一致的类，模块采用小写，类采用首字母大写，这样就能区分开模块和类  123# 规范的模块名import decoderimport html_parser  2. 类命名  类名使用驼峰（CamelCase）命名风格，首字母大写，私有类可用一个下划线开头  1
         </div>
       </a>
 
@@ -393,7 +397,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/11/14/ROS%E6%9C%BA%E6%A2%B0%E8%87%82%E8%B0%83%E7%A0%94/" target="_self">
         <div>
-          一、越疆机器人官方网站：https:&#x2F;&#x2F;www.dobot.cn&#x2F; github开源地址：https:&#x2F;&#x2F;github.com&#x2F;Dobot-Arm?tab&#x3D;repositories 其核心产品有：   其中，带有ROS SDK的有：MG400,M1Pro,Magician,CR。其中本项目推荐使用CR3。 二、大象机器人(Elephant Robotics)官方网站：https:&#x2F;&#x2F;www.ele
+          一、越疆机器人 官方网站：https:&#x2F;&#x2F;www.dobot.cn&#x2F; github开源地址：https:&#x2F;&#x2F;github.com&#x2F;Dobot-Arm?tab&#x3D;repositories 其核心产品有：  其中，带有ROS SDK的有：MG400,M1Pro,Magician,CR。其中本项目推荐使用CR3。  二、大象机器人(Elephant Robotics) 官方网站：https:&#x2F;&#x2F;www.
         </div>
       </a>
 
@@ -454,7 +458,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/11/14/%E6%B7%B1%E5%BA%A6%E7%9B%B8%E6%9C%BA%E4%BB%8B%E7%BB%8D/" target="_self">
         <div>
-          一、简介随着机器视觉，自动驾驶等颠覆性的技术逐步发展，采用 3D 相机进行物体识别，行为识别，场景建模的相关应用越来越多，可以说深度相机就是终端和机器人的眼睛，那么什么是深度相机呢，跟之前的普通相机（2D）想比较，又有哪些差别？ 深度相机又称之为3D相机，顾名思义，就是通过该相机能检测出拍摄空间的景深距离，这也是与普通摄像头最大的区别。普通的彩色相机拍摄到的图片能看到相机视角内的所有物体并记录下来
+          一、简介 随着机器视觉，自动驾驶等颠覆性的技术逐步发展，采用 3D 相机进行物体识别，行为识别，场景建模的相关应用越来越多，可以说深度相机就是终端和机器人的眼睛，那么什么是深度相机呢，跟之前的普通相机（2D）想比较，又有哪些差别？ 深度相机又称之为3D相机，顾名思义，就是通过该相机能检测出拍摄空间的景深距离，这也是与普通摄像头最大的区别。普通的彩色相机拍摄到的图片能看到相机视角内的所有物体并记录
         </div>
       </a>
 
@@ -515,7 +519,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/10/30/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E7%8E%B0%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E4%B8%8A%E7%BD%91/" target="_self">
         <div>
-          前言可能很多朋友想用VMware在自己的windows系统上体验下其它操作系统或者运行某些只能在Linux上的软件。但是可能自己买阿里云或者腾讯云感觉划不来。下面我来简单的来告诉大家，运用VMware的桥接模式，可以让大家像拥有另外一台不同操作系统的电脑一样在局域网中。同样可以来上网，可以和局域网中的其他机器一样通信，甚至可以暴露ip与端口到公网中，这样其他机器或者网页等也能访问它。 环境：  宿
+          前言 可能很多朋友想用VMware在自己的windows系统上体验下其它操作系统或者运行某些只能在Linux上的软件。但是可能自己买阿里云或者腾讯云感觉划不来。下面我来简单的来告诉大家，运用VMware的桥接模式，可以让大家像拥有另外一台不同操作系统的电脑一样在局域网中。同样可以来上网，可以和局域网中的其他机器一样通信，甚至可以暴露ip与端口到公网中，这样其他机器或者网页等也能访问它。 环境：
         </div>
       </a>
 
@@ -580,7 +584,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/10/27/roscpp-Callbacks-and-Spinning/" target="_self">
         <div>
-          1. 单线程Spinning刚学习ROS，在程序中会看到两个语句：ros::spin()和ros::spinOnce()。这两函数的学名叫ROS消息回调处理函数，他俩通常会出现在ROS主循环中，当你的ROS结点只有一个单线程（一个单线程可以有多个回调函数）时，一般都会用到这两函数其中一个。ros::spin()和ros::spinOnec()的具体使用区别如下： ros::spin()ros::s
+          1. 单线程Spinning 刚学习ROS，在程序中会看到两个语句：ros::spin()和ros::spinOnce()。这两函数的学名叫ROS消息回调处理函数，他俩通常会出现在ROS主循环中，当你的ROS结点只有一个单线程（一个单线程可以有多个回调函数）时，一般都会用到这两函数其中一个。ros::spin()和ros::spinOnec()的具体使用区别如下：  ros::spin() ro
         </div>
       </a>
 
@@ -641,7 +645,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/10/26/python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_self">
         <div>
-          1. 列表列表数据类型支持很多方法，列表对象的所有方法所示如下： list.append(x)在列表末尾添加一个元素 list.extend(iterable)用可迭代对象的元素扩展列表 list.insert(i, x)在指定位置插入元素。第一个参数是插入元素的索引 list.remove(x)从列表中删除第一个值为 x 的元素。未找到指定元素时，触发 ValueError 异常。 list.p
+          1. 列表 列表数据类型支持很多方法，列表对象的所有方法所示如下：  list.append(x) 在列表末尾添加一个元素  list.extend(iterable) 用可迭代对象的元素扩展列表  list.insert(i, x) 在指定位置插入元素。第一个参数是插入元素的索引  list.remove(x) 从列表中删除第一个值为 x 的元素。未找到指定元素时，触发 ValueError
         </div>
       </a>
 
@@ -695,7 +699,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/10/17/ROS%E4%BD%BF%E7%94%A8%E7%B1%BB%E6%96%B9%E6%B3%95%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" target="_self">
         <div>
-          描述大多数教程在示例中使用函数，而不是类方法。这是因为使用函数更简单，而不是因为不支持类方法。 根据回调函数的定义，其处理的是被调用者的数据，所以一般在调用者那里无法获得回调函数里面的数据，要想在回调函数以外使用回调函数内的数据，目前好像只能借助类来实现了。下面是根据ROS官方教程-使用类方法作为回调函数稍加改动实现的。 订阅者实现123456789101112131415161718192021
+          描述 大多数教程在示例中使用函数，而不是类方法。这是因为使用函数更简单，而不是因为不支持类方法。 根据回调函数的定义，其处理的是被调用者的数据，所以一般在调用者那里无法获得回调函数里面的数据，要想在回调函数以外使用回调函数内的数据，目前好像只能借助类来实现了。下面是根据ROS官方教程-使用类方法作为回调函数稍加改动实现的。  订阅者实现 12345678910111213141516171819
         </div>
       </a>
 
@@ -758,7 +762,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/10/14/ROS%E9%A2%84%E5%AE%9A%E4%B9%89%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E%E5%8F%8A%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/" target="_self">
         <div>
-          前言ros消息类型，即是ros话题的格式，可视为ros的数据类型，基本上是指同一个意思。ros消息类型是基于C++基本类型封装为.msg文件实现，rosmsg指令用于消息管理。 所谓预定义消息类型是可以直接引用，不需要自己实现，ros自定义数据类型通常包括两类，一类是在 std_msgs 包下，包含基本数据类型，例如字符型、整型以及浮点型等；一类是在 common_msgs 包下，包含常用的数据类
+          前言 ros消息类型，即是ros话题的格式，可视为ros的数据类型，基本上是指同一个意思。ros消息类型是基于C++基本类型封装为.msg文件实现，rosmsg指令用于消息管理。 所谓预定义消息类型是可以直接引用，不需要自己实现，ros自定义数据类型通常包括两类，一类是在 std_msgs 包下，包含基本数据类型，例如字符型、整型以及浮点型等；一类是在 common_msgs 包下，包含常用的数
         </div>
       </a>
 
@@ -819,7 +823,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/10/13/Moveit%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0%E6%9C%BA%E6%A2%B0%E8%87%82%E8%BF%90%E5%8A%A8-c-%E6%8E%A5%E5%8F%A3/" target="_self">
         <div>
-          简单说明在Moveit中，有三个主要的控制接口去控制机械臂，如下图：   刚接触Moveit时，一般是从RViz图形界面拖动机械臂末端开始学习控制。但实际上大部分工作都需要通过编程实现，本文主要介绍机械臂的c++接口，使用move_group_interface实现机械臂的正逆运动学控制。 准备工作本文所使用的机械臂是官网教程使用的panda机械臂，所以需要用到panda_moveit_confi
+          简单说明 在Moveit中，有三个主要的控制接口去控制机械臂，如下图：  刚接触Moveit时，一般是从RViz图形界面拖动机械臂末端开始学习控制。但实际上大部分工作都需要通过编程实现，本文主要介绍机械臂的c++接口，使用move_group_interface实现机械臂的正逆运动学控制。  准备工作 本文所使用的机械臂是官网教程使用的panda机械臂，所以需要用到panda_moveit_co
         </div>
       </a>
 

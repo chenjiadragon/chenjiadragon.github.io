@@ -18,12 +18,12 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一. 标定目的将摄像头获取的图像中的某一点转换到世界坐标系中的坐标一般需要进行四个坐标系的转换：像素坐标系-&gt;图像坐标系-&gt;相机坐标系-&gt;世界坐标系。其中前两个坐标系是二维的，后两个坐标系是三维的。经过推导，最终可以得到下面这样一个转换公式。   推导过程可以学习这篇博客：立体视觉入门指南（1）：坐标系与相机参数 图1中的公式等式右边第一部分是内参矩阵，第二部分是外参矩阵。其中内">
+    <meta name="description" content="一. 标定目的 将摄像头获取的图像中的某一点转换到世界坐标系中的坐标一般需要进行四个坐标系的转换：像素坐标系-&gt;图像坐标系-&gt;相机坐标系-&gt;世界坐标系。其中前两个坐标系是二维的，后两个坐标系是三维的。经过推导，最终可以得到下面这样一个转换公式。  推导过程可以学习这篇博客：立体视觉入门指南（1）：坐标系与相机参数 图1中的公式等式右边第一部分是内参矩阵，第二部分是外参矩阵。其中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MATLAB相机标定">
 <meta property="og:url" content="https://chenjiadragon.github.io/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="一. 标定目的将摄像头获取的图像中的某一点转换到世界坐标系中的坐标一般需要进行四个坐标系的转换：像素坐标系-&gt;图像坐标系-&gt;相机坐标系-&gt;世界坐标系。其中前两个坐标系是二维的，后两个坐标系是三维的。经过推导，最终可以得到下面这样一个转换公式。   推导过程可以学习这篇博客：立体视觉入门指南（1）：坐标系与相机参数 图1中的公式等式右边第一部分是内参矩阵，第二部分是外参矩阵。其中内">
+<meta property="og:description" content="一. 标定目的 将摄像头获取的图像中的某一点转换到世界坐标系中的坐标一般需要进行四个坐标系的转换：像素坐标系-&gt;图像坐标系-&gt;相机坐标系-&gt;世界坐标系。其中前两个坐标系是二维的，后两个坐标系是三维的。经过推导，最终可以得到下面这样一个转换公式。  推导过程可以学习这篇博客：立体视觉入门指南（1）：坐标系与相机参数 图1中的公式等式右边第一部分是内参矩阵，第二部分是外参矩阵。其中">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://chenjiadragon.github.io/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/1.png">
 <meta property="og:image" content="https://chenjiadragon.github.io/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/2.png">
@@ -117,7 +117,11 @@
 
 
   
-<meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -328,49 +332,46 @@
             
               <div class="markdown-body">
                 
-                <h1 id="一-标定目的"><a href="#一-标定目的" class="headerlink" title="一. 标定目的"></a>一. 标定目的</h1><p>将摄像头获取的图像中的某一点转换到世界坐标系中的坐标一般需要进行四个坐标系的转换：像素坐标系-&gt;图像坐标系-&gt;相机坐标系-&gt;世界坐标系。其中前两个坐标系是二维的，后两个坐标系是三维的。经过推导，最终可以得到下面这样一个转换公式。</p>
+                <h1 id="一-标定目的"><a class="markdownIt-Anchor" href="#一-标定目的"></a> 一. 标定目的</h1>
+<p>将摄像头获取的图像中的某一点转换到世界坐标系中的坐标一般需要进行四个坐标系的转换：像素坐标系-&gt;图像坐标系-&gt;相机坐标系-&gt;世界坐标系。其中前两个坐标系是二维的，后两个坐标系是三维的。经过推导，最终可以得到下面这样一个转换公式。</p>
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/1.png" srcset="/img/loading.gif" lazyload class="" alt="图1">
-
 <p>推导过程可以学习这篇博客：<a target="_blank" rel="noopener" href="https://ethanli.blog.csdn.net/article/details/113248118">立体视觉入门指南（1）：坐标系与相机参数</a></p>
 <p>图1中的公式等式右边第一部分是内参矩阵，第二部分是外参矩阵。其中内参矩阵里的参数都是相机本身的参数：焦距，像素大小等。在得到一个相机但不知道其相关参数的情况下，相机标定在这时就能起作用了。</p>
-<h1 id="二-张氏标定法"><a href="#二-张氏标定法" class="headerlink" title="二. 张氏标定法"></a>二. 张氏标定法</h1><p>张氏标定法在相机标定中被广泛使用，其中一个重要的原因是其实施方法十分简单，不需要专业的工艺制作即可完成。</p>
+<h1 id="二-张氏标定法"><a class="markdownIt-Anchor" href="#二-张氏标定法"></a> 二. 张氏标定法</h1>
+<p>张氏标定法在相机标定中被广泛使用，其中一个重要的原因是其实施方法十分简单，不需要专业的工艺制作即可完成。</p>
 <p>可以从学习以下博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/rs_lys/article/details/116332989">立体视觉入门指南（3）：相机标定之张式标定法【超详细值得收藏】</a></p>
 <p>可以从上述博客中获取标图案，后面进行标定时使用。</p>
-<h1 id="三-使用MATLAB工具箱标定"><a href="#三-使用MATLAB工具箱标定" class="headerlink" title="三. 使用MATLAB工具箱标定"></a>三. 使用MATLAB工具箱标定</h1><h2 id="1-安装MATLAB工具箱"><a href="#1-安装MATLAB工具箱" class="headerlink" title="1. 安装MATLAB工具箱"></a>1. 安装MATLAB工具箱</h2><p>打开MATLAB，点击附加功能-&gt;获取附加功能，搜索 Computer Vision Toolbox工具箱。</p>
+<h1 id="三-使用matlab工具箱标定"><a class="markdownIt-Anchor" href="#三-使用matlab工具箱标定"></a> 三. 使用MATLAB工具箱标定</h1>
+<h2 id="1-安装matlab工具箱"><a class="markdownIt-Anchor" href="#1-安装matlab工具箱"></a> 1. 安装MATLAB工具箱</h2>
+<p>打开MATLAB，点击附加功能-&gt;获取附加功能，搜索 Computer Vision Toolbox工具箱。</p>
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/2.png" srcset="/img/loading.gif" lazyload class="">
-
 <p>安装完成后，点击APP。</p>
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/3.png" srcset="/img/loading.gif" lazyload class="">
-
 <p>以下进行单目标定的流程，双目标定类似。</p>
-<h2 id="2-单目标定过程"><a href="#2-单目标定过程" class="headerlink" title="2. 单目标定过程"></a>2. 单目标定过程</h2><h3 id="1-采集棋盘图"><a href="#1-采集棋盘图" class="headerlink" title="(1) 采集棋盘图"></a>(1) 采集棋盘图</h3><p>尽量让棋盘占据照片中最多的画面，这样可以得到更多有关摄像头畸变方面的信息，同时拍摄的棋盘图是具有多个角度的，拍摄照片数量要多一点，推荐12张以上。</p>
+<h2 id="2-单目标定过程"><a class="markdownIt-Anchor" href="#2-单目标定过程"></a> 2. 单目标定过程</h2>
+<h3 id="1-采集棋盘图"><a class="markdownIt-Anchor" href="#1-采集棋盘图"></a> (1) 采集棋盘图</h3>
+<p>尽量让棋盘占据照片中最多的画面，这样可以得到更多有关摄像头畸变方面的信息，同时拍摄的棋盘图是具有多个角度的，拍摄照片数量要多一点，推荐12张以上。</p>
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/4.png" srcset="/img/loading.gif" lazyload class="">
-
-<h3 id="2-导入图片"><a href="#2-导入图片" class="headerlink" title="(2) 导入图片"></a>(2) 导入图片</h3><p>点击Camera Calibrator，打开标定界面：</p>
+<h3 id="2-导入图片"><a class="markdownIt-Anchor" href="#2-导入图片"></a> (2) 导入图片</h3>
+<p>点击Camera Calibrator，打开标定界面：</p>
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/5.png" srcset="/img/loading.gif" lazyload class="">
-
 <p>点击Add Images，选择从文件中输入图片，把图片全部选中：</p>
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/6.png" srcset="/img/loading.gif" lazyload class="">
-
 <p>输入棋盘格的大小，然后点击确定：</p>
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/7.png" srcset="/img/loading.gif" lazyload class="">
-
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/8.png" srcset="/img/loading.gif" lazyload class="">
-
 <p>点击确定，可以看到我这边输入的图片不太好，20张图片拒绝了11张。之后就看到了角点检测的情况了。</p>
-<h3 id="3-标定并输出结果"><a href="#3-标定并输出结果" class="headerlink" title="(3) 标定并输出结果"></a>(3) 标定并输出结果</h3><p>点击Calibrate按钮：</p>
+<h3 id="3-标定并输出结果"><a class="markdownIt-Anchor" href="#3-标定并输出结果"></a> (3) 标定并输出结果</h3>
+<p>点击Calibrate按钮：</p>
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/9.png" srcset="/img/loading.gif" lazyload class="">
-
 <p>点击Export Camera Parameters-&gt;Export parameters to workspace将结果输出：</p>
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/10.png" srcset="/img/loading.gif" lazyload class="">
-
 <img src="/2022/09/22/MATLAB%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/11.png" srcset="/img/loading.gif" lazyload class="">
-
-
-<h1 id="三-参考"><a href="#三-参考" class="headerlink" title="三. 参考"></a>三. 参考</h1><ol>
+<h1 id="三-参考"><a class="markdownIt-Anchor" href="#三-参考"></a> 三. 参考</h1>
+<ol>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/c20081052/article/details/89471176">https://blog.csdn.net/c20081052/article/details/89471176</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/leonardohaig/article/details/81254179">https://blog.csdn.net/leonardohaig/article/details/81254179</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44703886/article/details/122770420?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-122770420-blog-122767064.t5_refersearch_landing&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-122770420-blog-122767064.t5_refersearch_landing&utm_relevant_index=2">【ZED】从零开始使用ZED相机（四）：双目相机标定（MATLAB+张氏标定法）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44703886/article/details/122770420?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-122770420-blog-122767064.t5_refersearch_landing&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-122770420-blog-122767064.t5_refersearch_landing&amp;utm_relevant_index=2">【ZED】从零开始使用ZED相机（四）：双目相机标定（MATLAB+张氏标定法）</a></li>
 </ol>
 
                 
