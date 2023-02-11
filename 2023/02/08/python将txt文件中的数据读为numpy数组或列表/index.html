@@ -18,21 +18,23 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="人生语录  不积跬步，无以至千里； 不积小流，无以成江海。  ----《劝学篇》  弱小和无知不是生存的障碍，傲慢才是。  ----《三体》  尽人事以听天命。  ----《镜花缘》  百善孝为先，论心不论迹，论迹贫家无孝子； 万恶淫为首，论迹不论心，论心世上少完人。  ----《围炉夜话》  婚姻是一座围城，城外的人想进去，城里的人想出来。  ----《围城》  大丈夫生居天地间， 岂能郁郁久">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="https://chenjiadragon.github.io/about/index.html">
+    <meta name="description" content="很多时候，我们将数据存在txt或者csv格式的文件里，最后再用python读取出来，存到数组或者列表里，再做相应计算。本文首先介绍写入txt的方法，再根据不同的需求（存为数组还是list）,介绍从txt读取浮点数的方法。  一、写入浮点数到txt文件 假设每次有两个浮点数需要写入txt文件，这里提供用with关键字打开文件的方法，使用with打开文件是一个很好的习惯，因为with结束，它就会自动c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python将txt文件中的数据读为numpy数组或列表">
+<meta property="og:url" content="https://chenjiadragon.github.io/2023/02/08/python%E5%B0%86txt%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AF%BB%E4%B8%BAnumpy%E6%95%B0%E7%BB%84%E6%88%96%E5%88%97%E8%A1%A8/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="人生语录  不积跬步，无以至千里； 不积小流，无以成江海。  ----《劝学篇》  弱小和无知不是生存的障碍，傲慢才是。  ----《三体》  尽人事以听天命。  ----《镜花缘》  百善孝为先，论心不论迹，论迹贫家无孝子； 万恶淫为首，论迹不论心，论心世上少完人。  ----《围炉夜话》  婚姻是一座围城，城外的人想进去，城里的人想出来。  ----《围城》  大丈夫生居天地间， 岂能郁郁久">
+<meta property="og:description" content="很多时候，我们将数据存在txt或者csv格式的文件里，最后再用python读取出来，存到数组或者列表里，再做相应计算。本文首先介绍写入txt的方法，再根据不同的需求（存为数组还是list）,介绍从txt读取浮点数的方法。  一、写入浮点数到txt文件 假设每次有两个浮点数需要写入txt文件，这里提供用with关键字打开文件的方法，使用with打开文件是一个很好的习惯，因为with结束，它就会自动c">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-26T06:55:04.000Z">
-<meta property="article:modified_time" content="2023-02-03T12:18:49.468Z">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/02/08/python%E5%B0%86txt%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AF%BB%E4%B8%BAnumpy%E6%95%B0%E7%BB%84%E6%88%96%E5%88%97%E8%A1%A8/1.png">
+<meta property="article:published_time" content="2023-02-08T14:56:10.000Z">
+<meta property="article:modified_time" content="2023-02-08T15:03:21.998Z">
 <meta property="article:author" content="cjl">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chenjiadragon.github.io/2023/02/08/python%E5%B0%86txt%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AF%BB%E4%B8%BAnumpy%E6%95%B0%E7%BB%84%E6%88%96%E5%88%97%E8%A1%A8/1.png">
   
   
   
-  <title>关于 - chenjiadragon</title>
+  <title>python将txt文件中的数据读为numpy数组或列表 - chenjiadragon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -118,7 +120,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -229,15 +231,63 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/code2.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/code7.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于"></span>
+            <span id="subtitle" data-typed-text="python将txt文件中的数据读为numpy数组或列表"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-08 22:56" pubdate>
+          2023年2月8日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          763 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
 
         
       </div>
@@ -253,116 +303,146 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-            <div class="about-avatar">
-              <img src="/img/1.jpg" srcset="/img/loading.gif" lazyload class="img-fluid" alt="avatar">
-            </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center">
-  <div class="about-info">
-    <div class="about-name">陈家龙</div>
-    <div class="about-intro">一个想偷懒的大学生</div>
-    <div class="about-icons">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
       
-        
-        
-        
-        <a href=https://github.com/chenjiadragon class="
-           hint--bottom hint--rounded"
-           aria-label=GitHub
-           target="_blank"
-        >
-          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
-          
-        </a>
-      
-        
-        
-        
-        <a  class="qr-trigger
-           "
-           
-           target="_self"
-        >
-          <i class="iconfont icon-wechat-fill" aria-hidden="true"></i>
-          
-            <img class="qr-img" src="/img/favicon.png" srcset="/img/loading.gif" lazyload alt="qrcode" />
-          
-        </a>
-      
+
     </div>
-  </div>
-</div>
 
-<article class="about-content page-content mt-5">
-  <div class="markdown-body">
-    <h1 id="人生语录"><a class="markdownIt-Anchor" href="#人生语录"></a> 人生语录</h1>
-<center>
-不积跬步，无以至千里；
-<p>不积小流，无以成江海。</p>
-</center>
-<p align="right">----《劝学篇》</p>
-<center>
-弱小和无知不是生存的障碍，傲慢才是。
-</center>
-<p align="right">----《三体》</p>
-<center>
-尽人事以听天命。
-</center>
-<p align="right">----《镜花缘》</p>
-<center>
-百善孝为先，论心不论迹，论迹贫家无孝子；
-<p>万恶淫为首，论迹不论心，论心世上少完人。</p>
-</center>
-<p align="right">----《围炉夜话》</p>
-<center>
-婚姻是一座围城，城外的人想进去，城里的人想出来。
-</center>
-<p align="right">----《围城》</p>
-<center>
-大丈夫生居天地间，
-岂能郁郁久居人下！
-</center>
-<p align="right">----《三国演义》</p>
-<center>
-永远要保密的三件事：感情状态，你的情绪和你要做的事。
-</center>
-<p align="right">---- 佚名</p>
-<center>
-事以密成，言以泄败。
-</center>
-<p align="right">---- 佚名</p>
-<center>
-脾气不能大于本事，地位不能大于德行，财富不能大于认知，欲望不能大于能力。
-</center>
-<p align="right">---- 佚名</p>
-<center>
-时来天地皆同力，运去英雄不自由。
-</center>
-<p align="right">---- “穿梭在银河的可达鸭”</p>
-<center>
-看人之短，天下无可交之人。
-<p>看人之长，世间尽是吾师。</p>
-</center>
-<p align="right">---- “佚名”</p>
-  </div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">python将txt文件中的数据读为numpy数组或列表</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>很多时候，我们将数据存在txt或者csv格式的文件里，最后再用python读取出来，存到数组或者列表里，再做相应计算。本文首先介绍写入txt的方法，再根据不同的需求（存为数组还是list）,介绍从txt读取浮点数的方法。</p>
+<h2 id="一-写入浮点数到txt文件"><a class="markdownIt-Anchor" href="#一-写入浮点数到txt文件"></a> 一、写入浮点数到txt文件</h2>
+<p>假设每次有两个浮点数需要写入txt文件，这里提供用with关键字打开文件的方法，使用with打开文件是一个很好的习惯，因为with结束，它就会自动close file，不用手动再去flie.close()。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;file_path/filename.txt&#x27;</span>,<span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>    write_str = <span class="hljs-string">&#x27;%f %f\n&#x27;</span>%(float_data1,float_data2)<br>    file.write(write_str)<br></code></pre></td></tr></table></figure>
+<h2 id="二-从txt文件提取浮点数到numpy数组或list列表"><a class="markdownIt-Anchor" href="#二-从txt文件提取浮点数到numpy数组或list列表"></a> 二、从txt文件提取浮点数到numpy数组或list列表</h2>
+<p>首先假设你有一个odom.txt 的文件，里面每一行的数据个数都相同，如截图所示：</p>
+<img src="/2023/02/08/python%E5%B0%86txt%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AF%BB%E4%B8%BAnumpy%E6%95%B0%E7%BB%84%E6%88%96%E5%88%97%E8%A1%A8/1.png" srcset="/img/loading.gif" lazyload class="">
+<p>如果你是想把这些数据读取出来，存为numpy数组,那么一句代码可以搞定：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">a = numpy.loadtxt(<span class="hljs-string">&#x27;odom.txt&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>如果只是想读出来，存到一个list里,那就用下面的常用python格式了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;odom.txt&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    data = f.readlines()  <span class="hljs-comment">#txt中所有字符串读入data</span><br> <br>    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> data:<br>        odom = line.split()        <span class="hljs-comment">#将单个数据分隔开存好</span><br>        numbers_float = <span class="hljs-built_in">map</span>(<span class="hljs-built_in">float</span>, odom) <span class="hljs-comment">#转化为浮点数</span><br>        <span class="hljs-built_in">print</span> numbers_float<br></code></pre></td></tr></table></figure>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/heyijia0327/article/details/42506063">python : 将txt文件中的数据读为numpy数组或列表</a></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/python/" class="category-chain-item">python</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/python/numpy/" class="category-chain-item">numpy</a>
+  
+  
 
   
-    <!-- Comments -->
-    <article id="comments" lazyload>
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>python将txt文件中的数据读为numpy数组或列表</div>
+      <div>https://chenjiadragon.github.io/2023/02/08/python将txt文件中的数据读为numpy数组或列表/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cjl</div>
+        </div>
       
       
-        
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月8日</div>
+        </div>
       
       
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95/" title="深度学习神经网络算法">
+                        <span class="hidden-mobile">深度学习神经网络算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
   <div id="valine"></div>
   <script type="text/javascript">
     Fluid.utils.loadComments('#valine', function() {
@@ -386,41 +466,59 @@
   <noscript>Please enable JavaScript to view the comments</noscript>
 
 
-    </article>
-  
-</article>
+  </article>
 
 
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-              </div>
-            </div>
-          </div>
+          </article>
         </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -538,6 +636,34 @@
   
 
 
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
 
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
