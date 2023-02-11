@@ -25,33 +25,6 @@
   
   
   <entry>
-    <title>深度学习神经网络算法</title>
-    <link href="/2023/01/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95/"/>
-    <url>/2023/01/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95/</url>
-    
-    <content type="html"><![CDATA[<h3 id="机器学习与深度学习的区别"><a class="markdownIt-Anchor" href="#机器学习与深度学习的区别"></a> 机器学习与深度学习的区别</h3><ul><li>特征处理<ul><li>机器学习：人工处理设计特征</li><li>深度学习：不需要人工处理，只要经过网络输出即可，适合图像，语音，自然语言处理</li></ul></li></ul><h3 id="神经网络"><a class="markdownIt-Anchor" href="#神经网络"></a> 神经网络</h3><ul><li>输入层</li><li>隐藏层</li><li>输出层</li><li>特点<ul><li>每个连接都有个权值，同一层神经元之间没有连接</li><li>神经元当中会含有激活函数</li><li>最后的输出结果对应的层也称之为全连接层</li></ul></li><li>类似人的神经元的结构</li></ul><h3 id="逻辑回归"><a class="markdownIt-Anchor" href="#逻辑回归"></a> 逻辑回归</h3><img src="/2023/01/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95/1.png" class=""><h3 id="逻辑回归损失函数"><a class="markdownIt-Anchor" href="#逻辑回归损失函数"></a> 逻辑回归损失函数</h3><img src="/2023/01/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95/2.png" class=""><h3 id="梯度下降算法"><a class="markdownIt-Anchor" href="#梯度下降算法"></a> 梯度下降算法</h3><ul><li>目的：使损失函数的值找到最小值（确定W）</li><li>方式：梯度下降</li></ul><img src="/2023/01/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95/3.png" class=""><p>逻辑回归损失函数本质上使关于 W 的函数。然后就可以通过求导求极小值，来确定 W。</p><blockquote><p>注意：对于m个样本，每个样本计算出来的梯度不同，可以求和后再求平均值，再更新。</p></blockquote><!-- ### 简单编程练习```pythonimport numpy as np# 1. 实现sigmoid函数def basic_sigmoid(x):  # x可以是向量np.array类型数据  s = 1 / (1 + np.exp(-x))  return s# 2. 实现sigmoid gradient（梯度）def sigmoid_derivative(x):  s = bashic_sigmoid(x)  ds = s*(1 - s)  return ds``` --><h3 id="浅层神经网络"><a class="markdownIt-Anchor" href="#浅层神经网络"></a> 浅层神经网络</h3>]]></content>
-    
-    
-    <categories>
-      
-      <category>深度学习</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>神经网络</tag>
-      
-      <tag>python</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>空间描述和变化</title>
     <link href="/2022/11/30/%E7%A9%BA%E9%97%B4%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%8F%98%E5%8C%96/"/>
     <url>/2022/11/30/%E7%A9%BA%E9%97%B4%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%8F%98%E5%8C%96/</url>
