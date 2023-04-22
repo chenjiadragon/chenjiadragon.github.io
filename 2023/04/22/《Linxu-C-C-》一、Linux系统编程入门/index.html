@@ -1,0 +1,954 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cjl">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 Linux开发环境搭建  安装Linux系统（虚拟机安装）：参考安装 安装vscode以及相关插件（Remote - SSH），连接本地虚拟机。   2 GCC  2.1 什么是GCC  GCC 原名为 GNU C语言编译器（GNU C Compiler） GCC（GNU Compiler Collection，GNU编译器套件）是由 GNU 开发的编程语言 译器。GNU 编译器套件包括 C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Linxu C&#x2F;C++》一、Linux系统编程入门">
+<meta property="og:url" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="chenjiadragon">
+<meta property="og:description" content="1 Linux开发环境搭建  安装Linux系统（虚拟机安装）：参考安装 安装vscode以及相关插件（Remote - SSH），连接本地虚拟机。   2 GCC  2.1 什么是GCC  GCC 原名为 GNU C语言编译器（GNU C Compiler） GCC（GNU Compiler Collection，GNU编译器套件）是由 GNU 开发的编程语言 译器。GNU 编译器套件包括 C">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/1.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/2.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/3.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/4.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/5.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/6.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/7.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/8.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/9.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/10.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/11.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/12.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/13.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/14.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/15.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/16.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/17.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/18.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/19.png">
+<meta property="article:published_time" content="2023-04-22T05:53:33.000Z">
+<meta property="article:modified_time" content="2023-04-22T09:59:26.142Z">
+<meta property="article:author" content="cjl">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/1.png">
+  
+  
+  
+  <title>《Linxu C/C++》一、Linux系统编程入门 - chenjiadragon</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chenjiadragon.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YtwA6Qo3Mv4aVYBqpTAsm3iG-MdYXbMMI","app_key":"kdSKzfvlHtJTfOsKtJADVtdY","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>cjl&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/code7.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="《Linxu C/C++》一、Linux系统编程入门"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-22 13:53" pubdate>
+          2023年4月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">《Linxu C/C++》一、Linux系统编程入门</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-linux开发环境搭建"><a class="markdownIt-Anchor" href="#1-linux开发环境搭建"></a> 1 Linux开发环境搭建</h1>
+<ol>
+<li>安装Linux系统（虚拟机安装）：<a href="https://chenjiadragon.github.io/2022/09/02/VMware%E5%AE%89%E8%A3%85Ubuntu22-04/">参考安装</a></li>
+<li>安装vscode以及相关插件（Remote - SSH），连接本地虚拟机。</li>
+</ol>
+<h1 id="2-gcc"><a class="markdownIt-Anchor" href="#2-gcc"></a> 2 GCC</h1>
+<h2 id="21-什么是gcc"><a class="markdownIt-Anchor" href="#21-什么是gcc"></a> 2.1 什么是GCC</h2>
+<ul>
+<li>GCC 原名为 GNU C语言编译器（GNU C Compiler）</li>
+<li>GCC（GNU Compiler Collection，GNU编译器套件）是由 GNU 开发的编程语言<br />
+译器。GNU 编译器套件包括 C、C++、Objective-C、Java、Ada 和 Go 语言前<br />
+端，也包括了这些语言的库（如 libstdc++，libgcj等）</li>
+<li>GCC 不仅支持 C 的许多“方言”，也可以区别不同的 C 语言标准；可以使用命令行<br />
+选项来控制编译器在翻译源代码时应该遵循哪个 C 标准。例如，当使用命令行参数<br />
+<code>-std=c99</code> 启动 GCC 时，编译器支持 C99 标准。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install gcc g++    <span class="hljs-comment">#安装命令</span><br>gcc/g++ -v/--version        <span class="hljs-comment">#查看版本</span><br></code></pre></td></tr></table></figure>
+<h2 id="22-gcc工作流程"><a class="markdownIt-Anchor" href="#22-gcc工作流程"></a> 2.2 GCC工作流程</h2>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/1.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="23-gcc和g的区别"><a class="markdownIt-Anchor" href="#23-gcc和g的区别"></a> 2.3 gcc和g++的区别</h2>
+<p>gcc 和 g++ 都是GNU(组织)的一个编译器。</p>
+<ul>
+<li>编译阶段：gcc 把 .c 文件当成 C程序，把 .cpp 文件当成 C++ 程序；g++ 则都认为是 C++ 程序。</li>
+<li>链接阶段：gcc 命令不能自动和 C++ 程序使用的库联接，所以通常使用 g++ 来完成联接。</li>
+</ul>
+<h2 id="24-gcc常用参数选项"><a class="markdownIt-Anchor" href="#24-gcc常用参数选项"></a> 2.4 GCC常用参数选项</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">gcc编译选项</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-E</td>
+<td style="text-align:center"><font color=red> 预处理指定的源文件，不进行编译 </font></td>
+</tr>
+<tr>
+<td style="text-align:center">-S</td>
+<td style="text-align:center"><font color=red>编译指定的源文件，但是不进行汇编</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-c</td>
+<td style="text-align:center"><font color=red>编译、汇编指定的源文件，但是不进行链接</font></td>
+</tr>
+<tr>
+<td style="text-align:center">[file1] -o [file2]</td>
+<td style="text-align:center"><font color=red>将文件 file2 编译成可执行文件 file1 </font></td>
+</tr>
+<tr>
+<td style="text-align:center">-I directory</td>
+<td style="text-align:center"><font color=red>指定 include 包含文件的搜索目录</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-g</td>
+<td style="text-align:center"><font color=red>在编译的时候，生成调试信息，该程序可以被调试器调试</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-D</td>
+<td style="text-align:center"><font color=red>在程序编译的时候，指定一个宏</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-w</td>
+<td style="text-align:center"><font color=red>不生成任何警告信息</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-Wall</td>
+<td style="text-align:center"><font color=red>生成所有警告信息</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-On</td>
+<td style="text-align:center"><font color=red>n的取值范围：0~3。编译器的优化选项的4个级别，-O0表示没有优化，-O1为缺省值，-O3优化级别最高</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-l</td>
+<td style="text-align:center"><font color=red>在程序编译的时候，指定使用的库</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-L</td>
+<td style="text-align:center"><font color=red>指定编译的时候，搜索的库的路径</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-fPIC/fpic</td>
+<td style="text-align:center"><font color=red>生成与位置无关的代码</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-shared</td>
+<td style="text-align:center"><font color=red>生成共享目标文件，通常用在建立共享库时</font></td>
+</tr>
+<tr>
+<td style="text-align:center">-std</td>
+<td style="text-align:center"><font color=red>指定C方言，如:-std=c99，gcc默认的方言是GNU C</font></td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-静态库和动态库"><a class="markdownIt-Anchor" href="#3-静态库和动态库"></a> 3 静态库和动态库</h1>
+<p>库可以简单理解为将一些源文件编译生成的 .o 文件打包，供给其它程序使用。一般是可以直接拿来用的变量、函数或类。</p>
+<p>库文件有两种：<strong>静态库</strong>和<strong>动态库（共享库）</strong>。区别是：静态库在程序的链接阶段被复制到了程序中；动态库在链接阶段没有被复制到程序中，而是程序在运行时由系统动态加载到内存中供程序调用。</p>
+<p>库的好处：</p>
+<ol>
+<li>代码保密；</li>
+<li>方便部署和分发。</li>
+</ol>
+<h2 id="31-静态库的制作和使用"><a class="markdownIt-Anchor" href="#31-静态库的制作和使用"></a> 3.1 静态库的制作和使用</h2>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/2.png" srcset="/img/loading.gif" lazyload class="">
+<p>src 文件夹下是我们实现的加减乘除的函数程序，include 文件是这四个函数的声明。我们要把其封装成静态库。</p>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/3.png" srcset="/img/loading.gif" lazyload class="">
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> src<br>gcc -c *.c -I ../include   <span class="hljs-comment"># 编译</span><br>ar rcs libcalc.a *.o      <span class="hljs-comment"># 制作静态库</span><br><span class="hljs-built_in">mv</span> libcalc.a ../lib/     <span class="hljs-comment"># 移动到lib文件夹下</span><br><span class="hljs-built_in">cd</span> ..                   <br>gcc main.c -o main -I ./include -l calc -L ./lib/  <br>./main    <span class="hljs-comment">#运行</span><br></code></pre></td></tr></table></figure>
+<p>最终的文件结构树如下：</p>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/4.png" srcset="/img/loading.gif" lazyload class="">
+<blockquote>
+<p>可以看出，将程序封装成封装成库后，只需要提供包含函数头的头文件以及库文件就可以执行程序调用，可以将自己的源代码保密起来。</p>
+</blockquote>
+<h2 id="32-动态库的制作和使用"><a class="markdownIt-Anchor" href="#32-动态库的制作和使用"></a> 3.2 动态库的制作和使用</h2>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/5.png" srcset="/img/loading.gif" lazyload class="">
+<p>使用同样的文件生成动态库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> src<br>gcc -c -fpic *.c -I ../include   <span class="hljs-comment"># 生成与位置无关的代码</span><br>gcc -shared *.o -o ../lib/libcalc.so    <span class="hljs-comment"># 制作静态库</span><br><span class="hljs-built_in">cd</span> ..                   <br>gcc main.c -o main -I ./include -l calc -L ./lib/  <br>./main    <span class="hljs-comment">#运行</span><br></code></pre></td></tr></table></figure>
+<p>此时会报错：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">./main: <span class="hljs-keyword">error</span> <span class="hljs-keyword">while</span> loading shared libraries: libcalc.<span class="hljs-keyword">so</span>: cannot <span class="hljs-keyword">open</span> shared object <span class="hljs-keyword">file</span>: <span class="hljs-keyword">No</span> such <span class="hljs-keyword">file</span> or directory<br></code></pre></td></tr></table></figure>
+<p>GCC进行链接时，会把静态库中代码打包到可执行程序中，动态库的代码不会被打包到可执行程序中。动态库是在程序启动之后，被动态加载到内存中，可以使用 ldd 命令检查动态库依赖关系。</p>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/6.png" srcset="/img/loading.gif" lazyload class="">
+<p>可以看出，动态库 <a target="_blank" rel="noopener" href="http://libcalc.so">libcalc.so</a> 未被加载。加载动态库需要要系统的动态载入器来获取其绝对路径。对于elf格式的可执行程序，是由 <a target="_blank" rel="noopener" href="http://ld-linux.so">ld-linux.so</a> 来完成的，它先后搜索 elf 文件的 DT_RPATH 段 ——&gt; 环境变量 LD_LIBRARY_PATH ——&gt; /etc/ld.so.cache 文件列表 ——&gt; /lib/，/usr/lib目录找到库文件后将其载入内存。</p>
+<ol>
+<li>DT_RPATH段：不用管，一般用户访问不了</li>
+<li>LD_LIBRARY_PATH 方法</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 在shell中临时配置环境变量</span><br><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-variable">$LD_LIBRARY_PATH</span>:/home/nowcoder/Linux/lession06/library/lib<br><span class="hljs-comment"># 将上面命令写入.bashrc文件，永久配置</span><br><span class="hljs-built_in">source</span> .barshrc   <span class="hljs-comment"># 配置生效</span><br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li>在root文件夹下，使用root用户在etc文件夹中的profile文件里添加环境变量。使用./etc/profile指令使配置生效。</li>
+<li>把库文件放到/lib/，/usr/lib两个文件夹里。</li>
+</ol>
+<blockquote>
+<p>一般使用第2和3种方法</p>
+</blockquote>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/7.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="33-静态库和动态库的对比"><a class="markdownIt-Anchor" href="#33-静态库和动态库的对比"></a> 3.3 静态库和动态库的对比</h2>
+<p>静态库、动态库区别来自链接阶段如何处理，链接成可执行程序。分别称为静态链接方式和动态链接方式。</p>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/8.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/9.png" srcset="/img/loading.gif" lazyload class="" alt="静态库制作过程">
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/10.png" srcset="/img/loading.gif" lazyload class="" alt="动态库制作过程">
+<p>静态库加载更快，但如果多次调用则需要多次加载，浪费资源，更新、部署、发布麻烦；动态库加载慢，但可以实现进程间资源共享（共享库），更新、部署、发布简单，可以控制何时加载动态库。</p>
+<h1 id="4-makefile"><a class="markdownIt-Anchor" href="#4-makefile"></a> 4 Makefile</h1>
+<p>一个工程中的源文件很多，不可能在终端中一个个执行。可以将编译命令按一定规则写入 Makefile 文件中，达到自动化编译的目的。一旦写好，只需要一个 make 命令，整个工程完全自动编译，极大的提高了软件开发的效率。</p>
+<h2 id="41-文件命名和规则"><a class="markdownIt-Anchor" href="#41-文件命名和规则"></a> 4.1 文件命名和规则</h2>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/11.png" srcset="/img/loading.gif" lazyload class="">
+<p>命令在在执行之前，需要先检查规则中的依赖是否存在：</p>
+<ul>
+<li>如果存在，执行命令</li>
+<li>如果不存在，向下检查其它的规则，检查有没有一个规则是用来生成这个依赖的，如果找到了，则执行该规则中的命令</li>
+</ul>
+<p>检测更新，在执行规则中的命令时，会比较目标和依赖文件的时间：</p>
+<ul>
+<li>如果依赖的时间比目标的时间晚，需要重新生成目标</li>
+<li>如果依赖的时间比目标的时间早，目标不需要更新，对应规则中的命令不需要被执行</li>
+</ul>
+<h2 id="42-变量"><a class="markdownIt-Anchor" href="#42-变量"></a> 4.2 变量</h2>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/12.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="43-模式匹配"><a class="markdownIt-Anchor" href="#43-模式匹配"></a> 4.3 模式匹配</h2>
+<p>具体使用样例如下，未使用模式匹配前：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs makefile">app :sub.o add.o mult.o div.o main.o<br>    gcc sub.o add.o div.o mult.o main.o app<br><span class="hljs-section">sub.o:sub.c</span><br>    gcc -c sub.c -o sub.o<br><span class="hljs-section">add.o:add.c</span><br>    gcc -c add.c -o add.o<br><span class="hljs-section">div.o:div.c</span><br>    gcc -c div.c -o div.o<br><span class="hljs-section">mult.o:mult.c</span><br>    gcc -c mult.c -o mult.o<br><span class="hljs-section">main.o:main.c</span><br>    gcc -c main.c -o main.o<br></code></pre></td></tr></table></figure>
+<p>模式匹配后：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#定义变量</span><br>src=sub.o add.o mult.o div.o main.o<br>target=app<br> <br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(src)</span><br>    <span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(src)</span> -o <span class="hljs-variable">$(target)</span><br><span class="hljs-section">%.o:%.c</span><br>    <span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></table></figure>
+<p>%表示通配符，匹配一个字符串，在生成app前需要生成.o文件，每一次生成.o文件都要调用含有%.o:%.c生成.o文件。</p>
+<h2 id="43-常用函数"><a class="markdownIt-Anchor" href="#43-常用函数"></a> 4.3 常用函数</h2>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/13.png" srcset="/img/loading.gif" lazyload class="">
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#示例</span><br><span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *c ./sub/*.c)</span>  <br><span class="hljs-comment"># 返回 sub/ 文件夹和当前文件夹下所有的 .c 文件名</span><br><span class="hljs-comment"># 返回值格式: a.c b.c c.c d.c e.c f.c</span><br></code></pre></td></tr></table></figure>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/14.png" srcset="/img/loading.gif" lazyload class="">
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#示例</span><br><span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> %.c, %.o, x.c bar.c)</span><br><span class="hljs-comment"># x.c和bar.c符合 %.c 格式，取他们的名称，并加上 .o 后缀</span><br><span class="hljs-comment"># 返回值格式: x.o bar.o</span><br></code></pre></td></tr></table></figure>
+<h2 id="44-clean功能"><a class="markdownIt-Anchor" href="#44-clean功能"></a> 4.4 clean功能</h2>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 生成clean伪目标，</span><br><span class="hljs-comment"># 不写这一行代码的话会生成名为clean的文件，如果已经有了clean文件就不会被更新</span><br><span class="hljs-meta"><span class="hljs-keyword">.PHONY</span>:clean    </span><br><span class="hljs-section">clean:</span><br>    rm *.o -f<br></code></pre></td></tr></table></figure>
+<p>可以用来清除中间文件，比如我们有 a.c,b.c,main.c 先生成 a.o,b.o,mian.o, 再链接生成 app，这个时候a.o,b.o,main.o就没有用了，我们可以在Makefile文件末尾添加上述代码执行rm指令用来删除中间文件。但是不是添加了这三行代码就可以删除，需要在shell中执行 make clean 来调用 clean 指令。</p>
+<h1 id="5-gdb调试"><a class="markdownIt-Anchor" href="#5-gdb调试"></a> 5 GDB调试</h1>
+<p>GDB 是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境，GDB 是 Linux 和许多类 Unix 系统中的标准开发环境。</p>
+<p>一般来说，GDB 主要帮助你完成下面四个方面的功能：</p>
+<ol>
+<li>启动程序，可以按照自定义的要求随心所欲的运行程序</li>
+<li>可让被调试的程序在所指定的调置的断点处停住（断点可以是条件表达式）</li>
+<li>当程序被停住时，可以检查此时程序中所发生的事</li>
+<li>可以改变程序，将一个 BUG 产生的影响修正从而测试其他 BUG</li>
+</ol>
+<blockquote>
+<p>vscode 现在已经很强大，基本上都可以用 vscode 代替 GDB。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -g -Wall program.c -o program<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-g</code> 选项：确保生成的可执行程序能找到源代码</li>
+<li><code>-Wall</code> 选项：在尽量不影响程序行为的情况下选项打开所有warning，也可以发现许多问题，避免一些不必要的 BUG</li>
+</ul>
+<p>以下是常见的<code>GDB</code>调试命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 启动调试</span><br>gdb program<br><br><span class="hljs-comment"># 退出</span><br>q<br><br><span class="hljs-comment"># 给程序设置参数/获取设置参数</span><br><span class="hljs-built_in">set</span> args 10 20<br>show args<br><br><span class="hljs-comment"># GDB 使用帮助</span><br><span class="hljs-built_in">help</span><br><br><span class="hljs-comment"># 查看当前文件代码</span><br>list/l      <span class="hljs-comment"># 从默认位置显示</span><br>list/1 10   <span class="hljs-comment"># 从第10行显示</span><br>list/l func <span class="hljs-comment"># 从指定的函数显示</span><br><br><span class="hljs-comment"># 查看非当前文件代码</span><br>list/1 file:10   <span class="hljs-comment"># 从file第10行显示</span><br>list/l file:func <span class="hljs-comment"># 从file中指定的函数显示</span><br><br><span class="hljs-comment"># 设置显示的行数</span><br>show list<br><span class="hljs-built_in">set</span> list 15  <span class="hljs-comment"># 设置一次显示15行</span><br><br><span class="hljs-comment"># 设置断点</span><br>b 10     <span class="hljs-comment"># 第10行断点</span><br>b func<br>b file:10<br>b file:func<br><br><span class="hljs-comment"># 查看断点</span><br>i/info b<br><br><span class="hljs-comment"># 删除断点</span><br>del 1   <span class="hljs-comment"># 删除编号为1的断点</span><br><br><span class="hljs-comment"># 设置断点无效</span><br>dis 1  <br><br><span class="hljs-comment"># 设置断点生效</span><br>ena 1<br><br><span class="hljs-comment"># 设置条件断点</span><br>b 10 <span class="hljs-keyword">if</span> i==5  <br><br><span class="hljs-comment"># 运行程序</span><br>start   <span class="hljs-comment"># 程序停在第一行</span><br>run     <span class="hljs-comment"># 遇到断点才停</span><br><br><span class="hljs-comment"># 继续运行，到下一个断点</span><br>c/continue<br><br><span class="hljs-comment"># 向下执行一行代码（不进入函数体）</span><br>n/next<br><br><span class="hljs-comment"># 向下单步调试（遇到函数进入函数体）</span><br>s/step<br>finish <span class="hljs-comment"># 跳出函数体</span><br><br><span class="hljs-comment"># 变量操作</span><br>p/print i    <span class="hljs-comment"># 打印变量值</span><br>ptype i      <span class="hljs-comment"># 打印变量类型</span><br><br><span class="hljs-comment"># 自动打印变量</span><br>display i   <br>i display<br>undisplay<br><br><span class="hljs-comment"># 其他操作</span><br><span class="hljs-built_in">set</span> var i = 3  <span class="hljs-comment"># 设置变量值，循环中多使用</span><br>until    <span class="hljs-comment"># 跳出循环</span><br><br></code></pre></td></tr></table></figure>
+<h1 id="6-文件io"><a class="markdownIt-Anchor" href="#6-文件io"></a> 6 文件IO</h1>
+<p><strong>系统中的各种共享资源都由操作系统统一管理，因此，在用户程序中，凡是与资源管理有关的操作（如文件管理，IO传输等），都必须通过系统调用方式提出请求，并有操作系统代为完成。</strong></p>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/15.png" srcset="/img/loading.gif" lazyload class="">
+<p>所以 C 库文件 IO 函数均是系统调用 Linux 系统 IO 完成的。</p>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/16.png" srcset="/img/loading.gif" lazyload class="">
+<blockquote>
+<p>Linux 中所有硬件都可以当作文件来对待，所以学习文件管理对 Linux 开发很重要。</p>
+</blockquote>
+<h2 id="61-文件描述符"><a class="markdownIt-Anchor" href="#61-文件描述符"></a> 6.1 文件描述符</h2>
+<p>进程在内存中执行，因为虚拟地址空间技术，用户不需要考虑进程在内存中的实际位置。虚拟地址空间的大小与CPU指令位数有关，对于32位系统，CPU最大支持4G内存，所以虚拟地址空间大小也就是4G。</p>
+<p>每个进程都有一个PCB，PCB中有一个文件描述符表，用于管理进程执行所用到的文件。</p>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/17.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="62-linux系统-io-函数"><a class="markdownIt-Anchor" href="#62-linux系统-io-函数"></a> 6.2 Linux系统 IO 函数</h2>
+<blockquote>
+<p>使用 <code>man 2 open</code> 查看手册中函数描述。2 指的是第 2 册；open 指函数名。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 打开一个已经存在的文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags)</span>;<br><br><span class="hljs-comment">// 创建一个新的文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags, <span class="hljs-type">mode_t</span> mode)</span>;<br><br><span class="hljs-comment">//关闭文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">close</span><span class="hljs-params">(<span class="hljs-type">int</span> fd)</span>;<br><br><span class="hljs-comment">// 从文件读数据</span><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">read</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;<br><br><span class="hljs-comment">// 写数据到文件</span><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">write</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;<br><br><span class="hljs-comment">// 设置文件指针位置</span><br><span class="hljs-type">off_t</span> <span class="hljs-title function_">lseek</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">off_t</span> offset, <span class="hljs-type">int</span> whence)</span>;<br><br><span class="hljs-comment">// 获取一个文件相关的一些信息</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">stat</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-keyword">struct</span> stat *statbuf)</span>;<br><br><span class="hljs-comment">// 获取软连接文件的信息</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">lstat</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-keyword">struct</span> stat *statbuf)</span>;<br></code></pre></td></tr></table></figure>
+<p>其中，stat结构体如下：</p>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/18.png" srcset="/img/loading.gif" lazyload class="">
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 文件属性操作函数</span><br><span class="hljs-comment">// 判断某个文件是否有某个权限，或者判断文件是否存在</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">access</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> mode)</span>;<br><br><span class="hljs-comment">// 修改文件的权限</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">chmod</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *filename, <span class="hljs-type">int</span> mode)</span>;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">chown</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-type">uid_t</span> owner, <span class="hljs-type">gid_t</span> group)</span>;<br><br><span class="hljs-comment">// 缩减或者扩展文件的尺寸至指定的大小</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">truncate</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-type">off_t</span> length)</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 目录操作函数</span><br><span class="hljs-comment">// 修改路径名</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">rename</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *oldpath, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *newpath)</span>;<br><br><span class="hljs-comment">// 修改进程的工作目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">chdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path)</span>;<br><br><span class="hljs-comment">// 获取当前工作目录</span><br><span class="hljs-type">char</span> *<span class="hljs-title function_">getcwd</span><span class="hljs-params">(<span class="hljs-type">char</span> *buf, <span class="hljs-type">size_t</span> size)</span>;<br><br><span class="hljs-comment">// 创建一个目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">mkdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">mode_t</span> mode)</span>;<br><br><span class="hljs-comment">// 删除空目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">rmdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname)</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 目录遍历函数</span><br><span class="hljs-comment">// 打开一个目录</span><br>DIR *<span class="hljs-title function_">opendir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *name)</span>;<br><br><span class="hljs-comment">// 读取目录中的数据</span><br><span class="hljs-keyword">struct</span> dirent *<span class="hljs-title function_">readdir</span><span class="hljs-params">(DIR *dirp)</span>;<br><br><span class="hljs-comment">// 关闭目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">closedir</span><span class="hljs-params">(DIR *dirp)</span>;<br></code></pre></td></tr></table></figure>
+<p>dirent结构体：</p>
+<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/19.png" srcset="/img/loading.gif" lazyload class="">
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 复制文件描述符</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">dup</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd)</span>;<br><br><span class="hljs-comment">// 重定向文件描述符</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">dup2</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd, <span class="hljs-type">int</span> newfd)</span>;<br><br><span class="hljs-comment">// 复制文件描述符</span><br><span class="hljs-comment">// 设置/获取文件的状态标志</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">fcntl</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">int</span> cmd, ... <span class="hljs-comment">/* arg */</span> )</span>;<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="category-chain-item">Linux服务器</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+        <a href="/tags/C-C/">#C/C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>《Linxu C/C++》一、Linux系统编程入门</div>
+      <div>https://chenjiadragon.github.io/2023/04/22/《Linxu-C-C-》一、Linux系统编程入门/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cjl</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月22日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/08/python%E5%B0%86txt%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AF%BB%E4%B8%BAnumpy%E6%95%B0%E7%BB%84%E6%88%96%E5%88%97%E8%A1%A8/" title="python将txt文件中的数据读为numpy数组或列表">
+                        <span class="hidden-mobile">python将txt文件中的数据读为numpy数组或列表</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"9AQnxcUdb15xuYdLHjdl9mQ5-gzGzoHsz","appKey":"RXjuMjzaj6TxcPnncXHjdcK7","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicLine.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/love.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
