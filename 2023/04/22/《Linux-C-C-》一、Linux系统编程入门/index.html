@@ -20,41 +20,21 @@
   
     <meta name="description" content="1 Linux开发环境搭建  安装Linux系统（虚拟机安装）：参考安装 安装vscode以及相关插件（Remote - SSH），连接本地虚拟机。   2 GCC  2.1 什么是GCC  GCC 原名为 GNU C语言编译器（GNU C Compiler） GCC（GNU Compiler Collection，GNU编译器套件）是由 GNU 开发的编程语言 译器。GNU 编译器套件包括 C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《Linxu C&#x2F;C++》一、Linux系统编程入门">
-<meta property="og:url" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:title" content="《Linux C&#x2F;C++》一、Linux系统编程入门">
+<meta property="og:url" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="chenjiadragon">
 <meta property="og:description" content="1 Linux开发环境搭建  安装Linux系统（虚拟机安装）：参考安装 安装vscode以及相关插件（Remote - SSH），连接本地虚拟机。   2 GCC  2.1 什么是GCC  GCC 原名为 GNU C语言编译器（GNU C Compiler） GCC（GNU Compiler Collection，GNU编译器套件）是由 GNU 开发的编程语言 译器。GNU 编译器套件包括 C">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/1.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/2.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/3.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/4.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/5.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/6.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/7.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/8.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/9.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/10.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/11.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/12.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/13.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/14.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/15.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/16.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/17.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/18.png">
-<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/19.png">
 <meta property="article:published_time" content="2023-04-22T05:53:33.000Z">
-<meta property="article:modified_time" content="2023-04-24T06:37:25.488Z">
+<meta property="article:modified_time" content="2023-04-29T04:26:52.145Z">
 <meta property="article:author" content="cjl">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://chenjiadragon.github.io/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/1.png">
   
   
   
-  <title>《Linxu C/C++》一、Linux系统编程入门 - chenjiadragon</title>
+  <title>《Linux C/C++》一、Linux系统编程入门 - chenjiadragon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -257,7 +237,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="《Linxu C/C++》一、Linux系统编程入门"></span>
+            <span id="subtitle" data-typed-text="《Linux C/C++》一、Linux系统编程入门"></span>
           
         </div>
 
@@ -337,7 +317,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">《Linxu C/C++》一、Linux系统编程入门</h1>
+            <h1 style="display: none">《Linux C/C++》一、Linux系统编程入门</h1>
             
             
               <div class="markdown-body">
@@ -360,7 +340,7 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install gcc g++    <span class="hljs-comment">#安装命令</span><br>gcc/g++ -v/--version        <span class="hljs-comment">#查看版本</span><br></code></pre></td></tr></table></figure>
 <h2 id="22-gcc工作流程"><a class="markdownIt-Anchor" href="#22-gcc工作流程"></a> 2.2 GCC工作流程</h2>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/1.png" srcset="/img/loading.gif" lazyload class="">
+
 <h2 id="23-gcc和g的区别"><a class="markdownIt-Anchor" href="#23-gcc和g的区别"></a> 2.3 gcc和g++的区别</h2>
 <p>gcc 和 g++ 都是GNU(组织)的一个编译器。</p>
 <ul>
@@ -447,23 +427,23 @@
 <li>方便部署和分发。</li>
 </ol>
 <h2 id="31-静态库的制作和使用"><a class="markdownIt-Anchor" href="#31-静态库的制作和使用"></a> 3.1 静态库的制作和使用</h2>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/2.png" srcset="/img/loading.gif" lazyload class="">
+
 <p>src 文件夹下是我们实现的加减乘除的函数程序，include 文件是这四个函数的声明。我们要把其封装成静态库。</p>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/3.png" srcset="/img/loading.gif" lazyload class="">
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> src<br>gcc -c *.c -I ../include   <span class="hljs-comment"># 编译</span><br>ar rcs libcalc.a *.o      <span class="hljs-comment"># 制作静态库</span><br><span class="hljs-built_in">mv</span> libcalc.a ../lib/     <span class="hljs-comment"># 移动到lib文件夹下</span><br><span class="hljs-built_in">cd</span> ..                   <br>gcc main.c -o main -I ./include -l calc -L ./lib/  <br>./main    <span class="hljs-comment">#运行</span><br></code></pre></td></tr></table></figure>
 <p>最终的文件结构树如下：</p>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/4.png" srcset="/img/loading.gif" lazyload class="">
+
 <blockquote>
 <p>可以看出，将程序封装成封装成库后，只需要提供包含函数头的头文件以及库文件就可以执行程序调用，可以将自己的源代码保密起来。</p>
 </blockquote>
 <h2 id="32-动态库的制作和使用"><a class="markdownIt-Anchor" href="#32-动态库的制作和使用"></a> 3.2 动态库的制作和使用</h2>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/5.png" srcset="/img/loading.gif" lazyload class="">
+
 <p>使用同样的文件生成动态库。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> src<br>gcc -c -fpic *.c -I ../include   <span class="hljs-comment"># 生成与位置无关的代码</span><br>gcc -shared *.o -o ../lib/libcalc.so    <span class="hljs-comment"># 制作静态库</span><br><span class="hljs-built_in">cd</span> ..                   <br>gcc main.c -o main -I ./include -l calc -L ./lib/  <br>./main    <span class="hljs-comment">#运行</span><br></code></pre></td></tr></table></figure>
 <p>此时会报错：</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">./main: <span class="hljs-keyword">error</span> <span class="hljs-keyword">while</span> loading shared libraries: libcalc.<span class="hljs-keyword">so</span>: cannot <span class="hljs-keyword">open</span> shared object <span class="hljs-keyword">file</span>: <span class="hljs-keyword">No</span> such <span class="hljs-keyword">file</span> or directory<br></code></pre></td></tr></table></figure>
 <p>GCC进行链接时，会把静态库中代码打包到可执行程序中，动态库的代码不会被打包到可执行程序中。动态库是在程序启动之后，被动态加载到内存中，可以使用 ldd 命令检查动态库依赖关系。</p>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/6.png" srcset="/img/loading.gif" lazyload class="">
+
 <p>可以看出，动态库 <a target="_blank" rel="noopener" href="http://libcalc.so">libcalc.so</a> 未被加载。加载动态库需要要系统的动态载入器来获取其绝对路径。对于elf格式的可执行程序，是由 <a target="_blank" rel="noopener" href="http://ld-linux.so">ld-linux.so</a> 来完成的，它先后搜索 elf 文件的 DT_RPATH 段 ——&gt; 环境变量 LD_LIBRARY_PATH ——&gt; /etc/ld.so.cache 文件列表 ——&gt; /lib/，/usr/lib目录找到库文件后将其载入内存。</p>
 <ol>
 <li>DT_RPATH段：不用管，一般用户访问不了</li>
@@ -477,17 +457,17 @@
 <blockquote>
 <p>一般使用第2和3种方法</p>
 </blockquote>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/7.png" srcset="/img/loading.gif" lazyload class="">
+
 <h2 id="33-静态库和动态库的对比"><a class="markdownIt-Anchor" href="#33-静态库和动态库的对比"></a> 3.3 静态库和动态库的对比</h2>
 <p>静态库、动态库区别来自链接阶段如何处理，链接成可执行程序。分别称为静态链接方式和动态链接方式。</p>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/8.png" srcset="/img/loading.gif" lazyload class="">
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/9.png" srcset="/img/loading.gif" lazyload class="" alt="静态库制作过程">
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/10.png" srcset="/img/loading.gif" lazyload class="" alt="动态库制作过程">
+
+
+
 <p>静态库加载更快，但如果多次调用则需要多次加载，浪费资源，更新、部署、发布麻烦；动态库加载慢，但可以实现进程间资源共享（共享库），更新、部署、发布简单，可以控制何时加载动态库。</p>
 <h1 id="4-makefile"><a class="markdownIt-Anchor" href="#4-makefile"></a> 4 Makefile</h1>
 <p>一个工程中的源文件很多，不可能在终端中一个个执行。可以将编译命令按一定规则写入 Makefile 文件中，达到自动化编译的目的。一旦写好，只需要一个 make 命令，整个工程完全自动编译，极大的提高了软件开发的效率。</p>
 <h2 id="41-文件命名和规则"><a class="markdownIt-Anchor" href="#41-文件命名和规则"></a> 4.1 文件命名和规则</h2>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/11.png" srcset="/img/loading.gif" lazyload class="">
+
 <p>命令在在执行之前，需要先检查规则中的依赖是否存在：</p>
 <ul>
 <li>如果存在，执行命令</li>
@@ -499,7 +479,7 @@
 <li>如果依赖的时间比目标的时间早，目标不需要更新，对应规则中的命令不需要被执行</li>
 </ul>
 <h2 id="42-变量"><a class="markdownIt-Anchor" href="#42-变量"></a> 4.2 变量</h2>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/12.png" srcset="/img/loading.gif" lazyload class="">
+
 <h2 id="43-模式匹配"><a class="markdownIt-Anchor" href="#43-模式匹配"></a> 4.3 模式匹配</h2>
 <p>具体使用样例如下，未使用模式匹配前：</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs makefile">app :sub.o add.o mult.o div.o main.o<br>    gcc sub.o add.o div.o mult.o main.o app<br><span class="hljs-section">sub.o:sub.c</span><br>    gcc -c sub.c -o sub.o<br><span class="hljs-section">add.o:add.c</span><br>    gcc -c add.c -o add.o<br><span class="hljs-section">div.o:div.c</span><br>    gcc -c div.c -o div.o<br><span class="hljs-section">mult.o:mult.c</span><br>    gcc -c mult.c -o mult.o<br><span class="hljs-section">main.o:main.c</span><br>    gcc -c main.c -o main.o<br></code></pre></td></tr></table></figure>
@@ -507,9 +487,9 @@
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#定义变量</span><br>src=sub.o add.o mult.o div.o main.o<br>target=app<br> <br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(src)</span><br>    <span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(src)</span> -o <span class="hljs-variable">$(target)</span><br><span class="hljs-section">%.o:%.c</span><br>    <span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></table></figure>
 <p>%表示通配符，匹配一个字符串，在生成app前需要生成.o文件，每一次生成.o文件都要调用含有%.o:%.c生成.o文件。</p>
 <h2 id="43-常用函数"><a class="markdownIt-Anchor" href="#43-常用函数"></a> 4.3 常用函数</h2>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/13.png" srcset="/img/loading.gif" lazyload class="">
+
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#示例</span><br><span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *c ./sub/*.c)</span>  <br><span class="hljs-comment"># 返回 sub/ 文件夹和当前文件夹下所有的 .c 文件名</span><br><span class="hljs-comment"># 返回值格式: a.c b.c c.c d.c e.c f.c</span><br></code></pre></td></tr></table></figure>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/14.png" srcset="/img/loading.gif" lazyload class="">
+
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#示例</span><br><span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> %.c, %.o, x.c bar.c)</span><br><span class="hljs-comment"># x.c和bar.c符合 %.c 格式，取他们的名称，并加上 .o 后缀</span><br><span class="hljs-comment"># 返回值格式: x.o bar.o</span><br></code></pre></td></tr></table></figure>
 <h2 id="44-clean功能"><a class="markdownIt-Anchor" href="#44-clean功能"></a> 4.4 clean功能</h2>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 生成clean伪目标，</span><br><span class="hljs-comment"># 不写这一行代码的话会生成名为clean的文件，如果已经有了clean文件就不会被更新</span><br><span class="hljs-meta"><span class="hljs-keyword">.PHONY</span>:clean    </span><br><span class="hljs-section">clean:</span><br>    rm *.o -f<br></code></pre></td></tr></table></figure>
@@ -535,16 +515,16 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 启动调试</span><br>gdb program<br><br><span class="hljs-comment"># 退出</span><br>q<br><br><span class="hljs-comment"># 给程序设置参数/获取设置参数</span><br><span class="hljs-built_in">set</span> args 10 20<br>show args<br><br><span class="hljs-comment"># GDB 使用帮助</span><br><span class="hljs-built_in">help</span><br><br><span class="hljs-comment"># 查看当前文件代码</span><br>list/l      <span class="hljs-comment"># 从默认位置显示</span><br>list/1 10   <span class="hljs-comment"># 从第10行显示</span><br>list/l func <span class="hljs-comment"># 从指定的函数显示</span><br><br><span class="hljs-comment"># 查看非当前文件代码</span><br>list/1 file:10   <span class="hljs-comment"># 从file第10行显示</span><br>list/l file:func <span class="hljs-comment"># 从file中指定的函数显示</span><br><br><span class="hljs-comment"># 设置显示的行数</span><br>show list<br><span class="hljs-built_in">set</span> list 15  <span class="hljs-comment"># 设置一次显示15行</span><br><br><span class="hljs-comment"># 设置断点</span><br>b 10     <span class="hljs-comment"># 第10行断点</span><br>b func<br>b file:10<br>b file:func<br><br><span class="hljs-comment"># 查看断点</span><br>i/info b<br><br><span class="hljs-comment"># 删除断点</span><br>del 1   <span class="hljs-comment"># 删除编号为1的断点</span><br><br><span class="hljs-comment"># 设置断点无效</span><br>dis 1  <br><br><span class="hljs-comment"># 设置断点生效</span><br>ena 1<br><br><span class="hljs-comment"># 设置条件断点</span><br>b 10 <span class="hljs-keyword">if</span> i==5  <br><br><span class="hljs-comment"># 运行程序</span><br>start   <span class="hljs-comment"># 程序停在第一行</span><br>run     <span class="hljs-comment"># 遇到断点才停</span><br><br><span class="hljs-comment"># 继续运行，到下一个断点</span><br>c/continue<br><br><span class="hljs-comment"># 向下执行一行代码（不进入函数体）</span><br>n/next<br><br><span class="hljs-comment"># 向下单步调试（遇到函数进入函数体）</span><br>s/step<br>finish <span class="hljs-comment"># 跳出函数体</span><br><br><span class="hljs-comment"># 变量操作</span><br>p/print i    <span class="hljs-comment"># 打印变量值</span><br>ptype i      <span class="hljs-comment"># 打印变量类型</span><br><br><span class="hljs-comment"># 自动打印变量</span><br>display i   <br>i display<br>undisplay<br><br><span class="hljs-comment"># 其他操作</span><br><span class="hljs-built_in">set</span> var i = 3  <span class="hljs-comment"># 设置变量值，循环中多使用</span><br>until    <span class="hljs-comment"># 跳出循环</span><br><br></code></pre></td></tr></table></figure>
 <h1 id="6-文件io"><a class="markdownIt-Anchor" href="#6-文件io"></a> 6 文件IO</h1>
 <p><strong>系统中的各种共享资源都由操作系统统一管理，因此，在用户程序中，凡是与资源管理有关的操作（如文件管理，IO传输等），都必须通过系统调用方式提出请求，并有操作系统代为完成。</strong></p>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/15.png" srcset="/img/loading.gif" lazyload class="">
+
 <p>所以 C 库文件 IO 函数均是系统调用 Linux 系统 IO 完成的。</p>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/16.png" srcset="/img/loading.gif" lazyload class="">
+
 <blockquote>
 <p>Linux 中所有硬件都可以当作文件来对待，所以学习文件管理对 Linux 开发很重要。</p>
 </blockquote>
 <h2 id="61-文件描述符"><a class="markdownIt-Anchor" href="#61-文件描述符"></a> 6.1 文件描述符</h2>
 <p>进程在内存中执行，因为虚拟地址空间技术，用户不需要考虑进程在内存中的实际位置。虚拟地址空间的大小与CPU指令位数有关，对于32位系统，CPU最大支持4G内存，所以虚拟地址空间大小也就是4G。</p>
 <p>每个进程都有一个PCB，PCB中有一个文件描述符表，用于管理进程执行所用到的文件。</p>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/17.png" srcset="/img/loading.gif" lazyload class="">
+
 <h2 id="62-linux系统-io-函数"><a class="markdownIt-Anchor" href="#62-linux系统-io-函数"></a> 6.2 Linux系统 IO 函数</h2>
 <blockquote>
 <p>使用 <code>man 2 open</code> 查看手册中函数描述。2 指的是第 2 册(手册查询如下)；open 指函数名。</p>
@@ -562,12 +542,12 @@
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 打开一个已经存在的文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags)</span>;<br><br><span class="hljs-comment">// 创建一个新的文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags, <span class="hljs-type">mode_t</span> mode)</span>;<br><br><span class="hljs-comment">//关闭文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">close</span><span class="hljs-params">(<span class="hljs-type">int</span> fd)</span>;<br><br><span class="hljs-comment">// 从文件读数据</span><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">read</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;<br><br><span class="hljs-comment">// 写数据到文件</span><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">write</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;<br><br><span class="hljs-comment">// 设置文件指针位置</span><br><span class="hljs-type">off_t</span> <span class="hljs-title function_">lseek</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">off_t</span> offset, <span class="hljs-type">int</span> whence)</span>;<br><br><span class="hljs-comment">// 获取一个文件相关的一些信息</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">stat</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-keyword">struct</span> stat *statbuf)</span>;<br><br><span class="hljs-comment">// 获取软连接文件的信息</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">lstat</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-keyword">struct</span> stat *statbuf)</span>;<br></code></pre></td></tr></table></figure>
 <p>其中，stat结构体如下：</p>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/18.png" srcset="/img/loading.gif" lazyload class="">
+
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 文件属性操作函数</span><br><span class="hljs-comment">// 判断某个文件是否有某个权限，或者判断文件是否存在</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">access</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> mode)</span>;<br><br><span class="hljs-comment">// 修改文件的权限</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">chmod</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *filename, <span class="hljs-type">int</span> mode)</span>;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">chown</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-type">uid_t</span> owner, <span class="hljs-type">gid_t</span> group)</span>;<br><br><span class="hljs-comment">// 缩减或者扩展文件的尺寸至指定的大小</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">truncate</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-type">off_t</span> length)</span>;<br></code></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 目录操作函数</span><br><span class="hljs-comment">// 修改路径名</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">rename</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *oldpath, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *newpath)</span>;<br><br><span class="hljs-comment">// 修改进程的工作目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">chdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path)</span>;<br><br><span class="hljs-comment">// 获取当前工作目录</span><br><span class="hljs-type">char</span> *<span class="hljs-title function_">getcwd</span><span class="hljs-params">(<span class="hljs-type">char</span> *buf, <span class="hljs-type">size_t</span> size)</span>;<br><br><span class="hljs-comment">// 创建一个目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">mkdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">mode_t</span> mode)</span>;<br><br><span class="hljs-comment">// 删除空目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">rmdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname)</span>;<br></code></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 目录遍历函数</span><br><span class="hljs-comment">// 打开一个目录</span><br>DIR *<span class="hljs-title function_">opendir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *name)</span>;<br><br><span class="hljs-comment">// 读取目录中的数据</span><br><span class="hljs-keyword">struct</span> dirent *<span class="hljs-title function_">readdir</span><span class="hljs-params">(DIR *dirp)</span>;<br><br><span class="hljs-comment">// 关闭目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">closedir</span><span class="hljs-params">(DIR *dirp)</span>;<br></code></pre></td></tr></table></figure>
 <p>dirent结构体：</p>
-<img src="/2023/04/22/%E3%80%8ALinxu-C-C-%E3%80%8B%E4%B8%80%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/19.png" srcset="/img/loading.gif" lazyload class="">
+
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 复制文件描述符</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">dup</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd)</span>;<br><br><span class="hljs-comment">// 重定向文件描述符</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">dup2</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd, <span class="hljs-type">int</span> newfd)</span>;<br><br><span class="hljs-comment">// 复制文件描述符</span><br><span class="hljs-comment">// 设置/获取文件的状态标志</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">fcntl</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">int</span> cmd, ... <span class="hljs-comment">/* arg */</span> )</span>;<br></code></pre></td></tr></table></figure>
                 
               </div>
@@ -615,8 +595,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>《Linxu C/C++》一、Linux系统编程入门</div>
-      <div>https://chenjiadragon.github.io/2023/04/22/《Linxu-C-C-》一、Linux系统编程入门/</div>
+      <div>《Linux C/C++》一、Linux系统编程入门</div>
+      <div>https://chenjiadragon.github.io/2023/04/22/《Linux-C-C-》一、Linux系统编程入门/</div>
     </div>
     <div class="license-meta">
       
@@ -657,6 +637,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/" title="《Linux C/C++》二、Linux多进程开发">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《Linux C/C++》二、Linux多进程开发</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
