@@ -18,23 +18,29 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 线程  2 线程同步">
+    <meta name="description" content="1 线程  1.1 线程概述 一个进程可以包含一个或多个线程。进程是 CPU 分配资源的最小单位，线程是操作系统调度执行的最小单位。线程是轻量级的进程（LWP：Light Weight Process），在 Linux 环境下线程的本质仍是进程。  1.2 线程和进程的区别 进程间的信息难以共享。由于除去只读代码段外，父子进程并未共享内存，因此必须采用一些进程间通信方式，在进程间进行信息交换。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《Linux C&#x2F;C++》二、Linux多线程开发">
+<meta property="og:title" content="《Linux C&#x2F;C++》三、Linux多线程开发">
 <meta property="og:url" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="1 线程  2 线程同步">
+<meta property="og:description" content="1 线程  1.1 线程概述 一个进程可以包含一个或多个线程。进程是 CPU 分配资源的最小单位，线程是操作系统调度执行的最小单位。线程是轻量级的进程（LWP：Light Weight Process），在 Linux 环境下线程的本质仍是进程。  1.2 线程和进程的区别 进程间的信息难以共享。由于除去只读代码段外，父子进程并未共享内存，因此必须采用一些进程间通信方式，在进程间进行信息交换。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/1.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/2.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/3.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/4.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/5.png">
 <meta property="article:published_time" content="2023-04-29T04:25:05.000Z">
-<meta property="article:modified_time" content="2023-04-29T07:58:10.635Z">
+<meta property="article:modified_time" content="2023-04-29T08:25:32.257Z">
 <meta property="article:author" content="cjl">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/1.png">
   
   
   
-  <title>《Linux C/C++》二、Linux多线程开发 - chenjiadragon</title>
+  <title>《Linux C/C++》三、Linux多线程开发 - chenjiadragon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -237,7 +243,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="《Linux C/C++》二、Linux多线程开发"></span>
+            <span id="subtitle" data-typed-text="《Linux C/C++》三、Linux多线程开发"></span>
           
         </div>
 
@@ -260,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          1k 字
         
       </span>
     
@@ -271,7 +277,7 @@
         
         
         
-          1 分钟
+          9 分钟
         
       </span>
     
@@ -317,14 +323,30 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">《Linux C/C++》二、Linux多线程开发</h1>
+            <h1 style="display: none">《Linux C/C++》三、Linux多线程开发</h1>
             
             
               <div class="markdown-body">
                 
                 <h1 id="1-线程"><a class="markdownIt-Anchor" href="#1-线程"></a> 1 线程</h1>
+<h2 id="11-线程概述"><a class="markdownIt-Anchor" href="#11-线程概述"></a> 1.1 线程概述</h2>
+<p>一个进程可以包含一个或多个线程。进程是 CPU 分配资源的最小单位，线程是操作系统调度执行的最小单位。线程是轻量级的进程（LWP：Light Weight Process），在 Linux 环境下线程的本质仍是进程。</p>
+<h2 id="12-线程和进程的区别"><a class="markdownIt-Anchor" href="#12-线程和进程的区别"></a> 1.2 线程和进程的区别</h2>
+<p>进程间的信息难以共享。由于除去只读代码段外，父子进程并未共享内存，因此必须采用一些进程间通信方式，在进程间进行信息交换。</p>
+<p>调用 fork() 来创建进程的代价相对较高，即便利用写时复制技术，仍然需要复制诸如内存页表和文件描述符表之类的多种进程属性，这意味着 fork() 调用在时间上的开销依然不菲。</p>
+<p>线程之间能够方便、快速地共享信息。只需将数据复制到共享（全局或堆）变量中即可。</p>
+<p>创建线程比创建进程通常要快 10 倍甚至更多。线程间是共享虚拟地址空间的，无需采用写时复制来复制内存，也无需复制页表。</p>
+<h2 id="13-线程之间共享和非共享资源"><a class="markdownIt-Anchor" href="#13-线程之间共享和非共享资源"></a> 1.3 线程之间共享和非共享资源</h2>
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/1.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="14-相关操作函数"><a class="markdownIt-Anchor" href="#14-相关操作函数"></a> 1.4 相关操作函数</h2>
+<p>线程操需要用到 pthread 库，查看当前库版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">getconf GNU_LIBPTHREAD_VERSION<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//线程操作</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">pthread_create</span><span class="hljs-params">(<span class="hljs-type">pthread_t</span> *thread, <span class="hljs-type">const</span> <span class="hljs-type">pthread_attr_t</span> *attr, <span class="hljs-type">void</span> *(*start_routine) (<span class="hljs-type">void</span> *), <span class="hljs-type">void</span> *arg)</span>;<br><span class="hljs-type">pthread_t</span> <span class="hljs-title function_">pthread_self</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">pthread_equal</span><span class="hljs-params">(<span class="hljs-type">pthread_t</span> t1, <span class="hljs-type">pthread_t</span> t2)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">pthread_exit</span><span class="hljs-params">(<span class="hljs-type">void</span> *retval)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">pthread_join</span><span class="hljs-params">(<span class="hljs-type">pthread_t</span> thread, <span class="hljs-type">void</span> **retval)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">pthread_detach</span><span class="hljs-params">(<span class="hljs-type">pthread_t</span> thread)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">pthread_cancel</span><span class="hljs-params">(<span class="hljs-type">pthread_t</span> thread)</span>;<br><br><span class="hljs-comment">//线程属性</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">pthread_attr_init</span><span class="hljs-params">(<span class="hljs-type">pthread_attr_t</span> *attr)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">pthread_attr_destroy</span><span class="hljs-params">(<span class="hljs-type">pthread_attr_t</span> *attr)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">pthread_attr_getdetachstate</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">pthread_attr_t</span> *attr, <span class="hljs-type">int</span> *detachstate)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">pthread_attr_setdetachstate</span><span class="hljs-params">(<span class="hljs-type">pthread_attr_t</span> *attr, <span class="hljs-type">int</span> detachstate)</span>;<br></code></pre></td></tr></table></figure>
 <h1 id="2-线程同步"><a class="markdownIt-Anchor" href="#2-线程同步"></a> 2 线程同步</h1>
-
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/2.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/3.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/4.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/5.png" srcset="/img/loading.gif" lazyload class="">
                 
               </div>
             
@@ -371,7 +393,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>《Linux C/C++》二、Linux多线程开发</div>
+      <div>《Linux C/C++》三、Linux多线程开发</div>
       <div>https://chenjiadragon.github.io/2023/04/29/《Linux-C-C-》三、Linux多线程开发/</div>
     </div>
     <div class="license-meta">
