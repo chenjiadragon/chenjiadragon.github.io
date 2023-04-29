@@ -18,19 +18,26 @@
   <meta name="author" content="cjl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 进程概述  2 进程状态转换  3 进程创建  4 exec函数族  5 进程退出、孤儿进程、僵尸进程  6 进程间通信  7 信号  8 共享内存  9 守护进程">
+    <meta name="description" content="1 进程概述  1.1 程序 程序是包含一系列信息的文件，这些信息描述了如何在运行时创建一个进程：  二进制格式标识 机器语言指令 程序入口地址 数据 符号表及重定位表 共享库和动态链接信息 其他信息   1.2 进程 进程是正在运行的程序的实例。是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。进程是操作系统进行资源分配的最小单元。 一个程序可以创建多个进程，进程是由内核创建的抽象实">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Linux C&#x2F;C++》二、Linux多进程开发">
 <meta property="og:url" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="chenjiadragon">
-<meta property="og:description" content="1 进程概述  2 进程状态转换  3 进程创建  4 exec函数族  5 进程退出、孤儿进程、僵尸进程  6 进程间通信  7 信号  8 共享内存  9 守护进程">
+<meta property="og:description" content="1 进程概述  1.1 程序 程序是包含一系列信息的文件，这些信息描述了如何在运行时创建一个进程：  二进制格式标识 机器语言指令 程序入口地址 数据 符号表及重定位表 共享库和动态链接信息 其他信息   1.2 进程 进程是正在运行的程序的实例。是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。进程是操作系统进行资源分配的最小单元。 一个程序可以创建多个进程，进程是由内核创建的抽象实">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/1.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/2.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/3.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/4.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/5.png">
+<meta property="og:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/6.png">
 <meta property="article:published_time" content="2023-04-29T04:25:05.000Z">
-<meta property="article:modified_time" content="2023-04-29T04:30:51.990Z">
+<meta property="article:modified_time" content="2023-04-29T07:57:36.103Z">
 <meta property="article:author" content="cjl">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chenjiadragon.github.io/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/1.png">
   
   
   
@@ -260,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          59 字
+          8.1k 字
         
       </span>
     
@@ -271,7 +278,7 @@
         
         
         
-          1 分钟
+          68 分钟
         
       </span>
     
@@ -323,14 +330,199 @@
               <div class="markdown-body">
                 
                 <h1 id="1-进程概述"><a class="markdownIt-Anchor" href="#1-进程概述"></a> 1 进程概述</h1>
+<h2 id="11-程序"><a class="markdownIt-Anchor" href="#11-程序"></a> 1.1 程序</h2>
+<p>程序是包含一系列信息的文件，这些信息描述了如何在运行时创建一个进程：</p>
+<ul>
+<li>二进制格式标识</li>
+<li>机器语言指令</li>
+<li>程序入口地址</li>
+<li>数据</li>
+<li>符号表及重定位表</li>
+<li>共享库和动态链接信息</li>
+<li>其他信息</li>
+</ul>
+<h2 id="12-进程"><a class="markdownIt-Anchor" href="#12-进程"></a> 1.2 进程</h2>
+<p>进程是正在运行的程序的实例。是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。进程是操作系统进行资源分配的最小单元。</p>
+<p>一个程序可以创建多个进程，进程是由内核创建的抽象实体。从内核的角度看，进程由用户内存空间和一系列内核数据结构组成，其中用户内存空间包含了程序代码及代码所使用的变量，而内核数据结构则用于维护进程状态信息。记录在内核数据结构中的信息包括许多与进程相关的标识号（IDs）、虚拟内存表、打开文件的描述符表、信号传递及处理的有关信息、进程资源使用及限制、当前工作目录和大量的其他信息</p>
+<p>为了管理进程，内核必须对每个进程所做的事情进行清楚的描述。内核为每个进程分配一个 PCB(Processing Control Block)进程控制块，维护进程相关的信息，Linux 内核的进程控制块是 task_struct 结构体。在 <code>/usr/src/linux-headers-xxx/include/linux/sched.h</code> 文件中可以查<br />
+看 struct task_struct 结构体定义。其内部成员有很多，我们只需要掌握以下部分即可：</p>
+<ul>
+<li>进程id：系统中每个进程有唯一的 id，用 pid_t 类型表示，其实就是一个非负整数</li>
+<li>进程的状态：有就绪、运行、挂起、停止等状态</li>
+<li>进程切换时需要保存和恢复的一些CPU寄存器</li>
+<li>描述虚拟地址空间的信息</li>
+<li>描述控制终端的信息</li>
+<li>当前工作目录（Current Working Directory）</li>
+<li>umask 掩码</li>
+<li>文件描述符表</li>
+<li>和信号相关的信息</li>
+<li>用户 id 和组 id</li>
+<li>会话（Session）和进程组</li>
+<li>进程可以使用的资源上限（Resource Limit）</li>
+</ul>
+<h2 id="13-并发和并行"><a class="markdownIt-Anchor" href="#13-并发和并行"></a> 1.3 并发和并行</h2>
+<ul>
+<li>并行(parallel)：指在同一时刻，有多条指令在多个处理器上同时执行。</li>
+<li>并发(concurrency)：指在同一时刻只能有一条指令执行，但多个进程指令被快速的轮换执行，使得在宏观上具有多个进程同时执行的效果，但在微观上并不是同时执行的，只是把时间分成若干段，使多个进程快速交替的执行。</li>
+</ul>
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/1.png" srcset="/img/loading.gif" lazyload class="">
 <h1 id="2-进程状态转换"><a class="markdownIt-Anchor" href="#2-进程状态转换"></a> 2 进程状态转换</h1>
+<h2 id="21-五态模型"><a class="markdownIt-Anchor" href="#21-五态模型"></a> 2.1 五态模型</h2>
+<ul>
+<li>新建态：进程刚被创建时的状态，尚未进入就绪队列</li>
+<li>就绪态：进程具备运行条件，等待系统分配处理器以便运行</li>
+<li>运行态：进程占有处理器正在运行</li>
+<li>阻塞态：又称为等待(wait)态或睡眠(sleep)态，指进程不具备运行条件，正在等待某个事件的完成</li>
+<li>终止态：进程完成任务到达正常结束点，或出现无法克服的错误而异常终止，或被操作系统及有终止权的进程所终止时所处的状态。进入终止态的进程以后不再执行，但依然保留在操作系统中等待善后。</li>
+</ul>
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/2.png" srcset="/img/loading.gif" lazyload class="">
+<blockquote>
+<p>阻塞态和就绪态的区别：就绪态是只等待CPU，而阻塞态是等待除了CPU以外的资源（如 I/O ）。</p>
+</blockquote>
+<h2 id="22-linux进程相关命令"><a class="markdownIt-Anchor" href="#22-linux进程相关命令"></a> 2.2 Linux进程相关命令</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看进程</span><br>ps aux / ajx<br><span class="hljs-comment"># a: 显示终端上的所有进程，包括其他用户的进程</span><br><span class="hljs-comment"># u: 显示进程的详细信息</span><br><span class="hljs-comment"># x: 显示没有控制终端的进程</span><br><span class="hljs-comment"># j: 列出与作业控制相关的信息</span><br></code></pre></td></tr></table></figure>
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/3.png" srcset="/img/loading.gif" lazyload class="">
+<p>这里 STAT 参数意义：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字母参数</th>
+<th style="text-align:center">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center"><font color=red> 不可中断 Uninterruptible（usually IO） </font></td>
+</tr>
+<tr>
+<td style="text-align:center">S(大写)</td>
+<td style="text-align:center"><font color=red> 处于休眠状态 </font></td>
+</tr>
+<tr>
+<td style="text-align:center">T</td>
+<td style="text-align:center"><font color=red> 停止或被追踪 </font></td>
+</tr>
+<tr>
+<td style="text-align:center">Z</td>
+<td style="text-align:center"><font color=red> 僵尸进程 </font></td>
+</tr>
+<tr>
+<td style="text-align:center">W</td>
+<td style="text-align:center"><font color=red> 进入内存交换（从内核2.6开始无效） </font></td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><font color=red> 死掉的进程 </font></td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center"><font color=red> 高优先级 </font></td>
+</tr>
+<tr>
+<td style="text-align:center">N</td>
+<td style="text-align:center"><font color=red> 低优先级 </font></td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td style="text-align:center"><font color=red> 包含子进程 </font></td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center"><font color=red> 位于前台的进程组 </font></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 实时显示进程动态</span><br>top -d 5  <span class="hljs-comment"># 5s更新一次信息显示</span><br></code></pre></td></tr></table></figure>
+<p>执行 <code>top</code> 命令后，可以按键对结果进行排序：</p>
+<ul>
+<li>M : 根据内存使用量排序</li>
+<li>P : 根据 CPU 占有率排序</li>
+<li>T : 根据进程运行时间长短排序</li>
+<li>U : 根据用户名来筛选进程</li>
+<li>K : 输入指定的 PID 杀死进程</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 杀死进程</span><br><span class="hljs-built_in">kill</span> [-signal] pid<br><span class="hljs-built_in">kill</span> -l <span class="hljs-comment"># 列出所有信号</span><br><span class="hljs-built_in">kill</span> -9 ID  <span class="hljs-comment"># 杀死ID进程 </span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>kill 命令本质上是发送信号的指令，不是字面意义上的杀死进程。总共有62个信号可以发送。参考：<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-kill.html">https://www.runoob.com/linux/linux-comm-kill.html</a></p>
+</blockquote>
 <h1 id="3-进程创建"><a class="markdownIt-Anchor" href="#3-进程创建"></a> 3 进程创建</h1>
+<h1 id="31-相关函数"><a class="markdownIt-Anchor" href="#31-相关函数"></a> 3.1 相关函数</h1>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 进程号相关函数</span><br><span class="hljs-type">pid_t</span> <span class="hljs-title function_">getpid</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;        <span class="hljs-comment">//获取进程号</span><br><span class="hljs-type">pid_t</span> <span class="hljs-title function_">getppid</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;       <span class="hljs-comment">//获取父进程号</span><br><span class="hljs-type">pid_t</span> <span class="hljs-title function_">getpgid</span><span class="hljs-params">(<span class="hljs-type">pid_t</span> pid)</span>;  <span class="hljs-comment">//获取进程组号</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//进程创建函数</span><br><span class="hljs-type">pid_t</span> <span class="hljs-title function_">fork</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">    返回值：</span><br><span class="hljs-comment">        成功：子进程返回0，父进程返回子进程ID</span><br><span class="hljs-comment">        失败：返回-1</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>fork函数创建的子进程，虽然在虚拟地址空间上父子进程分别有各自的进程执行空间，但其内容基本都是相同的（为了节省系统资源），所以它们映射的物理内存也是相同的，只有在修改后，才会不同。即：<strong>读时共享，写时拷贝</strong>。</p>
+</blockquote>
+<h2 id="32-gdb多进程调试"><a class="markdownIt-Anchor" href="#32-gdb多进程调试"></a> 3.2 GDB多进程调试</h2>
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/4.png" srcset="/img/loading.gif" lazyload class="">
 <h1 id="4-exec函数族"><a class="markdownIt-Anchor" href="#4-exec函数族"></a> 4 exec函数族</h1>
-<h1 id="5-进程退出-孤儿进程-僵尸进程"><a class="markdownIt-Anchor" href="#5-进程退出-孤儿进程-僵尸进程"></a> 5 进程退出、孤儿进程、僵尸进程</h1>
+<p>exec 函数族的作用是根据指定的文件名找到可执行文件，并用它来取代调用进程的内容，换句话说，就是在调用进程内部执行一个可执行文件。</p>
+<p>exec 函数族的函数执行成功后不会返回，因为调用进程的实体，包括代码段，数据段和堆栈等都已经被新的内容取代，只留下进程 ID 等一些表面上的信息仍保持原样，颇有些神似“三十六计”中的“金蝉脱壳”。看上去还是旧的躯壳，却已经注入了新的灵魂。只有调用失败了，它们才会返回 -1，从原程序的调用点接着往下执行。</p>
+<blockquote>
+<p>使用 <code>man 3 exec</code> 查看所有成员函数及描述。下面是 <code>execl</code> 函数使用示例（常用）</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*  </span><br><span class="hljs-comment">    #include &lt;unistd.h&gt;</span><br><span class="hljs-comment">    int execl(const char *path, const char *arg, ...);</span><br><span class="hljs-comment">        - 参数：</span><br><span class="hljs-comment">            - path:需要指定的执行的文件的路径或者名称</span><br><span class="hljs-comment">                a.out /home/nowcoder/a.out 推荐使用绝对路径</span><br><span class="hljs-comment">                ./a.out hello world</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">            - arg:是执行可执行文件所需要的参数列表</span><br><span class="hljs-comment">                第一个参数一般没有什么作用，为了方便，一般写的是执行的程序的名称</span><br><span class="hljs-comment">                从第二个参数开始往后，就是程序执行所需要的的参数列表。</span><br><span class="hljs-comment">                参数最后需要以NULL结束（哨兵）</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">        - 返回值：</span><br><span class="hljs-comment">            只有当调用失败，才会有返回值，返回-1，并且设置errno</span><br><span class="hljs-comment">            如果调用成功，没有返回值。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br><br><br>    <span class="hljs-comment">// 创建一个子进程，在子进程中执行exec函数族中的函数</span><br>    <span class="hljs-type">pid_t</span> pid = fork();<br><br>    <span class="hljs-keyword">if</span>(pid &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-comment">// 父进程</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;i am parent process, pid : %d\n&quot;</span>,getpid());<br>        sleep(<span class="hljs-number">1</span>);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-comment">// 子进程</span><br>        <span class="hljs-comment">// execl(&quot;hello&quot;,&quot;hello&quot;,NULL);</span><br><br>        execl(<span class="hljs-string">&quot;/bin/ps&quot;</span>, <span class="hljs-string">&quot;ps&quot;</span>, <span class="hljs-string">&quot;aux&quot;</span>, <span class="hljs-literal">NULL</span>);<br>        perror(<span class="hljs-string">&quot;execl&quot;</span>);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;i am child process, pid : %d\n&quot;</span>, getpid());<br><br>    &#125;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;i = %d, pid = %d\n&quot;</span>, i, getpid());<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="5-进程控制"><a class="markdownIt-Anchor" href="#5-进程控制"></a> 5 进程控制</h1>
+<h2 id="51-进程退出"><a class="markdownIt-Anchor" href="#51-进程退出"></a> 5.1 进程退出</h2>
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/5.png" srcset="/img/loading.gif" lazyload class="">
+<h2 id="52-孤儿进程"><a class="markdownIt-Anchor" href="#52-孤儿进程"></a> 5.2 孤儿进程</h2>
+<p>父进程运行结束，但子进程还在运行（未运行结束），这样的子进程就称为孤儿进程（Orphan Process）。</p>
+<p>每当出现一个孤儿进程的时候，内核就把孤儿进程的父进程设置为 init ，而 init 进程会循环地 wait() 它的已经退出的子进程。这样，当一个孤儿进程凄凉地结束了其生命周期的时候，init 进程就会代表党和政府出面处理它的一切善后工作。</p>
+<p>因此孤儿进程并不会有什么危害。</p>
+<h2 id="53-僵尸进程"><a class="markdownIt-Anchor" href="#53-僵尸进程"></a> 5.3 僵尸进程</h2>
+<p>在每个进程退出的时候，内核释放该进程所有的资源、包括打开的文件、占用的内存等。但是仍然为其保留一定的信息，这些信息主要主要指进程控制块PCB的信息（包括进程号、退出状态、运行时间等）。</p>
+<p>即：每个进程结束之后, 都会释放自己地址空间中的用户区数据，<strong>内核区的 PCB 没有办法自己释放掉</strong>，<strong>需要父进程去释放</strong>。</p>
+<p>进程终止时，父进程尚未回收，子进程残留资源（PCB）存放于内核中，变成僵尸（Zombie）进程。</p>
+<p>僵尸进程不能被 kill -9 杀死，这样就会导致一个问题，如果父进程不调用 wait() 或 waitpid() 的话，那么保留的那段信息就不会释放，其进程号就会一直被占用，但是系统所能使用的进程号是有限的，如果大量的产生僵尸进程，将因为没有可用的进程号而导致系统不能产生新的进程，此即为僵尸进程的危害，应当避免。</p>
+<p>wait() 和 waitpid() 函数的功能一样，区别在于，wait() 函数会阻塞，waitpid() 可以设置不阻塞，waitpid() 还可以指定等待哪个子进程结束。</p>
+<blockquote>
+<p>注意：一次wait或waitpid调用只能清理一个子进程，清理多个子进程应使用循环。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment">    #include &lt;sys/types.h&gt;</span><br><span class="hljs-comment">    #include &lt;sys/wait.h&gt;</span><br><span class="hljs-comment">    pid_t wait(int *wstatus);</span><br><span class="hljs-comment">        功能：等待任意一个子进程结束，如果任意一个子进程结束了，此函数会回收子进程的资源。</span><br><span class="hljs-comment">        参数：int *wstatus</span><br><span class="hljs-comment">            进程退出时的状态信息，传入的是一个int类型的地址，传出参数。</span><br><span class="hljs-comment">        返回值：</span><br><span class="hljs-comment">            - 成功：返回被回收的子进程的id</span><br><span class="hljs-comment">            - 失败：-1 (所有的子进程都结束，调用函数失败)</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">    调用wait函数的进程会被挂起（阻塞），直到它的一个子进程退出或者收到一个不能被忽略的信号时才被唤醒（相当于继续往下执行）</span><br><span class="hljs-comment">    如果没有子进程了，函数立刻返回，返回-1；如果子进程都已经结束了，也会立即返回，返回-1.</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/wait.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br><br>    <span class="hljs-comment">// 有一个父进程，创建5个子进程（兄弟）</span><br>    <span class="hljs-type">pid_t</span> pid;<br><br>    <span class="hljs-comment">// 创建5个子进程</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>        pid = fork();<br>        <span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span>(pid &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-comment">// 父进程</span><br>        <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;parent, pid = %d\n&quot;</span>, getpid());<br><br>            <span class="hljs-comment">// int ret = wait(NULL);</span><br>            <span class="hljs-type">int</span> st;<br>            <span class="hljs-type">int</span> ret = wait(&amp;st);<br><br>            <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br><br>            <span class="hljs-keyword">if</span>(WIFEXITED(st)) &#123;<br>                <span class="hljs-comment">// 是不是正常退出</span><br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;退出的状态码：%d\n&quot;</span>, WEXITSTATUS(st));<br>            &#125;<br>            <span class="hljs-keyword">if</span>(WIFSIGNALED(st)) &#123;<br>                <span class="hljs-comment">// 是不是异常终止</span><br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;被哪个信号干掉了：%d\n&quot;</span>, WTERMSIG(st));<br>            &#125;<br><br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child die, pid = %d\n&quot;</span>, ret);<br><br>            sleep(<span class="hljs-number">1</span>);<br>        &#125;<br><br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pid == <span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-comment">// 子进程</span><br>         <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child, pid = %d\n&quot;</span>,getpid());    <br>            sleep(<span class="hljs-number">1</span>);       <br>         &#125;<br><br>        <span class="hljs-comment">// exit(0);</span><br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// exit(0)</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h1 id="6-进程间通信"><a class="markdownIt-Anchor" href="#6-进程间通信"></a> 6 进程间通信</h1>
-<h1 id="7-信号"><a class="markdownIt-Anchor" href="#7-信号"></a> 7 信号</h1>
-<h1 id="8-共享内存"><a class="markdownIt-Anchor" href="#8-共享内存"></a> 8 共享内存</h1>
-<h1 id="9-守护进程"><a class="markdownIt-Anchor" href="#9-守护进程"></a> 9 守护进程</h1>
+<p>进程是一个独立的资源分配单元，不同进程（这里所说的进程通常指的是用户进程）之间的资源是独立的，没有关联，不能在一个进程中直接访问另一个进程的资源。但是，进程不是孤立的，不同的进程需要进行信息的交互和状态的传递等，因此需要进程间通信( IPC：Inter Processes Communication )。</p>
+<p>进程间通信的目的：</p>
+<ul>
+<li>数据传输</li>
+<li>通知事件</li>
+<li>资源共享</li>
+<li>进程控制</li>
+</ul>
+<p>通信方式分为以下几种：</p>
+<img src="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%BA%8C%E3%80%81Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/6.png" srcset="/img/loading.gif" lazyload class="">
+<blockquote>
+<p>7种通信方式详解：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c1015f5ffa74">进程间通信IPC (InterProcess Communication)</a></p>
+</blockquote>
+<p>以下是Linux开发种所使用到的操作函数</p>
+<h2 id="61-信号"><a class="markdownIt-Anchor" href="#61-信号"></a> 6.1 信号</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//信号相关函数</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">kill</span><span class="hljs-params">(<span class="hljs-type">pid_t</span> pid, <span class="hljs-type">int</span> sig)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">raise</span><span class="hljs-params">(<span class="hljs-type">int</span> sig)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">abort</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;<br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> <span class="hljs-title function_">alarm</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> seconds)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">setitimer</span><span class="hljs-params">(<span class="hljs-type">int</span> which, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> itimerval *new_val, <span class="hljs-keyword">struct</span> itimerval *old_value)</span>;<br><br><span class="hljs-comment">//信号捕捉函数</span><br><span class="hljs-type">sighandler_t</span> <span class="hljs-title function_">signal</span><span class="hljs-params">(<span class="hljs-type">int</span> signum, <span class="hljs-type">sighandler_t</span> handler)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">sigaction</span><span class="hljs-params">(<span class="hljs-type">int</span> signum, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> sigaction *act, <span class="hljs-keyword">struct</span> sigaction *oldact)</span>;<br><br><br><span class="hljs-comment">//信号集相关函数</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">sigemptyset</span><span class="hljs-params">(<span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">sigfillset</span><span class="hljs-params">(<span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">sigaddset</span><span class="hljs-params">(<span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>, <span class="hljs-type">int</span> signum)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">sigdelset</span><span class="hljs-params">(<span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>, <span class="hljs-type">int</span> signum)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">sigismember</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>, <span class="hljs-type">int</span> signum)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">sigprocmask</span><span class="hljs-params">(<span class="hljs-type">int</span> how, <span class="hljs-type">const</span> <span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>, <span class="hljs-type">sigset_t</span> *oldset)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">sigpending</span><span class="hljs-params">(<span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>)</span>;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>可以使用 <code>kill -l</code> 查看所有的信号</p>
+</blockquote>
+<h2 id="62-共享内存"><a class="markdownIt-Anchor" href="#62-共享内存"></a> 6.2 共享内存</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//共享内存操作函数</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">shmget</span><span class="hljs-params">(<span class="hljs-type">key_t</span> key, <span class="hljs-type">size_t</span> size, <span class="hljs-type">int</span> shmflg)</span>;<br><span class="hljs-type">void</span> *<span class="hljs-title function_">shmat</span><span class="hljs-params">(<span class="hljs-type">int</span> shmid, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *shmaddr, <span class="hljs-type">int</span> shmflg)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">shmdt</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *shmaddr)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">shmctl</span><span class="hljs-params">(<span class="hljs-type">int</span> shmid, <span class="hljs-type">int</span> cmd, <span class="hljs-keyword">struct</span> shmid_ds *buf)</span>;<br><span class="hljs-type">key_t</span> <span class="hljs-title function_">ftok</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> proj_id)</span>;<br></code></pre></td></tr></table></figure>
+<p>使用步骤：</p>
+<ol>
+<li>调用 shmget() 创建一个新共享内存段或取得一个既有共享内存段的标识符。</li>
+<li>使用 shmat() 来附上共享内存段，即使该段成为调用进程的虚拟内存的一部分。</li>
+<li>对该内存段进行需要的操作（指针指向内存）</li>
+<li>调用 shmdt() 来分离共享内存段。</li>
+<li>调用 shmctl() 来删除共享内存段。</li>
+</ol>
+<h1 id="7-守护进程"><a class="markdownIt-Anchor" href="#7-守护进程"></a> 7 守护进程</h1>
+<p>守护进程（Daemon Process），也就是通常说的 Daemon 进程（精灵进程），是Linux 中的后台服务进程。它是一个生存期较长的进程，通常独立于控制终端并且<strong>周期性地执行某种任务或等待处理某些发生的事件</strong>。一般采用以 d 结尾的名字。</p>
+<p>Linux 的大多数服务器就是用守护进程实现的。比如，Internet 服务器 inetd，Web 服务器 httpd 等。</p>
+<p>一个守护进程的创建步骤：</p>
+<ul>
+<li>执行一个 fork()，之后父进程退出，子进程继续执行。</li>
+<li>子进程调用 setsid() 开启一个新会话。</li>
+<li>清除进程的 umask 以确保当守护进程创建文件和目录时拥有所需的权限。</li>
+<li>修改进程的当前工作目录，通常会改为根目录（/）。</li>
+<li>关闭守护进程从其父进程继承而来的所有打开着的文件描述符。</li>
+<li>在关闭了文件描述符0、1、2之后，守护进程通常会打开/dev/null 并使用dup2() 使所有这些描述符指向这个设备。</li>
+<li>核心业务逻辑</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment">    写一个守护进程，每隔2s获取一下系统时间，将这个时间写入到磁盘文件中。</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">work</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> &#123;<br>    <span class="hljs-comment">// 捕捉到信号之后，获取系统时间，写入磁盘文件</span><br>    <span class="hljs-type">time_t</span> tm = time(<span class="hljs-literal">NULL</span>);<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tm</span> * <span class="hljs-title">loc</span> =</span> localtime(&amp;tm);<br>    <span class="hljs-comment">// char buf[1024];</span><br><br>    <span class="hljs-comment">// sprintf(buf, &quot;%d-%d-%d %d:%d:%d\n&quot;,loc-&gt;tm_year,loc-&gt;tm_mon</span><br>    <span class="hljs-comment">// ,loc-&gt;tm_mday, loc-&gt;tm_hour, loc-&gt;tm_min, loc-&gt;tm_sec);</span><br><br>    <span class="hljs-comment">// printf(&quot;%s\n&quot;, buf);</span><br><br>    <span class="hljs-type">char</span> * str = asctime(loc);<br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">&quot;time.txt&quot;</span>, O_RDWR | O_CREAT | O_APPEND, <span class="hljs-number">0664</span>);<br>    write(fd ,str, <span class="hljs-built_in">strlen</span>(str));<br>    close(fd);<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br><br>    <span class="hljs-comment">// 1.创建子进程，退出父进程</span><br>    <span class="hljs-type">pid_t</span> pid = fork();<br><br>    <span class="hljs-keyword">if</span>(pid &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 2.将子进程重新创建一个会话</span><br>    setsid();<br><br>    <span class="hljs-comment">// 3.设置掩码</span><br>    umask(<span class="hljs-number">022</span>);<br><br>    <span class="hljs-comment">// 4.更改工作目录</span><br>    chdir(<span class="hljs-string">&quot;/home/nowcoder/&quot;</span>);<br><br>    <span class="hljs-comment">// 5. 关闭、重定向文件描述符</span><br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">&quot;/dev/null&quot;</span>, O_RDWR);<br>    dup2(fd, STDIN_FILENO);<br>    dup2(fd, STDOUT_FILENO);<br>    dup2(fd, STDERR_FILENO);<br><br>    <span class="hljs-comment">// 6.业务逻辑</span><br><br>    <span class="hljs-comment">// 捕捉定时信号</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sigaction</span> <span class="hljs-title">act</span>;</span><br>    act.sa_flags = <span class="hljs-number">0</span>;<br>    act.sa_handler = work;<br>    sigemptyset(&amp;act.sa_mask);<br>    sigaction(SIGALRM, &amp;act, <span class="hljs-literal">NULL</span>);<br><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">itimerval</span> <span class="hljs-title">val</span>;</span><br>    val.it_value.tv_sec = <span class="hljs-number">2</span>;<br>    val.it_value.tv_usec = <span class="hljs-number">0</span>;<br>    val.it_interval.tv_sec = <span class="hljs-number">2</span>;<br>    val.it_interval.tv_usec = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">// 创建定时器</span><br>    setitimer(ITIMER_REAL, &amp;val, <span class="hljs-literal">NULL</span>);<br><br>    <span class="hljs-comment">// 不让进程结束</span><br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;<br>        sleep(<span class="hljs-number">10</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -420,6 +612,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/04/29/%E3%80%8ALinux-C-C-%E3%80%8B%E4%B8%89%E3%80%81Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91/" title="《Linux C/C++》二、Linux多线程开发">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《Linux C/C++》二、Linux多线程开发</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
